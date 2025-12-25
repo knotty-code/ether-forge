@@ -1,0 +1,96 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: network-builder
+spec:
+  appInfo:
+    categories:
+      - uncategorised
+    documentation: network_builder/docs
+  author: knotty-code
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: network_builder/intents
+    - file:
+        path: network_builder/api/v1alpha1/pysrc
+  description: Sample description
+  group: network-builder.eda.local
+  image: change.me/network-builder:v0.0.0
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Network Builder
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_portgenies.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_portgenies.json
+        ui:
+          category: Network Builder
+          name: Port Genie
+    - script:
+        path: network_builder/intents/portgenie/config_intent.py
+        trigger:
+          kind: PortGenie
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_portgeniestates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_portgeniestates.json
+    - script:
+        path: network_builder/intents/portgeniestate/state_intent.py
+        trigger:
+          kind: PortGenieState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_portlibraries.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_portlibraries.json
+        ui:
+          category: Network Builder
+          name: Port Library
+    - script:
+        path: network_builder/intents/portlibrary/config_intent.py
+        trigger:
+          kind: PortLibrary
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_portlibrarystates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_portlibrarystates.json
+    - script:
+        path: network_builder/intents/portlibrarystate/state_intent.py
+        trigger:
+          kind: PortLibraryState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_porttailors.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_porttailors.json
+        ui:
+          category: Network Builder
+          name: Port Tailor
+    - script:
+        path: network_builder/intents/porttailor/config_intent.py
+        trigger:
+          kind: PortTailor
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_porttailorstates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_porttailorstates.json
+    - script:
+        path: network_builder/intents/porttailorstate/state_intent.py
+        trigger:
+          kind: PortTailorState
+        type: state
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.10.*
+    - srl:25.*
+    - sros:24.10.*
+    - sros:25.*
