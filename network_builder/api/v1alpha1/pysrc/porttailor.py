@@ -9,6 +9,8 @@ from .constants import *
 Y_NODES = 'nodes'
 Y_NODESELECTOR = 'nodeSelector'
 Y_LOGINBANNER = 'loginBanner'
+Y_INTERFACEPATTERN = 'interfacePattern'
+Y_PORTLIBRARYSELECTOR = 'portLibrarySelector'
 # Package objects (GVK Schemas)
 PORTTAILOR_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortTailor')
 
@@ -18,11 +20,15 @@ class PortTailorSpec:
         self,
         nodes: list[str] | None = None,
         nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        loginBanner: list[str] | None = None,
+        interfacePattern: str | None = None,
+        portLibrarySelector: list[str] | None = None,
     ):
         self.nodes = nodes
         self.nodeSelector = nodeSelector
         self.loginBanner = loginBanner
+        self.interfacePattern = interfacePattern
+        self.portLibrarySelector = portLibrarySelector
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -32,6 +38,10 @@ class PortTailorSpec:
             _rval[Y_NODESELECTOR] = self.nodeSelector
         if self.loginBanner is not None:
             _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.interfacePattern is not None:
+            _rval[Y_INTERFACEPATTERN] = self.interfacePattern
+        if self.portLibrarySelector is not None:
+            _rval[Y_PORTLIBRARYSELECTOR] = self.portLibrarySelector
         return _rval
 
     @staticmethod
@@ -40,10 +50,14 @@ class PortTailorSpec:
             _nodes = obj.get(Y_NODES)
             _nodeSelector = obj.get(Y_NODESELECTOR)
             _loginBanner = obj.get(Y_LOGINBANNER)
+            _interfacePattern = obj.get(Y_INTERFACEPATTERN)
+            _portLibrarySelector = obj.get(Y_PORTLIBRARYSELECTOR)
             return PortTailorSpec(
                 nodes=_nodes,
                 nodeSelector=_nodeSelector,
                 loginBanner=_loginBanner,
+                interfacePattern=_interfacePattern,
+                portLibrarySelector=_portLibrarySelector,
             )
         return None  # pragma: no cover
 

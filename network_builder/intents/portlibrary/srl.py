@@ -14,19 +14,19 @@ class SrlBaseConfigHandler:
         log_msg(f"cr_obj: {cr_obj}")
         log_msg(f"node_cr: {node_cr}")
 
-        node_name = node_cr[Y_METADATA][Y_NAME]
+        # node_name not needed for naming — it's already in cr_obj.metadata.name
         self._generate_config(cr_obj, configs)
+
         eda.update_cr(
             schema=s.CONFIG_SCHEMA,
-            name=f"banner-{cr_obj.metadata.name}-{node_name}",
-            spec={"node-endpoint": node_name, "configs": configs},
+            name=f"banner-{cr_obj.metadata.name}",  # <-- Remove -{node_name}
+            spec={"node-endpoint": cr_obj.spec.nodes[0], "configs": configs},
         )
 
     def _generate_config(self, cr_obj: PortLibrary, configs: list):
         _config = {}
         if cr_obj.spec.loginBanner is not None:
             _config["login-banner"] = cr_obj.spec.loginBanner
-
         configs.append(
             {
                 "path": ".system.banner",

@@ -94,7 +94,6 @@ def process_cr(cr):
             eda.update_cr(
                 schema=PORTLIBRARY_SCHEMA,
                 name=dest_name,
-                labels={"eda.nokia.com/source": "derived"},
                 spec={
                     "loginBanner": cr_obj.spec.loginBanner or "Default Banner",
                     "nodes": [node_name],

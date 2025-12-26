@@ -18,11 +18,28 @@
       "type": "object",
       "title": "Specification",
       "properties": {
+        "interfacePattern": {
+          "description": "Regex or glob to match interface names (e.g., \"ethernet-1/*\")",
+          "type": "string",
+          "title": "Interface Pattern"
+        },
         "loginBanner": {
           "description": "This is the login banner displayed before a user has logged into the Node.",
-          "type": "string",
+          "type": "array",
           "title": "Login Banner",
+          "items": {
+            "type": "string"
+          },
           "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "portlibraries"
+              }
+            ],
             "ui-order-priority": 300,
             "ui-column-span": 4
           }
@@ -59,6 +76,19 @@
             ],
             "ui-order-priority": 100,
             "ui-column-span": 2
+          }
+        },
+        "portLibrarySelector": {
+          "description": "NEW FIELD: Let user select which PortLibrary instances to tailor\nSelect derived PortLibrary resources to apply additional configuration to",
+          "type": "array",
+          "format": "labelselector",
+          "title": "Port Library Selector",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-order-priority": 400,
+            "ui-column-span": 4
           }
         }
       },
