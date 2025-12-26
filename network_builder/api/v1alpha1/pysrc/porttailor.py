@@ -6,11 +6,9 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
+Y_PORTS = 'ports'
+Y_PORTDESCRIPTION = 'portDescription'
 Y_NODES = 'nodes'
-Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
-Y_INTERFACEPATTERN = 'interfacePattern'
-Y_PORTLIBRARYSELECTOR = 'portLibrarySelector'
 # Package objects (GVK Schemas)
 PORTTAILOR_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortTailor')
 
@@ -18,46 +16,28 @@ PORTTAILOR_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alp
 class PortTailorSpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        nodeSelector: list[str] | None = None,
-        loginBanner: list[str] | None = None,
-        interfacePattern: str | None = None,
-        portLibrarySelector: list[str] | None = None,
+        ports: list[str] | None = None,
+        portDescription: str | None = None,
     ):
-        self.nodes = nodes
-        self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
-        self.interfacePattern = interfacePattern
-        self.portLibrarySelector = portLibrarySelector
+        self.ports = ports
+        self.portDescription = portDescription
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.nodeSelector is not None:
-            _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
-        if self.interfacePattern is not None:
-            _rval[Y_INTERFACEPATTERN] = self.interfacePattern
-        if self.portLibrarySelector is not None:
-            _rval[Y_PORTLIBRARYSELECTOR] = self.portLibrarySelector
+        if self.ports is not None:
+            _rval[Y_PORTS] = self.ports
+        if self.portDescription is not None:
+            _rval[Y_PORTDESCRIPTION] = self.portDescription
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'PortTailorSpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
-            _interfacePattern = obj.get(Y_INTERFACEPATTERN)
-            _portLibrarySelector = obj.get(Y_PORTLIBRARYSELECTOR)
+            _ports = obj.get(Y_PORTS)
+            _portDescription = obj.get(Y_PORTDESCRIPTION)
             return PortTailorSpec(
-                nodes=_nodes,
-                nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
-                interfacePattern=_interfacePattern,
-                portLibrarySelector=_portLibrarySelector,
+                ports=_ports,
+                portDescription=_portDescription,
             )
         return None  # pragma: no cover
 

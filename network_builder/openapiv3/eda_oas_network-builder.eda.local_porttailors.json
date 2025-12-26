@@ -18,15 +18,19 @@
       "type": "object",
       "title": "Specification",
       "properties": {
-        "interfacePattern": {
-          "description": "Regex or glob to match interface names (e.g., \"ethernet-1/*\")",
+        "portDescription": {
+          "description": "Add a meaningfull description for selected port(s).",
           "type": "string",
-          "title": "Interface Pattern"
+          "title": "Port Description",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200,
+            "ui-column-span": 4
+          }
         },
-        "loginBanner": {
-          "description": "This is the login banner displayed before a user has logged into the Node.",
+        "ports": {
+          "description": "Select interface from Port Library.",
           "type": "array",
-          "title": "Login Banner",
+          "title": "Port List",
           "items": {
             "type": "string"
           },
@@ -40,55 +44,8 @@
                 "resource": "portlibraries"
               }
             ],
-            "ui-order-priority": 300,
-            "ui-column-span": 4
-          }
-        },
-        "nodeSelector": {
-          "description": "Label selector to select nodes on which to configure the banners.",
-          "type": "array",
-          "format": "labelselector",
-          "title": "Node Selector",
-          "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-order-priority": 200,
-            "ui-column-span": 2
-          }
-        },
-        "nodes": {
-          "description": "List of nodes on which to configure the banners.",
-          "type": "array",
-          "title": "Nodes",
-          "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-auto-completes": [
-              {
-                "condition": "true",
-                "type": "gvr",
-                "group": "core.eda.nokia.com",
-                "version": "v1",
-                "resource": "toponodes"
-              }
-            ],
             "ui-order-priority": 100,
-            "ui-column-span": 2
-          }
-        },
-        "portLibrarySelector": {
-          "description": "NEW FIELD: Let user select which PortLibrary instances to tailor\nSelect derived PortLibrary resources to apply additional configuration to",
-          "type": "array",
-          "format": "labelselector",
-          "title": "Port Library Selector",
-          "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-order-priority": 400,
-            "ui-column-span": 4
+            "ui-column-span": 3
           }
         }
       },

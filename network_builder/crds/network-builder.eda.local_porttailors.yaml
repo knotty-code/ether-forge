@@ -39,30 +39,11 @@ spec:
           spec:
             description: PortTailorSpec defines the desired state of PortTailor
             properties:
-              interfacePattern:
-                description: Regex or glob to match interface names (e.g., "ethernet-1/*")
+              portDescription:
+                description: Add a meaningfull description for selected port(s).
                 type: string
-              loginBanner:
-                description: This is the login banner displayed before a user has
-                  logged into the Node.
-                items:
-                  type: string
-                type: array
-              nodeSelector:
-                description: Label selector to select nodes on which to configure
-                  the banners.
-                items:
-                  type: string
-                type: array
-              nodes:
-                description: List of nodes on which to configure the banners.
-                items:
-                  type: string
-                type: array
-              portLibrarySelector:
-                description: |-
-                  NEW FIELD: Let user select which PortLibrary instances to tailor
-                  Select derived PortLibrary resources to apply additional configuration to
+              ports:
+                description: Select interface from Port Library.
                 items:
                   type: string
                 type: array

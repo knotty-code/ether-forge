@@ -15,22 +15,34 @@ class SrlBaseConfigHandler:
         log_msg(f"node_cr: {node_cr}")
 
         node_name = node_cr[Y_METADATA][Y_NAME]
-        self._generate_config(cr_obj, configs)
+        self._generate_config(cr_obj, configs, node_name)
         eda.update_cr(
             schema=s.CONFIG_SCHEMA,
-            name=f"banner-{cr_obj.metadata.name}-{node_name}",
+            name=f"porttailor-{cr_obj.metadata.name}-{node_name}",
             spec={"node-endpoint": node_name, "configs": configs},
         )
 
-    def _generate_config(self, cr_obj: PortTailor, configs: list):
-        _config = {}
-        if cr_obj.spec.loginBanner is not None:
-            _config["login-banner"] = cr_obj.spec.loginBanner
+    def _generate_config(self, cr_obj: PortTailor, configs: list, node_name: str):
+        # Filter ports for this node (e.g., "leaf1-ethernet-1-1" -> "ethernet-1-1")
+        local_ports = []
+        for port in cr_obj.spec.ports or []:
+            if port.startswith(node_name + "-"):
+                interface = port.split('-', 1)[1]
+                parts = interface.split('-')
+                if len(parts) < 2:
+                    continue  # Skip invalid formats
+                transformed = parts[0] + '-' + '/'.join(parts[1:])
+                local_ports.append(transformed)
 
-        configs.append(
-            {
-                "path": ".system.banner",
-                "config": json.dumps(_config),
-                "operation": "Create",
-            },
-        )
+        for local_port in local_ports:
+            _config = {
+                "description": cr_obj.spec.portDescription
+            }
+            path = f".interface{{.name==\"{local_port}\"}}"
+            configs.append(
+                {
+                    "path": path,
+                    "config": json.dumps(_config),
+                    "operation": "Create",
+                },
+            )
