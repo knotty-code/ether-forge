@@ -31,7 +31,7 @@ spec:
         path: network_builder/crds/network-builder.eda.local_portgenies.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_portgenies.json
         ui:
-          category: Network Builder
+          category: Port Smith
           name: Port Genie
     - script:
         path: network_builder/intents/portgenie/config_intent.py
@@ -52,7 +52,7 @@ spec:
         path: network_builder/crds/network-builder.eda.local_portlibraries.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_portlibraries.json
         ui:
-          category: Network Builder
+          category: Port Smith
           name: Port Library
     - script:
         path: network_builder/intents/portlibrary/config_intent.py
@@ -73,7 +73,7 @@ spec:
         path: network_builder/crds/network-builder.eda.local_porttailors.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_porttailors.json
         ui:
-          category: Network Builder
+          category: Port Smith
           name: Port Tailor
     - script:
         path: network_builder/intents/porttailor/config_intent.py
@@ -87,6 +87,69 @@ spec:
         path: network_builder/intents/porttailorstate/state_intent.py
         trigger:
           kind: PortTailorState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_subnetgenies.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_subnetgenies.json
+        ui:
+          category: Address Smith
+          name: Subnet Genie
+    - script:
+        path: network_builder/intents/subnetgenie/config_intent.py
+        trigger:
+          kind: SubnetGenie
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_subnetgeniestates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_subnetgeniestates.json
+    - script:
+        path: network_builder/intents/subnetgeniestate/state_intent.py
+        trigger:
+          kind: SubnetGenieState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_subnetlibraries.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_subnetlibraries.json
+        ui:
+          category: Address Smith
+          name: Subnet Library
+    - script:
+        path: network_builder/intents/subnetlibrary/config_intent.py
+        trigger:
+          kind: SubnetLibrary
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_subnetlibrarystates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_subnetlibrarystates.json
+    - script:
+        path: network_builder/intents/subnetlibrarystate/state_intent.py
+        trigger:
+          kind: SubnetLibraryState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_circuitgenies.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_circuitgenies.json
+        ui:
+          category: Port Smith
+          name: P2P Library
+    - script:
+        path: network_builder/intents/circuitgenie/config_intent.py
+        trigger:
+          kind: CircuitGenie
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_circuitgeniestates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_circuitgeniestates.json
+    - script:
+        path: network_builder/intents/circuitgeniestate/state_intent.py
+        trigger:
+          kind: CircuitGenieState
         type: state
   supportedEndpoints:
     - srl:0.0.0
