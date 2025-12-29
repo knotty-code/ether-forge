@@ -33,8 +33,8 @@ class SubnetGenieSpec:
     @staticmethod
     def from_input(obj) -> 'SubnetGenieSpec | None':
         if obj:
-            _subnet = obj.get(Y_SUBNET)
-            _subnetLength = obj.get(Y_SUBNETLENGTH)
+            _subnet = obj.get(Y_SUBNET, "'10.0.0.0/29'")
+            _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
             return SubnetGenieSpec(
                 subnet=_subnet,
                 subnetLength=_subnetLength,

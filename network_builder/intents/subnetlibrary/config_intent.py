@@ -22,22 +22,6 @@ def process_cr(cr):
     init_globals_defaults(cr_obj)
     nodes = {}
 
-    if cr_obj.spec.nodeSelector is not None and len(cr_obj.spec.nodeSelector) > 0:
-        log_msg("Filtering nodes with node selectors:", dict=cr_obj.spec.nodeSelector)
-        for node_cr in nutils.list_nodes(filter=[], label_filter=cr_obj.spec.nodeSelector):
-            node_name = node_cr["metadata"]["name"]
-            nodes[node_name] = node_cr
-            log_msg("Found node:", dict=node_name)
-
-    if cr_obj.spec.nodes is not None and len(cr_obj.spec.nodes) > 0:
-        for node in cr_obj.spec.nodes:
-            if node not in nodes:
-                node_cr = nutils.get_node(name=node)
-                if node_cr is None:
-                    msg = f"Node {node} not found"
-                    raise e.InvalidInput(msg)
-                nodes[node] = node_cr
-
     for node, node_cr in nodes.items():
         if node_cr is not None:
             node_spec = node_cr["spec"]

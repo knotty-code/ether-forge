@@ -16,10 +16,6 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // CircuitGenieSpec defines the desired state of CircuitGenie
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type CircuitGenieSpec struct {
@@ -43,6 +39,13 @@ type CircuitGenieSpec struct {
 	// +eda:ui:title="Login Banner"
 	// This is the login banner displayed before a user has logged into the Node.
 	LoginBanner string `json:"loginBanner,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=100
+	// +eda:ui:title="subnet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
+	// Select interface from Port Library.
+	Subnet []string `json:"subnet,omitempty"`
 }
 
 // CircuitGenieStatus defines the observed state of CircuitGenie

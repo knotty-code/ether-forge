@@ -24,12 +24,14 @@ type SubnetGenieSpec struct {
 	// +eda:ui:orderpriority=100
 	// +eda:ui:title="Subnet"
 	// IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
+	// +kubebuilder:default='10.0.0.0/29'
 	Subnet string `json:"subnet,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=1
 	// +eda:ui:orderpriority=200
 	// +eda:ui:title="Subnet Length"
 	// The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
+	// +kubebuilder:default=30
 	SubnetLength int `json:"subnetLength,omitempty"`
 }
 

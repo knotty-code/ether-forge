@@ -54,6 +54,11 @@ spec:
                 items:
                   type: string
                 type: array
+              subnet:
+                description: Select interface from Port Library.
+                items:
+                  type: string
+                type: array
             type: object
           status:
             description: CircuitGenieStatus defines the observed state of CircuitGenie

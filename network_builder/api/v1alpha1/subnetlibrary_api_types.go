@@ -16,33 +16,23 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // SubnetLibrarySpec defines the desired state of SubnetLibrary
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type SubnetLibrarySpec struct {
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=2
 	// +eda:ui:orderpriority=100
-	// +eda:ui:autocomplete=`{"group":"core.eda.nokia.com", "version":"v1", "resource":"toponodes"}`
-	// +eda:ui:title="Nodes"
-	// List of nodes on which to configure the banners.
-	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Subnet"
+	// IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
+	// +kubebuilder:default='10.0.0.0/29'
+	Subnet string `json:"subnet,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
+	// +eda:ui:columnspan=1
 	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Node Selector"
-	// +eda:ui:format="labelselector"
-	// Label selector to select nodes on which to configure the banners.
-	NodeSelector []string `json:"nodeSelector,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=4
-	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:title="Subnet Length"
+	// The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
+	// +kubebuilder:default=30
+	SubnetLength int `json:"subnetLength,omitempty"`
 }
 
 // SubnetLibraryStatus defines the observed state of SubnetLibrary

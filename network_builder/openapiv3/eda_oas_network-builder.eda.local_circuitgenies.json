@@ -60,6 +60,27 @@
             "ui-order-priority": 100,
             "ui-column-span": 2
           }
+        },
+        "subnet": {
+          "description": "Select interface from Port Library.",
+          "type": "array",
+          "title": "subnet",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetgenies"
+              }
+            ],
+            "ui-order-priority": 100,
+            "ui-column-span": 3
+          }
         }
       },
       "x-eda-nokia-com": {

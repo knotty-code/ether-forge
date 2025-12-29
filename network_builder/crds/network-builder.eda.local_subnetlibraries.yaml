@@ -39,21 +39,15 @@ spec:
           spec:
             description: SubnetLibrarySpec defines the desired state of SubnetLibrary
             properties:
-              loginBanner:
-                description: This is the login banner displayed before a user has
-                  logged into the Node.
+              subnet:
+                default: '''10.0.0.0/29'''
+                description: IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
                 type: string
-              nodeSelector:
-                description: Label selector to select nodes on which to configure
-                  the banners.
-                items:
-                  type: string
-                type: array
-              nodes:
-                description: List of nodes on which to configure the banners.
-                items:
-                  type: string
-                type: array
+              subnetLength:
+                default: 30
+                description: The size of the subnets to be allocated from within the
+                  parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
+                type: integer
             type: object
           status:
             description: SubnetLibraryStatus defines the observed state of SubnetLibrary

@@ -6,9 +6,9 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
+Y_SUBNET = 'subnet'
+Y_SUBNETLENGTH = 'subnetLength'
 Y_NODES = 'nodes'
-Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
 # Package objects (GVK Schemas)
 SUBNETLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='SubnetLibrary')
 
@@ -16,34 +16,28 @@ SUBNETLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1
 class SubnetLibrarySpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        subnet: str | None = None,
+        subnetLength: int | None = None,
     ):
-        self.nodes = nodes
-        self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
+        self.subnet = subnet
+        self.subnetLength = subnetLength
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.nodeSelector is not None:
-            _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.subnet is not None:
+            _rval[Y_SUBNET] = self.subnet
+        if self.subnetLength is not None:
+            _rval[Y_SUBNETLENGTH] = self.subnetLength
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'SubnetLibrarySpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
+            _subnet = obj.get(Y_SUBNET, "'10.0.0.0/29'")
+            _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
             return SubnetLibrarySpec(
-                nodes=_nodes,
-                nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
+                subnet=_subnet,
+                subnetLength=_subnetLength,
             )
         return None  # pragma: no cover
 

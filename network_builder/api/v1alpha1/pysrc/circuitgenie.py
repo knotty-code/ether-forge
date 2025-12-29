@@ -9,6 +9,7 @@ from .constants import *
 Y_NODES = 'nodes'
 Y_NODESELECTOR = 'nodeSelector'
 Y_LOGINBANNER = 'loginBanner'
+Y_SUBNET = 'subnet'
 # Package objects (GVK Schemas)
 CIRCUITGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='CircuitGenie')
 
@@ -19,10 +20,12 @@ class CircuitGenieSpec:
         nodes: list[str] | None = None,
         nodeSelector: list[str] | None = None,
         loginBanner: str | None = None,
+        subnet: list[str] | None = None,
     ):
         self.nodes = nodes
         self.nodeSelector = nodeSelector
         self.loginBanner = loginBanner
+        self.subnet = subnet
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -32,6 +35,8 @@ class CircuitGenieSpec:
             _rval[Y_NODESELECTOR] = self.nodeSelector
         if self.loginBanner is not None:
             _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.subnet is not None:
+            _rval[Y_SUBNET] = self.subnet
         return _rval
 
     @staticmethod
@@ -40,10 +45,12 @@ class CircuitGenieSpec:
             _nodes = obj.get(Y_NODES)
             _nodeSelector = obj.get(Y_NODESELECTOR)
             _loginBanner = obj.get(Y_LOGINBANNER)
+            _subnet = obj.get(Y_SUBNET)
             return CircuitGenieSpec(
                 nodes=_nodes,
                 nodeSelector=_nodeSelector,
                 loginBanner=_loginBanner,
+                subnet=_subnet,
             )
         return None  # pragma: no cover
 
