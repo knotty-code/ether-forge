@@ -18,32 +18,10 @@
       "type": "object",
       "title": "Specification",
       "properties": {
-        "loginBanner": {
-          "description": "This is the login banner displayed before a user has logged into the Node.",
-          "type": "string",
-          "title": "Login Banner",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 300,
-            "ui-column-span": 4
-          }
-        },
-        "nodeSelector": {
-          "description": "Label selector to select nodes on which to configure the banners.",
+        "portA": {
+          "description": "Select interface from Port Library.",
           "type": "array",
-          "format": "labelselector",
-          "title": "Node Selector",
-          "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-order-priority": 200,
-            "ui-column-span": 2
-          }
-        },
-        "nodes": {
-          "description": "List of nodes on which to configure the banners.",
-          "type": "array",
-          "title": "Nodes",
+          "title": "Port-B",
           "items": {
             "type": "string"
           },
@@ -52,13 +30,34 @@
               {
                 "condition": "true",
                 "type": "gvr",
-                "group": "core.eda.nokia.com",
-                "version": "v1",
-                "resource": "toponodes"
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "portlibraries"
               }
             ],
             "ui-order-priority": 100,
-            "ui-column-span": 2
+            "ui-column-span": 3
+          }
+        },
+        "portB": {
+          "description": "Select interface from Port Library.",
+          "type": "array",
+          "title": "Port-A",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "portlibraries"
+              }
+            ],
+            "ui-order-priority": 100,
+            "ui-column-span": 3
           }
         },
         "subnet": {

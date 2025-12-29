@@ -20,32 +20,26 @@ package v1alpha1
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type CircuitGenieSpec struct {
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
+	// +eda:ui:columnspan=3
 	// +eda:ui:orderpriority=100
-	// +eda:ui:autocomplete=`{"group":"core.eda.nokia.com", "version":"v1", "resource":"toponodes"}`
-	// +eda:ui:title="Nodes"
-	// List of nodes on which to configure the banners.
-	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Port-B"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
+	// Select interface from Port Library.
+	PortA []string `json:"portA,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
-	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Node Selector"
-	// +eda:ui:format="labelselector"
-	// Label selector to select nodes on which to configure the banners.
-	NodeSelector []string `json:"nodeSelector,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=4
-	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=100
+	// +eda:ui:title="Port-A"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
+	// Select interface from Port Library.
+	PortB []string `json:"portB,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=3
 	// +eda:ui:orderpriority=100
 	// +eda:ui:title="subnet"
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
 	// Select interface from Port Library.
-	Subnet []string `json:"subnet,omitempty"`
+	Supernet []string `json:"supernet,omitempty"`
 }
 
 // CircuitGenieStatus defines the observed state of CircuitGenie

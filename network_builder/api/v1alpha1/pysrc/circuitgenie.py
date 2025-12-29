@@ -6,10 +6,10 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_NODES = 'nodes'
-Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
+Y_PORTA = 'portA'
+Y_PORTB = 'portB'
 Y_SUBNET = 'subnet'
+Y_NODES = 'nodes'
 # Package objects (GVK Schemas)
 CIRCUITGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='CircuitGenie')
 
@@ -17,24 +17,20 @@ CIRCUITGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1a
 class CircuitGenieSpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        portA: list[str] | None = None,
+        portB: list[str] | None = None,
         subnet: list[str] | None = None,
     ):
-        self.nodes = nodes
-        self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
+        self.portA = portA
+        self.portB = portB
         self.subnet = subnet
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.nodeSelector is not None:
-            _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.portA is not None:
+            _rval[Y_PORTA] = self.portA
+        if self.portB is not None:
+            _rval[Y_PORTB] = self.portB
         if self.subnet is not None:
             _rval[Y_SUBNET] = self.subnet
         return _rval
@@ -42,14 +38,12 @@ class CircuitGenieSpec:
     @staticmethod
     def from_input(obj) -> 'CircuitGenieSpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
+            _portA = obj.get(Y_PORTA)
+            _portB = obj.get(Y_PORTB)
             _subnet = obj.get(Y_SUBNET)
             return CircuitGenieSpec(
-                nodes=_nodes,
-                nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
+                portA=_portA,
+                portB=_portB,
                 subnet=_subnet,
             )
         return None  # pragma: no cover

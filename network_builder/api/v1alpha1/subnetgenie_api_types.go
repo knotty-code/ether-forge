@@ -22,13 +22,19 @@ type SubnetGenieSpec struct {
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=2
 	// +eda:ui:orderpriority=100
-	// +eda:ui:title="Subnet"
+	// +eda:ui:title="Supernet"
 	// IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
 	// +kubebuilder:default='10.0.0.0/29'
-	Subnet string `json:"subnet,omitempty"`
+	Supernet string `json:"supernet,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=4
+	// +eda:ui:orderpriority=200
+	// +eda:ui:title="SuperNet Description"
+	// Reserved for point-to-point links.
+	Purpose string `json:"purpose,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=1
-	// +eda:ui:orderpriority=200
+	// +eda:ui:orderpriority=300
 	// +eda:ui:title="Subnet Length"
 	// The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
 	// +kubebuilder:default=30
@@ -37,7 +43,11 @@ type SubnetGenieSpec struct {
 
 // SubnetGenieStatus defines the observed state of SubnetGenie
 type SubnetGenieStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
+	// Available is the percentage (0-100) of available subnets within the supernet.
+	// This is computed by the state script and is read-only.
+	// +eda:ui:columnspan=1
+	// +eda:ui:orderpriority=300
+	// +eda:ui:title="Available"
+	// +eda:ui:suffix="%"
+	Available int `json:"available,omitempty"`
 }

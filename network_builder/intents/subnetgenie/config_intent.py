@@ -66,10 +66,10 @@ def process_cr(cr):
     validate(cr_obj)
     init_globals_defaults(cr_obj)
 
-    subnets = subnet_split(cr_obj.spec.subnet, cr_obj.spec.subnetLength)
-    log_msg(f"Generated {len(subnets)} subnets: {subnets}")
+    supernets = subnet_split(cr_obj.spec.supernet, cr_obj.spec.subnetLength)
+    log_msg(f"Generated {len(supernets)} supernets: {supernets}")
 
-    for i, subnet_cidr in enumerate(subnets):
+    for i, subnet_cidr in enumerate(supernets):
         child_name = f"{cr_name}-{i}"
         subnet_ip = subnet_cidr.split('/')[0]
         log_msg(f"Creating SubnetLibrary {child_name} with subnet {subnet_ip} length {cr_obj.spec.subnetLength}")
@@ -82,9 +82,9 @@ def process_cr(cr):
             },
         )
 
-    # Update state
+    # Create the corresponding SubnetGenieState resource (state-only resource)
     eda.update_cr(
         schema=SUBNETGENIESTATE_SCHEMA,
         name=cr_name,
-        spec={"nodes": []},
+        spec={},  # or whatever minimal fields your SubnetGenieState spec requires, often {}
     )

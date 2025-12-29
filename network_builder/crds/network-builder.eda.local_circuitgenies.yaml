@@ -39,18 +39,13 @@ spec:
           spec:
             description: CircuitGenieSpec defines the desired state of CircuitGenie
             properties:
-              loginBanner:
-                description: This is the login banner displayed before a user has
-                  logged into the Node.
-                type: string
-              nodeSelector:
-                description: Label selector to select nodes on which to configure
-                  the banners.
+              portA:
+                description: Select interface from Port Library.
                 items:
                   type: string
                 type: array
-              nodes:
-                description: List of nodes on which to configure the banners.
+              portB:
+                description: Select interface from Port Library.
                 items:
                   type: string
                 type: array

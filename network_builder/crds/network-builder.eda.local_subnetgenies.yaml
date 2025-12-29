@@ -39,24 +39,27 @@ spec:
           spec:
             description: SubnetGenieSpec defines the desired state of SubnetGenie
             properties:
-              subnet:
-                default: '''10.0.0.0/29'''
-                description: IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
+              purpose:
+                description: Reserved for point-to-point links.
                 type: string
               subnetLength:
                 default: 30
                 description: The size of the subnets to be allocated from within the
                   parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
                 type: integer
+              supernet:
+                default: '''10.0.0.0/29'''
+                description: IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
+                type: string
             type: object
           status:
             description: SubnetGenieStatus defines the observed state of SubnetGenie
             properties:
-              nodes:
-                description: List of nodes this banner has been applied to
-                items:
-                  type: string
-                type: array
+              available:
+                description: |-
+                  Available is the percentage (0-100) of available subnets within the supernet.
+                  This is computed by the state script and is read-only.
+                type: integer
             type: object
         type: object
     served: true
