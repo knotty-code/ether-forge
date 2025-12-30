@@ -79,6 +79,7 @@ def process_cr(cr):
             spec={
                 "subnet": subnet_ip,
                 "subnetLength": cr_obj.spec.subnetLength,
+                "supernet": cr_obj.metadata.name,
             },
         )
 

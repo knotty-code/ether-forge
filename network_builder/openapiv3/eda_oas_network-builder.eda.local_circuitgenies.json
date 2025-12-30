@@ -39,14 +39,6 @@
             "ui-column-span": 3
           }
         },
-        "portAIP": {
-          "type": "string",
-          "title": "Port-A IP Address",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 250,
-            "ui-column-span": 3
-          }
-        },
         "portB": {
           "description": "Select interface from Port Library.",
           "type": "array",
@@ -68,18 +60,20 @@
             "ui-column-span": 3
           }
         },
-        "portBIP": {
-          "type": "string",
-          "title": "Port-B IP Address ",
+        "subnet": {
+          "type": "array",
+          "title": "Subnet",
+          "items": {
+            "type": "string"
+          },
           "x-eda-nokia-com": {
-            "ui-order-priority": 300,
+            "ui-order-priority": 200,
             "ui-column-span": 3
           }
         },
         "supernet": {
-          "description": "Select interface from Port Library.",
           "type": "array",
-          "title": "subnet",
+          "title": "Supernet",
           "items": {
             "type": "string"
           },

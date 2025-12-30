@@ -44,17 +44,16 @@ spec:
                 items:
                   type: string
                 type: array
-              portAIP:
-                type: string
               portB:
                 description: Select interface from Port Library.
                 items:
                   type: string
                 type: array
-              portBIP:
-                type: string
+              subnet:
+                items:
+                  type: string
+                type: array
               supernet:
-                description: Select interface from Port Library.
                 items:
                   type: string
                 type: array

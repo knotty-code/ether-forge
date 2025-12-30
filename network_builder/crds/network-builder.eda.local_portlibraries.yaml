@@ -63,6 +63,8 @@ spec:
                 items:
                   type: string
                 type: array
+              opstate:
+                type: string
             type: object
         type: object
     served: true

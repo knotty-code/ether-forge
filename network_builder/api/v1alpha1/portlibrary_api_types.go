@@ -16,10 +16,6 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // PortLibrarySpec defines the desired state of PortLibrary
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type PortLibrarySpec struct {
@@ -50,4 +46,6 @@ type PortLibraryStatus struct {
 	// +eda:ui:title="Nodes"
 	// List of nodes this banner has been applied to
 	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Operational State"
+	OpState string `json:"opstate,omitempty"`
 }
