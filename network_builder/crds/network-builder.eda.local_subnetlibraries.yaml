@@ -48,6 +48,8 @@ spec:
                 description: The size of the subnets to be allocated from within the
                   parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
                 type: integer
+              supernet:
+                type: string
             type: object
           status:
             description: SubnetLibraryStatus defines the observed state of SubnetLibrary

@@ -33,6 +33,11 @@ type SubnetLibrarySpec struct {
 	// The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
 	// +kubebuilder:default=30
 	SubnetLength int `json:"subnetLength,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=2
+	// +eda:ui:orderpriority=300
+	// +eda:ui:title="SuperNet Name"
+	SuperNet string `json:"supernet,omitempty"`
 }
 
 // SubnetLibraryStatus defines the observed state of SubnetLibrary

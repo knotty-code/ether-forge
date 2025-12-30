@@ -28,18 +28,28 @@ type CircuitGenieSpec struct {
 	PortA []string `json:"portA,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=3
-	// +eda:ui:orderpriority=100
+	// +eda:ui:orderpriority=150
 	// +eda:ui:title="Port-A"
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
 	// Select interface from Port Library.
 	PortB []string `json:"portB,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=3
-	// +eda:ui:orderpriority=100
+	// +eda:ui:orderpriority=200
 	// +eda:ui:title="subnet"
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
 	// Select interface from Port Library.
 	Supernet []string `json:"supernet,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=250
+	// +eda:ui:title="Port-A IP Address"
+	PortAIP string `json:"portAIP,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=300
+	// +eda:ui:title="Port-B IP Address "
+	PortBIP string `json:"portBIP,omitempty"`
 }
 
 // CircuitGenieStatus defines the observed state of CircuitGenie

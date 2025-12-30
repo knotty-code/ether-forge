@@ -37,6 +37,14 @@
             "ui-order-priority": 200,
             "ui-column-span": 1
           }
+        },
+        "supernet": {
+          "type": "string",
+          "title": "SuperNet Name",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 300,
+            "ui-column-span": 2
+          }
         }
       },
       "x-eda-nokia-com": {

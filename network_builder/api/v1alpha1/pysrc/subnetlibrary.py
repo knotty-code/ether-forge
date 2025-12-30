@@ -8,6 +8,7 @@ from . import Metadata, Y_NAME
 from .constants import *
 Y_SUBNET = 'subnet'
 Y_SUBNETLENGTH = 'subnetLength'
+Y_SUPERNET = 'supernet'
 Y_NODES = 'nodes'
 # Package objects (GVK Schemas)
 SUBNETLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='SubnetLibrary')
@@ -18,9 +19,11 @@ class SubnetLibrarySpec:
         self,
         subnet: str | None = None,
         subnetLength: int | None = None,
+        supernet: str | None = None,
     ):
         self.subnet = subnet
         self.subnetLength = subnetLength
+        self.supernet = supernet
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -28,6 +31,8 @@ class SubnetLibrarySpec:
             _rval[Y_SUBNET] = self.subnet
         if self.subnetLength is not None:
             _rval[Y_SUBNETLENGTH] = self.subnetLength
+        if self.supernet is not None:
+            _rval[Y_SUPERNET] = self.supernet
         return _rval
 
     @staticmethod
@@ -35,9 +40,11 @@ class SubnetLibrarySpec:
         if obj:
             _subnet = obj.get(Y_SUBNET, "'10.0.0.0/29'")
             _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
+            _supernet = obj.get(Y_SUPERNET)
             return SubnetLibrarySpec(
                 subnet=_subnet,
                 subnetLength=_subnetLength,
+                supernet=_supernet,
             )
         return None  # pragma: no cover
 
