@@ -60,7 +60,7 @@
             "ui-column-span": 3
           }
         },
-        "subnet": {
+        "supernet": {
           "description": "Select interface from Port Library.",
           "type": "array",
           "title": "subnet",

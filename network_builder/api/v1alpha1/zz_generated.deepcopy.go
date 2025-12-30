@@ -80,8 +80,8 @@ func (in *CircuitGenieSpec) DeepCopyInto(out *CircuitGenieSpec) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
-	if in.Subnet != nil {
-		in, out := &in.Subnet, &out.Subnet
+	if in.Supernet != nil {
+		in, out := &in.Supernet, &out.Supernet
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
