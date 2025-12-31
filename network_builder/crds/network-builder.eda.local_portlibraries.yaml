@@ -56,11 +56,8 @@ spec:
           status:
             description: PortLibraryStatus defines the observed state of PortLibrary
             properties:
-              nodes:
-                description: List of nodes this banner has been applied to
-                items:
-                  type: string
-                type: array
+              adminState:
+                type: string
               opstate:
                 type: string
             type: object

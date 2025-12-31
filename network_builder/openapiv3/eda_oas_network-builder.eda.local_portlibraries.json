@@ -76,13 +76,9 @@
       "type": "object",
       "title": "Status",
       "properties": {
-        "nodes": {
-          "description": "List of nodes this banner has been applied to",
-          "type": "array",
-          "title": "Nodes",
-          "items": {
-            "type": "string"
-          }
+        "adminState": {
+          "type": "string",
+          "title": "Admin State"
         },
         "opstate": {
           "type": "string",

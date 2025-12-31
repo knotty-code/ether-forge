@@ -68,6 +68,9 @@ def process_state_cr(cr):
     eda.update_cr(
         schema=PORTLIBRARY_SCHEMA,
         name=cr_obj.metadata.name,
-        status={'opstate': op_state}
+        status={
+            'opstate': op_state,
+            'adminState': value.get('admin-state', 'unknown')
+        }
     )
-    log_msg('Updated PortLibrary status.opstate:', op_state)
+    log_msg('Updated PortLibrary status:', {'opstate': op_state, 'adminState': value.get('admin-state', 'unknown')})

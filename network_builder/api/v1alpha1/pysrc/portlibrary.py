@@ -10,6 +10,7 @@ Y_NODES = 'nodes'
 Y_NODESELECTOR = 'nodeSelector'
 Y_PORT = 'port'
 Y_OPSTATE = 'opstate'
+Y_ADMINSTATE = 'adminState'
 # Package objects (GVK Schemas)
 PORTLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortLibrary')
 
@@ -52,28 +53,28 @@ class PortLibrarySpec:
 class PortLibraryStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
         opstate: str | None = None,
+        adminState: str | None = None,
     ):
-        self.nodes = nodes
         self.opstate = opstate
+        self.adminState = adminState
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
         if self.opstate is not None:
             _rval[Y_OPSTATE] = self.opstate
+        if self.adminState is not None:
+            _rval[Y_ADMINSTATE] = self.adminState
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'PortLibraryStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
             _opstate = obj.get(Y_OPSTATE)
+            _adminState = obj.get(Y_ADMINSTATE)
             return PortLibraryStatus(
-                nodes=_nodes,
                 opstate=_opstate,
+                adminState=_adminState,
             )
         return None  # pragma: no cover
 

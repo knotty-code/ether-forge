@@ -42,9 +42,8 @@ type PortLibrarySpec struct {
 
 // PortLibraryStatus defines the observed state of PortLibrary
 type PortLibraryStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
 	// +eda:ui:title="Operational State"
 	OpState string `json:"opstate,omitempty"`
+	// +eda:ui:title="Admin State"
+	AdminState string `json:"adminState,omitempty"`
 }
