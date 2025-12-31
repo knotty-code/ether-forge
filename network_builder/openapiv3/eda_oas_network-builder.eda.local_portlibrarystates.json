@@ -25,6 +25,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "opstate": {
+          "type": "string"
         }
       },
       "x-eda-nokia-com": {

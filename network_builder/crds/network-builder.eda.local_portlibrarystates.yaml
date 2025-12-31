@@ -45,6 +45,8 @@ spec:
                 items:
                   type: string
                 type: array
+              opstate:
+                type: string
             type: object
           status:
             description: PortLibraryStateStatus defines the observed state of PortLibraryState

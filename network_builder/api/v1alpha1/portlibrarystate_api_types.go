@@ -16,15 +16,12 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // PortLibraryStateSpec defines the desired state of PortLibraryState
 type PortLibraryStateSpec struct {
 	// +eda:ui:title="Nodes"
 	// List of TopoNodes this login banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
+	Nodes   []string `json:"nodes,omitempty"`
+	OpState string   `json:"opstate,omitempty"`
 }
 
 // PortLibraryStateStatus defines the observed state of PortLibraryState

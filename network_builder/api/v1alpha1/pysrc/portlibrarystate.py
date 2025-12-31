@@ -7,6 +7,7 @@ from . import Metadata, Y_NAME
 
 from .constants import *
 Y_NODES = 'nodes'
+Y_OPSTATE = 'opstate'
 # Package objects (GVK Schemas)
 PORTLIBRARYSTATE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortLibraryState')
 
@@ -15,21 +16,27 @@ class PortLibraryStateSpec:
     def __init__(
         self,
         nodes: list[str] | None = None,
+        opstate: str | None = None,
     ):
         self.nodes = nodes
+        self.opstate = opstate
 
     def to_input(self):  # pragma: no cover
         _rval = {}
         if self.nodes is not None:
             _rval[Y_NODES] = self.nodes
+        if self.opstate is not None:
+            _rval[Y_OPSTATE] = self.opstate
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'PortLibraryStateSpec | None':
         if obj:
             _nodes = obj.get(Y_NODES)
+            _opstate = obj.get(Y_OPSTATE)
             return PortLibraryStateSpec(
                 nodes=_nodes,
+                opstate=_opstate,
             )
         return None  # pragma: no cover
 
