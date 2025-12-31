@@ -8,7 +8,7 @@ from . import Metadata, Y_NAME
 from .constants import *
 Y_NODES = 'nodes'
 Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
+Y_PORT = 'port'
 Y_OPSTATE = 'opstate'
 # Package objects (GVK Schemas)
 PORTLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortLibrary')
@@ -19,11 +19,11 @@ class PortLibrarySpec:
         self,
         nodes: list[str] | None = None,
         nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        port: str | None = None,
     ):
         self.nodes = nodes
         self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
+        self.port = port
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -31,8 +31,8 @@ class PortLibrarySpec:
             _rval[Y_NODES] = self.nodes
         if self.nodeSelector is not None:
             _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.port is not None:
+            _rval[Y_PORT] = self.port
         return _rval
 
     @staticmethod
@@ -40,11 +40,11 @@ class PortLibrarySpec:
         if obj:
             _nodes = obj.get(Y_NODES)
             _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
+            _port = obj.get(Y_PORT)
             return PortLibrarySpec(
                 nodes=_nodes,
                 nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
+                port=_port,
             )
         return None  # pragma: no cover
 

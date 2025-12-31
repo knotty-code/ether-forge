@@ -39,10 +39,6 @@ spec:
           spec:
             description: PortLibrarySpec defines the desired state of PortLibrary
             properties:
-              loginBanner:
-                description: This is the login banner displayed before a user has
-                  logged into the Node.
-                type: string
               nodeSelector:
                 description: Label selector to select nodes on which to configure
                   the banners.
@@ -54,6 +50,8 @@ spec:
                 items:
                   type: string
                 type: array
+              port:
+                type: string
             type: object
           status:
             description: PortLibraryStatus defines the observed state of PortLibrary

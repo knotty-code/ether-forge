@@ -34,11 +34,10 @@ type PortLibrarySpec struct {
 	// Label selector to select nodes on which to configure the banners.
 	NodeSelector []string `json:"nodeSelector,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=4
+	// +eda:ui:columnspan=2
 	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:title="Port Name"
+	Port string `json:"port,omitempty"`
 }
 
 // PortLibraryStatus defines the observed state of PortLibrary
