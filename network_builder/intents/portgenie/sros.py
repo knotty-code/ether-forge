@@ -14,22 +14,22 @@ class SrosBaseConfigHandler:
         log_msg(f"cr_obj: {cr_obj}")
         log_msg(f"node_cr: {node_cr}")
 
-        node_name = node_cr[Y_METADATA][Y_NAME]
-        self._generate_config(cr_obj, configs)
-        # eda.update_cr(
-        #     schema=s.CONFIG_SCHEMA,
-        #     name=f"banner-{cr_obj.metadata.name}-{node_name}",
-        #     spec={"node-endpoint": node_name, "configs": configs},
-        # )
+    #     node_name = node_cr[Y_METADATA][Y_NAME]
+    #     self._generate_config(cr_obj, configs)
+    #     eda.update_cr(
+    #         schema=s.CONFIG_SCHEMA,
+    #         name=f"banner-{cr_obj.metadata.name}-{node_name}",
+    #         spec={"node-endpoint": node_name, "configs": configs},
+    #     )
 
-    def _generate_config(self, cr_obj: PortGenie, configs: list):
-        if cr_obj.spec.loginBanner is not None:
-            _banner_config = {}
-            _banner_config["message"] = cr_obj.spec.loginBanner
-            configs.append(
-                {
-                    "path": ".configure.system.login-control.pre-login-message",
-                    "config": json.dumps(_banner_config),
-                    "operation": "Create",
-                }
-            )
+    # def _generate_config(self, cr_obj: PortGenie, configs: list):
+    #     if cr_obj.spec.loginBanner is not None:
+    #         _banner_config = {}
+    #         _banner_config["message"] = cr_obj.spec.loginBanner
+    #         configs.append(
+    #             {
+    #                 "path": ".configure.system.login-control.pre-login-message",
+    #                 "config": json.dumps(_banner_config),
+    #                 "operation": "Create",
+    #             }
+    #         )

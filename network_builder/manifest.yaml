@@ -151,6 +151,27 @@ spec:
         trigger:
           kind: CircuitGenieState
         type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_stockapps.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_stockapps.json
+        ui:
+          category: Network Builder
+          name: stockapps
+    - script:
+        path: network_builder/intents/stockapp/config_intent.py
+        trigger:
+          kind: StockApp
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_stockappstates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_stockappstates.json
+    - script:
+        path: network_builder/intents/stockappstate/state_intent.py
+        trigger:
+          kind: StockAppState
+        type: state
   supportedEndpoints:
     - srl:0.0.0
     - srl:24.10.*

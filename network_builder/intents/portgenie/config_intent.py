@@ -94,10 +94,3 @@ def process_cr(cr):
             created_count += 1
 
     log_msg(f"Created {created_count} PortLibrary CRs from selected ports")
-
-    # Update state
-    eda.update_cr(
-        schema=PORTGENIESTATE_SCHEMA,
-        name=cr_name,
-        spec={"nodes": list(nodes.keys())},
-    )

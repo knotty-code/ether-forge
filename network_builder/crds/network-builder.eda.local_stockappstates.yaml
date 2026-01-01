@@ -4,20 +4,20 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-  name: portgenies.network-builder.eda.local
+  name: stockappstates.network-builder.eda.local
 spec:
   group: network-builder.eda.local
   names:
-    kind: PortGenie
-    listKind: PortGenieList
-    plural: portgenies
-    singular: portgenie
+    kind: StockAppState
+    listKind: StockAppStateList
+    plural: stockappstates
+    singular: stockappstate
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PortGenie is the Schema for the portgenies API
+        description: StockAppState is the Schema for the stockappstates API
         properties:
           apiVersion:
             description: |-
@@ -37,19 +37,17 @@ spec:
           metadata:
             type: object
           spec:
-            description: PortGenieSpec defines the desired state of PortGenie
+            description: StockAppStateSpec defines the desired state of StockAppState
             properties:
               nodes:
-                description: List of nodes on which to configure the banners.
+                description: List of TopoNodes this login banner has been applied
+                  to
                 items:
                   type: string
                 type: array
-              portselector:
-                description: Idetify which ports to create ie, 1 - 3, 5 - 10
-                type: string
             type: object
           status:
-            description: PortGenieStatus defines the observed state of PortGenie
+            description: StockAppStateStatus defines the observed state of StockAppState
             type: object
         type: object
     served: true

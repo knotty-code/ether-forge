@@ -7,41 +7,34 @@ from . import Metadata, Y_NAME
 
 from .constants import *
 Y_NODES = 'nodes'
-Y_PORTSELECTOR = 'portselector'
 # Package objects (GVK Schemas)
-PORTGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortGenie')
+STOCKAPPSTATE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='StockAppState')
 
 
-class PortGenieSpec:
+class StockAppStateSpec:
     def __init__(
         self,
         nodes: list[str] | None = None,
-        portselector: str | None = None,
     ):
         self.nodes = nodes
-        self.portselector = portselector
 
     def to_input(self):  # pragma: no cover
         _rval = {}
         if self.nodes is not None:
             _rval[Y_NODES] = self.nodes
-        if self.portselector is not None:
-            _rval[Y_PORTSELECTOR] = self.portselector
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenieSpec | None':
+    def from_input(obj) -> 'StockAppStateSpec | None':
         if obj:
             _nodes = obj.get(Y_NODES)
-            _portselector = obj.get(Y_PORTSELECTOR)
-            return PortGenieSpec(
+            return StockAppStateSpec(
                 nodes=_nodes,
-                portselector=_portselector,
             )
         return None  # pragma: no cover
 
 
-class PortGenieStatus:
+class StockAppStateStatus:
     def __init__(
         self,
     ):
@@ -52,19 +45,19 @@ class PortGenieStatus:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenieStatus | None':
+    def from_input(obj) -> 'StockAppStateStatus | None':
         if obj:
-            return PortGenieStatus(
+            return StockAppStateStatus(
             )
         return None  # pragma: no cover
 
 
-class PortGenie:
+class StockAppState:
     def __init__(
         self,
         metadata: Metadata | None = None,
-        spec: PortGenieSpec | None = None,
-        status: PortGenieStatus | None = None
+        spec: StockAppStateSpec | None = None,
+        status: StockAppStateStatus | None = None
     ):
         self.metadata = metadata
         self.spec = spec
@@ -72,7 +65,7 @@ class PortGenie:
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        _rval[Y_SCHEMA_KEY] = PORTGENIE_SCHEMA
+        _rval[Y_SCHEMA_KEY] = STOCKAPPSTATE_SCHEMA
         if self.metadata is not None:
             _rval[Y_NAME] = self.metadata.name
         if self.spec is not None:
@@ -82,16 +75,16 @@ class PortGenie:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenie | None':
+    def from_input(obj) -> 'StockAppState | None':
         if obj:
             _metadata = (
                 Metadata.from_input(obj.get(Y_METADATA))
                 if obj.get(Y_METADATA, None)
                 else Metadata.from_name(obj.get(Y_NAME))
             )
-            _spec = PortGenieSpec.from_input(obj.get(Y_SPEC, None))
-            _status = PortGenieStatus.from_input(obj.get(Y_STATUS))
-            return PortGenie(
+            _spec = StockAppStateSpec.from_input(obj.get(Y_SPEC, None))
+            _status = StockAppStateStatus.from_input(obj.get(Y_STATUS))
+            return StockAppState(
                 metadata=_metadata,
                 spec=_spec,
                 status=_status,
@@ -99,10 +92,10 @@ class PortGenie:
         return None  # pragma: no cover
 
 
-class PortGenieList:
+class StockAppStateList:
     def __init__(
         self,
-        items: list[PortGenie],
+        items: list[StockAppState],
         listMeta: object | None = None
     ):
         self.items = items
@@ -117,11 +110,11 @@ class PortGenieList:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenieList | None':
+    def from_input(obj) -> 'StockAppStateList | None':
         if obj:
             _items = obj.get(Y_ITEMS, [])
             _listMeta = obj.get(Y_METADATA, None)
-            return PortGenieList(
+            return StockAppStateList(
                 items=_items,
                 listMeta=_listMeta,
             )

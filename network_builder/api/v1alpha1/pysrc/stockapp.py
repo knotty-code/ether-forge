@@ -7,64 +7,76 @@ from . import Metadata, Y_NAME
 
 from .constants import *
 Y_NODES = 'nodes'
-Y_PORTSELECTOR = 'portselector'
+Y_NODESELECTOR = 'nodeSelector'
+Y_LOGINBANNER = 'loginBanner'
 # Package objects (GVK Schemas)
-PORTGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='PortGenie')
+STOCKAPP_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='StockApp')
 
 
-class PortGenieSpec:
+class StockAppSpec:
     def __init__(
         self,
         nodes: list[str] | None = None,
-        portselector: str | None = None,
+        nodeSelector: list[str] | None = None,
+        loginBanner: str | None = None,
     ):
         self.nodes = nodes
-        self.portselector = portselector
+        self.nodeSelector = nodeSelector
+        self.loginBanner = loginBanner
 
     def to_input(self):  # pragma: no cover
         _rval = {}
         if self.nodes is not None:
             _rval[Y_NODES] = self.nodes
-        if self.portselector is not None:
-            _rval[Y_PORTSELECTOR] = self.portselector
+        if self.nodeSelector is not None:
+            _rval[Y_NODESELECTOR] = self.nodeSelector
+        if self.loginBanner is not None:
+            _rval[Y_LOGINBANNER] = self.loginBanner
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenieSpec | None':
+    def from_input(obj) -> 'StockAppSpec | None':
         if obj:
             _nodes = obj.get(Y_NODES)
-            _portselector = obj.get(Y_PORTSELECTOR)
-            return PortGenieSpec(
+            _nodeSelector = obj.get(Y_NODESELECTOR)
+            _loginBanner = obj.get(Y_LOGINBANNER)
+            return StockAppSpec(
                 nodes=_nodes,
-                portselector=_portselector,
+                nodeSelector=_nodeSelector,
+                loginBanner=_loginBanner,
             )
         return None  # pragma: no cover
 
 
-class PortGenieStatus:
+class StockAppStatus:
     def __init__(
         self,
+        nodes: list[str] | None = None,
     ):
-        pass
+        self.nodes = nodes
 
     def to_input(self):  # pragma: no cover
         _rval = {}
+        if self.nodes is not None:
+            _rval[Y_NODES] = self.nodes
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenieStatus | None':
+    def from_input(obj) -> 'StockAppStatus | None':
         if obj:
-            return PortGenieStatus(
+            _nodes = obj.get(Y_NODES)
+            return StockAppStatus(
+                nodes=_nodes,
             )
         return None  # pragma: no cover
 
 
-class PortGenie:
+class StockApp:
     def __init__(
         self,
         metadata: Metadata | None = None,
-        spec: PortGenieSpec | None = None,
-        status: PortGenieStatus | None = None
+        spec: StockAppSpec | None = None,
+        status: StockAppStatus | None = None
     ):
         self.metadata = metadata
         self.spec = spec
@@ -72,7 +84,7 @@ class PortGenie:
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        _rval[Y_SCHEMA_KEY] = PORTGENIE_SCHEMA
+        _rval[Y_SCHEMA_KEY] = STOCKAPP_SCHEMA
         if self.metadata is not None:
             _rval[Y_NAME] = self.metadata.name
         if self.spec is not None:
@@ -82,16 +94,16 @@ class PortGenie:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenie | None':
+    def from_input(obj) -> 'StockApp | None':
         if obj:
             _metadata = (
                 Metadata.from_input(obj.get(Y_METADATA))
                 if obj.get(Y_METADATA, None)
                 else Metadata.from_name(obj.get(Y_NAME))
             )
-            _spec = PortGenieSpec.from_input(obj.get(Y_SPEC, None))
-            _status = PortGenieStatus.from_input(obj.get(Y_STATUS))
-            return PortGenie(
+            _spec = StockAppSpec.from_input(obj.get(Y_SPEC, None))
+            _status = StockAppStatus.from_input(obj.get(Y_STATUS))
+            return StockApp(
                 metadata=_metadata,
                 spec=_spec,
                 status=_status,
@@ -99,10 +111,10 @@ class PortGenie:
         return None  # pragma: no cover
 
 
-class PortGenieList:
+class StockAppList:
     def __init__(
         self,
-        items: list[PortGenie],
+        items: list[StockApp],
         listMeta: object | None = None
     ):
         self.items = items
@@ -117,11 +129,11 @@ class PortGenieList:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'PortGenieList | None':
+    def from_input(obj) -> 'StockAppList | None':
         if obj:
             _items = obj.get(Y_ITEMS, [])
             _listMeta = obj.get(Y_METADATA, None)
-            return PortGenieList(
+            return StockAppList(
                 items=_items,
                 listMeta=_listMeta,
             )

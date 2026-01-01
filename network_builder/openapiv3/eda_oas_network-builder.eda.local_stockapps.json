@@ -1,5 +1,5 @@
 {
-  "description": "PortGenie is the Schema for the portgenies API",
+  "description": "StockApp is the Schema for the stockapps API",
   "type": "object",
   "properties": {
     "apiVersion": {
@@ -14,10 +14,32 @@
       "type": "object"
     },
     "spec": {
-      "description": "PortGenieSpec defines the desired state of PortGenie",
+      "description": "StockAppSpec defines the desired state of StockApp",
       "type": "object",
       "title": "Specification",
       "properties": {
+        "loginBanner": {
+          "description": "This is the login banner displayed before a user has logged into the Node.",
+          "type": "string",
+          "title": "Login Banner",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 300,
+            "ui-column-span": 4
+          }
+        },
+        "nodeSelector": {
+          "description": "Label selector to select nodes on which to configure the banners.",
+          "type": "array",
+          "format": "labelselector",
+          "title": "Node Selector",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200,
+            "ui-column-span": 2
+          }
+        },
         "nodes": {
           "description": "List of nodes on which to configure the banners.",
           "type": "array",
@@ -38,15 +60,6 @@
             "ui-order-priority": 100,
             "ui-column-span": 2
           }
-        },
-        "portselector": {
-          "description": "Idetify which ports to create ie, 1 - 3, 5 - 10",
-          "type": "string",
-          "title": "Ports",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 200,
-            "ui-column-span": 4
-          }
         }
       },
       "x-eda-nokia-com": {
@@ -60,9 +73,19 @@
       }
     },
     "status": {
-      "description": "PortGenieStatus defines the observed state of PortGenie",
+      "description": "StockAppStatus defines the observed state of StockApp",
       "type": "object",
       "title": "Status",
+      "properties": {
+        "nodes": {
+          "description": "List of nodes this banner has been applied to",
+          "type": "array",
+          "title": "Nodes",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
       "readOnly": true,
       "x-eda-nokia-com": {
         "ui-order-priority": 20
