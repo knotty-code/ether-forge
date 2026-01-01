@@ -9,7 +9,7 @@ from .constants import *
 Y_SUBNET = 'subnet'
 Y_SUBNETLENGTH = 'subnetLength'
 Y_SUPERNET = 'supernet'
-Y_NODES = 'nodes'
+Y_USEDBY = 'usedby'
 # Package objects (GVK Schemas)
 SUBNETLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='SubnetLibrary')
 
@@ -20,10 +20,12 @@ class SubnetLibrarySpec:
         subnet: str | None = None,
         subnetLength: int | None = None,
         supernet: str | None = None,
+        usedby: str | None = None,
     ):
         self.subnet = subnet
         self.subnetLength = subnetLength
         self.supernet = supernet
+        self.usedby = usedby
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -33,6 +35,8 @@ class SubnetLibrarySpec:
             _rval[Y_SUBNETLENGTH] = self.subnetLength
         if self.supernet is not None:
             _rval[Y_SUPERNET] = self.supernet
+        if self.usedby is not None:
+            _rval[Y_USEDBY] = self.usedby
         return _rval
 
     @staticmethod
@@ -41,10 +45,12 @@ class SubnetLibrarySpec:
             _subnet = obj.get(Y_SUBNET, "'10.0.0.0/29'")
             _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
             _supernet = obj.get(Y_SUPERNET)
+            _usedby = obj.get(Y_USEDBY)
             return SubnetLibrarySpec(
                 subnet=_subnet,
                 subnetLength=_subnetLength,
                 supernet=_supernet,
+                usedby=_usedby,
             )
         return None  # pragma: no cover
 
@@ -52,22 +58,22 @@ class SubnetLibrarySpec:
 class SubnetLibraryStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
+        usedby: str | None = None,
     ):
-        self.nodes = nodes
+        self.usedby = usedby
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
+        if self.usedby is not None:
+            _rval[Y_USEDBY] = self.usedby
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'SubnetLibraryStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
+            _usedby = obj.get(Y_USEDBY)
             return SubnetLibraryStatus(
-                nodes=_nodes,
+                usedby=_usedby,
             )
         return None  # pragma: no cover
 

@@ -50,15 +50,14 @@ spec:
                 type: integer
               supernet:
                 type: string
+              usedby:
+                type: string
             type: object
           status:
             description: SubnetLibraryStatus defines the observed state of SubnetLibrary
             properties:
-              nodes:
-                description: List of nodes this banner has been applied to
-                items:
-                  type: string
-                type: array
+              usedby:
+                type: string
             type: object
         type: object
     served: true

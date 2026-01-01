@@ -38,11 +38,12 @@ type SubnetLibrarySpec struct {
 	// +eda:ui:orderpriority=300
 	// +eda:ui:title="SuperNet Name"
 	SuperNet string `json:"supernet,omitempty"`
+	// +eda:ui:title="Used By"
+	UsedBy string `json:"usedby,omitempty"`
 }
 
 // SubnetLibraryStatus defines the observed state of SubnetLibrary
 type SubnetLibraryStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Used By"
+	UsedBy string `json:"usedby,omitempty"`
 }

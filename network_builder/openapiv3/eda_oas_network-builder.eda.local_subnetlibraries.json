@@ -45,6 +45,10 @@
             "ui-order-priority": 300,
             "ui-column-span": 2
           }
+        },
+        "usedby": {
+          "type": "string",
+          "title": "Used By"
         }
       },
       "x-eda-nokia-com": {
@@ -62,13 +66,9 @@
       "type": "object",
       "title": "Status",
       "properties": {
-        "nodes": {
-          "description": "List of nodes this banner has been applied to",
-          "type": "array",
-          "title": "Nodes",
-          "items": {
-            "type": "string"
-          }
+        "usedby": {
+          "type": "string",
+          "title": "Used By"
         }
       },
       "readOnly": true,
