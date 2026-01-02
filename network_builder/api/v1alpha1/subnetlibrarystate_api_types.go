@@ -16,15 +16,10 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // SubnetLibraryStateSpec defines the desired state of SubnetLibraryState
 type SubnetLibraryStateSpec struct {
-	// +eda:ui:title="Nodes"
-	// List of TopoNodes this login banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Used By"
+	UsedBy []string `json:"usedby,omitempty"`
 }
 
 // SubnetLibraryStateStatus defines the observed state of SubnetLibraryState

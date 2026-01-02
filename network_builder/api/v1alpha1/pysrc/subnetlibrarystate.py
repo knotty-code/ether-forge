@@ -6,7 +6,7 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_NODES = 'nodes'
+Y_USEDBY = 'usedby'
 # Package objects (GVK Schemas)
 SUBNETLIBRARYSTATE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='SubnetLibraryState')
 
@@ -14,22 +14,22 @@ SUBNETLIBRARYSTATE_SCHEMA = eda.Schema(group='network-builder.eda.local', versio
 class SubnetLibraryStateSpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
+        usedby: list[str] | None = None,
     ):
-        self.nodes = nodes
+        self.usedby = usedby
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
+        if self.usedby is not None:
+            _rval[Y_USEDBY] = self.usedby
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'SubnetLibraryStateSpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
+            _usedby = obj.get(Y_USEDBY)
             return SubnetLibraryStateSpec(
-                nodes=_nodes,
+                usedby=_usedby,
             )
         return None  # pragma: no cover
 

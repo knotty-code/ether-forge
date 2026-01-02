@@ -40,9 +40,7 @@ spec:
           spec:
             description: SubnetLibraryStateSpec defines the desired state of SubnetLibraryState
             properties:
-              nodes:
-                description: List of TopoNodes this login banner has been applied
-                  to
+              usedby:
                 items:
                   type: string
                 type: array

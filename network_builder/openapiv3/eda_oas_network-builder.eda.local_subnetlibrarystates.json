@@ -18,10 +18,9 @@
       "type": "object",
       "title": "Specification",
       "properties": {
-        "nodes": {
-          "description": "List of TopoNodes this login banner has been applied to",
+        "usedby": {
           "type": "array",
-          "title": "Nodes",
+          "title": "Used By",
           "items": {
             "type": "string"
           }

@@ -41,10 +41,10 @@ def process_cr(cr):
                 msg = f'Operating system unsupported for {node}, os is {node_spec.get("operatingSystem", None)}'
                 raise e.InvalidInput(msg)
 
-    eda.update_cr(
-        schema=SUBNETLIBRARYSTATE_SCHEMA,
-        name=cr_name,
-        spec={
-            "nodes": list(nodes.keys()),
-        },
-    )
+    # eda.update_cr(
+    #     schema=SUBNETLIBRARYSTATE_SCHEMA,
+    #     name=cr_name,
+    #     spec={
+    #         "nodes": list(nodes.keys()),
+    #     },
+    # )

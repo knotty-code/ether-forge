@@ -50,14 +50,14 @@ spec:
                 type: integer
               supernet:
                 type: string
-              usedby:
-                type: string
             type: object
           status:
             description: SubnetLibraryStatus defines the observed state of SubnetLibrary
             properties:
               usedby:
-                type: string
+                items:
+                  type: string
+                type: array
             type: object
         type: object
     served: true
