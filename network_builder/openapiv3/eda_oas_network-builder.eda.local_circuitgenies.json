@@ -103,6 +103,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "subnets": {
+          "type": "array",
+          "title": "Subnets",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "readOnly": true,

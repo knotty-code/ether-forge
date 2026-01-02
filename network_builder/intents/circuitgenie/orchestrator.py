@@ -109,9 +109,13 @@ class CircuitConfigOrchestrator:
         """Update state CR. The circle is complete."""
         import eda_common as eda
         node_names = [nodes["A"][0], nodes["B"][0]]
+        subnets = ["test123"]
         eda.update_cr(
             schema=CIRCUITGENIESTATE_SCHEMA,
             name=self.cr_name,
-            spec={"nodes": node_names}
+            spec={
+                "nodes": node_names,
+                "subnets": subnets
+            }
         )
         log_msg("State updated. Users will be so impressed.")

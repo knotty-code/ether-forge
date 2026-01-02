@@ -46,4 +46,6 @@ type CircuitGenieStatus struct {
 	// +eda:ui:title="Nodes"
 	// List of nodes this banner has been applied to
 	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Subnets"
+	Subnets []string `json:"subnets,omitempty"`
 }
