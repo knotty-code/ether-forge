@@ -49,10 +49,6 @@ spec:
                 items:
                   type: string
                 type: array
-              subnet:
-                items:
-                  type: string
-                type: array
               supernet:
                 items:
                   type: string

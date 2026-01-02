@@ -25,6 +25,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "subnets": {
+          "description": "List of nodes this banner has been applied to",
+          "type": "array",
+          "title": "Subnets",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-eda-nokia-com": {

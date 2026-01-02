@@ -60,17 +60,6 @@
             "ui-column-span": 3
           }
         },
-        "subnet": {
-          "type": "array",
-          "title": "Subnet",
-          "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-order-priority": 200,
-            "ui-column-span": 3
-          }
-        },
         "supernet": {
           "type": "array",
           "title": "Supernet",

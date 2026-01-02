@@ -9,7 +9,6 @@ from .constants import *
 Y_PORTA = 'portA'
 Y_PORTB = 'portB'
 Y_SUPERNET = 'supernet'
-Y_SUBNET = 'subnet'
 Y_NODES = 'nodes'
 # Package objects (GVK Schemas)
 CIRCUITGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='CircuitGenie')
@@ -21,12 +20,10 @@ class CircuitGenieSpec:
         portA: list[str] | None = None,
         portB: list[str] | None = None,
         supernet: list[str] | None = None,
-        subnet: list[str] | None = None,
     ):
         self.portA = portA
         self.portB = portB
         self.supernet = supernet
-        self.subnet = subnet
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -36,8 +33,6 @@ class CircuitGenieSpec:
             _rval[Y_PORTB] = self.portB
         if self.supernet is not None:
             _rval[Y_SUPERNET] = self.supernet
-        if self.subnet is not None:
-            _rval[Y_SUBNET] = self.subnet
         return _rval
 
     @staticmethod
@@ -46,12 +41,10 @@ class CircuitGenieSpec:
             _portA = obj.get(Y_PORTA)
             _portB = obj.get(Y_PORTB)
             _supernet = obj.get(Y_SUPERNET)
-            _subnet = obj.get(Y_SUBNET)
             return CircuitGenieSpec(
                 portA=_portA,
                 portB=_portB,
                 supernet=_supernet,
-                subnet=_subnet,
             )
         return None  # pragma: no cover
 

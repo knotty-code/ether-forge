@@ -39,11 +39,6 @@ type CircuitGenieSpec struct {
 	// +eda:ui:title="Supernet"
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
 	Supernet []string `json:"supernet,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=3
-	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Subnet"
-	Subnet []string `json:"subnet,omitempty"`
 }
 
 // CircuitGenieStatus defines the observed state of CircuitGenie

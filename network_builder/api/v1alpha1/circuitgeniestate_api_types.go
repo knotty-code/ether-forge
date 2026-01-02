@@ -16,15 +16,14 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // CircuitGenieStateSpec defines the desired state of CircuitGenieState
 type CircuitGenieStateSpec struct {
 	// +eda:ui:title="Nodes"
 	// List of TopoNodes this login banner has been applied to
 	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:title="Subnets"
+	// List of nodes this banner has been applied to
+	Subnets []string `json:"subnets,omitempty"`
 }
 
 // CircuitGenieStateStatus defines the observed state of CircuitGenieState

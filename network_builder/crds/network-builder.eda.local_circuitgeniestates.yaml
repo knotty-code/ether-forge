@@ -45,6 +45,11 @@ spec:
                 items:
                   type: string
                 type: array
+              subnets:
+                description: List of nodes this banner has been applied to
+                items:
+                  type: string
+                type: array
             type: object
           status:
             description: CircuitGenieStateStatus defines the observed state of CircuitGenieState
