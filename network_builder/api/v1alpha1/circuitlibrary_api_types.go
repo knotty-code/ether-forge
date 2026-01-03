@@ -16,10 +16,6 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // CircuitLibrarySpec defines the desired state of CircuitLibrary
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type CircuitLibrarySpec struct {
@@ -31,18 +27,31 @@ type CircuitLibrarySpec struct {
 	// List of nodes on which to configure the banners.
 	Nodes []string `json:"nodes,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
-	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Node Selector"
-	// +eda:ui:format="labelselector"
-	// Label selector to select nodes on which to configure the banners.
-	NodeSelector []string `json:"nodeSelector,omitempty"`
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=150
+	// +eda:ui:title="Port-B"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
+	// Select interface from Port Library.
+	PortA []string `json:"portA,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=4
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=200
+	// +eda:ui:title="Port-A"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
+	// Select interface from Port Library.
+	PortB []string `json:"portB,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=3
+	// +eda:ui:orderpriority=250
+	// +eda:ui:title="Supernet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
+	Supernet []string `json:"supernet,omitempty"`
+	// +kubebuilder:validation:Optional
 	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:columnspan=3
+	// +eda:ui:title="Subnet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetlibraries"}`
+	Subnet []string `json:"subnets,omitempty"`
 }
 
 // CircuitLibraryStatus defines the observed state of CircuitLibrary

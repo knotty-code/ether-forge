@@ -298,8 +298,23 @@ func (in *CircuitLibrarySpec) DeepCopyInto(out *CircuitLibrarySpec) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
-	if in.NodeSelector != nil {
-		in, out := &in.NodeSelector, &out.NodeSelector
+	if in.PortA != nil {
+		in, out := &in.PortA, &out.PortA
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
+	if in.PortB != nil {
+		in, out := &in.PortB, &out.PortB
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
+	if in.Supernet != nil {
+		in, out := &in.Supernet, &out.Supernet
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
+	if in.Subnet != nil {
+		in, out := &in.Subnet, &out.Subnet
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}

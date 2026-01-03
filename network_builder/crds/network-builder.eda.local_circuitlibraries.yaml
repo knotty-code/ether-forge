@@ -39,18 +39,26 @@ spec:
           spec:
             description: CircuitLibrarySpec defines the desired state of CircuitLibrary
             properties:
-              loginBanner:
-                description: This is the login banner displayed before a user has
-                  logged into the Node.
-                type: string
-              nodeSelector:
-                description: Label selector to select nodes on which to configure
-                  the banners.
+              nodes:
+                description: List of nodes on which to configure the banners.
                 items:
                   type: string
                 type: array
-              nodes:
-                description: List of nodes on which to configure the banners.
+              portA:
+                description: Select interface from Port Library.
+                items:
+                  type: string
+                type: array
+              portB:
+                description: Select interface from Port Library.
+                items:
+                  type: string
+                type: array
+              subnets:
+                items:
+                  type: string
+                type: array
+              supernet:
                 items:
                   type: string
                 type: array

@@ -18,28 +18,6 @@
       "type": "object",
       "title": "Specification",
       "properties": {
-        "loginBanner": {
-          "description": "This is the login banner displayed before a user has logged into the Node.",
-          "type": "string",
-          "title": "Login Banner",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 300,
-            "ui-column-span": 4
-          }
-        },
-        "nodeSelector": {
-          "description": "Label selector to select nodes on which to configure the banners.",
-          "type": "array",
-          "format": "labelselector",
-          "title": "Node Selector",
-          "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-order-priority": 200,
-            "ui-column-span": 2
-          }
-        },
         "nodes": {
           "description": "List of nodes on which to configure the banners.",
           "type": "array",
@@ -59,6 +37,88 @@
             ],
             "ui-order-priority": 100,
             "ui-column-span": 2
+          }
+        },
+        "portA": {
+          "description": "Select interface from Port Library.",
+          "type": "array",
+          "title": "Port-B",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "portlibraries"
+              }
+            ],
+            "ui-order-priority": 150,
+            "ui-column-span": 3
+          }
+        },
+        "portB": {
+          "description": "Select interface from Port Library.",
+          "type": "array",
+          "title": "Port-A",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "portlibraries"
+              }
+            ],
+            "ui-order-priority": 200,
+            "ui-column-span": 3
+          }
+        },
+        "subnets": {
+          "type": "array",
+          "title": "Subnet",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetlibraries"
+              }
+            ],
+            "ui-order-priority": 300,
+            "ui-column-span": 3
+          }
+        },
+        "supernet": {
+          "type": "array",
+          "title": "Supernet",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetgenies"
+              }
+            ],
+            "ui-order-priority": 250,
+            "ui-column-span": 3
           }
         }
       },

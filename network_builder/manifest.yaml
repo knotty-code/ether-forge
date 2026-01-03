@@ -94,7 +94,7 @@ spec:
         path: network_builder/crds/network-builder.eda.local_subnetgenies.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_subnetgenies.json
         ui:
-          category: Address Smith
+          category: Port Smith
           name: Subnet Genie
     - script:
         path: network_builder/intents/subnetgenie/config_intent.py
@@ -115,7 +115,7 @@ spec:
         path: network_builder/crds/network-builder.eda.local_subnetlibraries.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_subnetlibraries.json
         ui:
-          category: Address Smith
+          category: Port Smith
           name: Subnet Library
     - script:
         path: network_builder/intents/subnetlibrary/config_intent.py
