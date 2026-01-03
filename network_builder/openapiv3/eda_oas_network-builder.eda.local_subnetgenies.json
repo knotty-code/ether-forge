@@ -46,6 +46,13 @@
             "ui-order-priority": 100,
             "ui-column-span": 2
           }
+        },
+        "usedsubnets": {
+          "type": "array",
+          "title": "Used Subnets",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-eda-nokia-com": {
@@ -63,13 +70,11 @@
       "type": "object",
       "title": "Status",
       "properties": {
-        "available": {
-          "description": "Available is the percentage (0-100) of available subnets within the supernet.\nThis is computed by the state script and is read-only.",
-          "type": "integer",
-          "title": "Available",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 300,
-            "ui-column-span": 1
+        "usedsubnets": {
+          "type": "array",
+          "title": "Used Subnets",
+          "items": {
+            "type": "string"
           }
         }
       },

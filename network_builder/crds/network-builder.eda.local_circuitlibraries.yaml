@@ -4,20 +4,20 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-  name: subnetlibraries.network-builder.eda.local
+  name: circuitlibraries.network-builder.eda.local
 spec:
   group: network-builder.eda.local
   names:
-    kind: SubnetLibrary
-    listKind: SubnetLibraryList
-    plural: subnetlibraries
-    singular: subnetlibrary
+    kind: CircuitLibrary
+    listKind: CircuitLibraryList
+    plural: circuitlibraries
+    singular: circuitlibrary
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SubnetLibrary is the Schema for the subnetlibraries API
+        description: CircuitLibrary is the Schema for the circuitlibraries API
         properties:
           apiVersion:
             description: |-
@@ -37,28 +37,29 @@ spec:
           metadata:
             type: object
           spec:
-            description: SubnetLibrarySpec defines the desired state of SubnetLibrary
+            description: CircuitLibrarySpec defines the desired state of CircuitLibrary
             properties:
-              subnet:
-                default: '''10.0.0.0/29'''
-                description: IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
+              loginBanner:
+                description: This is the login banner displayed before a user has
+                  logged into the Node.
                 type: string
-              subnetLength:
-                default: 30
-                description: The size of the subnets to be allocated from within the
-                  parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
-                type: integer
-              supernet:
-                type: string
-              usedby:
+              nodeSelector:
+                description: Label selector to select nodes on which to configure
+                  the banners.
+                items:
+                  type: string
+                type: array
+              nodes:
+                description: List of nodes on which to configure the banners.
                 items:
                   type: string
                 type: array
             type: object
           status:
-            description: SubnetLibraryStatus defines the observed state of SubnetLibrary
+            description: CircuitLibraryStatus defines the observed state of CircuitLibrary
             properties:
-              usedby:
+              nodes:
+                description: List of nodes this banner has been applied to
                 items:
                   type: string
                 type: array

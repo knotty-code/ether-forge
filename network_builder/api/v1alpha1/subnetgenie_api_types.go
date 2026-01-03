@@ -39,15 +39,12 @@ type SubnetGenieSpec struct {
 	// The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
 	// +kubebuilder:default=30
 	SubnetLength int `json:"subnetLength,omitempty"`
+	// +eda:ui:title="Used Subnets"
+	UsedSubnets []string `json:"usedsubnets,omitempty"`
 }
 
 // SubnetGenieStatus defines the observed state of SubnetGenie
 type SubnetGenieStatus struct {
-	// Available is the percentage (0-100) of available subnets within the supernet.
-	// This is computed by the state script and is read-only.
-	// +eda:ui:columnspan=1
-	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Available"
-	// +eda:ui:suffix="%"
-	Available int `json:"available,omitempty"`
+	// +eda:ui:title="Used Subnets"
+	UsedSubnets []string `json:"usedsubnets,omitempty"`
 }

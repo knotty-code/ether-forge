@@ -39,9 +39,7 @@ spec:
           spec:
             description: SubnetGenieStateSpec defines the desired state of SubnetGenieState
             properties:
-              nodes:
-                description: List of TopoNodes this login banner has been applied
-                  to
+              usedsubnets:
                 items:
                   type: string
                 type: array

@@ -21,10 +21,14 @@ class CircuitGenieSpec:
         portA: list[str] | None = None,
         portB: list[str] | None = None,
         supernet: list[str] | None = None,
+        nodes: list[str] | None = None,
+        subnets: list[str] | None = None,
     ):
         self.portA = portA
         self.portB = portB
         self.supernet = supernet
+        self.nodes = nodes
+        self.subnets = subnets
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -34,6 +38,10 @@ class CircuitGenieSpec:
             _rval[Y_PORTB] = self.portB
         if self.supernet is not None:
             _rval[Y_SUPERNET] = self.supernet
+        if self.nodes is not None:
+            _rval[Y_NODES] = self.nodes
+        if self.subnets is not None:
+            _rval[Y_SUBNETS] = self.subnets
         return _rval
 
     @staticmethod
@@ -42,10 +50,14 @@ class CircuitGenieSpec:
             _portA = obj.get(Y_PORTA)
             _portB = obj.get(Y_PORTB)
             _supernet = obj.get(Y_SUPERNET)
+            _nodes = obj.get(Y_NODES)
+            _subnets = obj.get(Y_SUBNETS)
             return CircuitGenieSpec(
                 portA=_portA,
                 portB=_portB,
                 supernet=_supernet,
+                nodes=_nodes,
+                subnets=_subnets,
             )
         return None  # pragma: no cover
 

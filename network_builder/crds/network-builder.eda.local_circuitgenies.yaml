@@ -39,6 +39,11 @@ spec:
           spec:
             description: CircuitGenieSpec defines the desired state of CircuitGenie
             properties:
+              nodes:
+                description: List of nodes this banner has been applied to
+                items:
+                  type: string
+                type: array
               portA:
                 description: Select interface from Port Library.
                 items:
@@ -46,6 +51,10 @@ spec:
                 type: array
               portB:
                 description: Select interface from Port Library.
+                items:
+                  type: string
+                type: array
+              subnets:
                 items:
                   type: string
                 type: array

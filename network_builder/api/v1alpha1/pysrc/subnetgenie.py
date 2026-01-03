@@ -9,7 +9,7 @@ from .constants import *
 Y_SUPERNET = 'supernet'
 Y_PURPOSE = 'purpose'
 Y_SUBNETLENGTH = 'subnetLength'
-Y_AVAILABLE = 'available'
+Y_USEDSUBNETS = 'usedsubnets'
 # Package objects (GVK Schemas)
 SUBNETGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='SubnetGenie')
 
@@ -20,10 +20,12 @@ class SubnetGenieSpec:
         supernet: str | None = None,
         purpose: str | None = None,
         subnetLength: int | None = None,
+        usedsubnets: list[str] | None = None,
     ):
         self.supernet = supernet
         self.purpose = purpose
         self.subnetLength = subnetLength
+        self.usedsubnets = usedsubnets
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -33,6 +35,8 @@ class SubnetGenieSpec:
             _rval[Y_PURPOSE] = self.purpose
         if self.subnetLength is not None:
             _rval[Y_SUBNETLENGTH] = self.subnetLength
+        if self.usedsubnets is not None:
+            _rval[Y_USEDSUBNETS] = self.usedsubnets
         return _rval
 
     @staticmethod
@@ -41,10 +45,12 @@ class SubnetGenieSpec:
             _supernet = obj.get(Y_SUPERNET, "'10.0.0.0/29'")
             _purpose = obj.get(Y_PURPOSE)
             _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
+            _usedsubnets = obj.get(Y_USEDSUBNETS)
             return SubnetGenieSpec(
                 supernet=_supernet,
                 purpose=_purpose,
                 subnetLength=_subnetLength,
+                usedsubnets=_usedsubnets,
             )
         return None  # pragma: no cover
 
@@ -52,22 +58,22 @@ class SubnetGenieSpec:
 class SubnetGenieStatus:
     def __init__(
         self,
-        available: int | None = None,
+        usedsubnets: list[str] | None = None,
     ):
-        self.available = available
+        self.usedsubnets = usedsubnets
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.available is not None:
-            _rval[Y_AVAILABLE] = self.available
+        if self.usedsubnets is not None:
+            _rval[Y_USEDSUBNETS] = self.usedsubnets
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'SubnetGenieStatus | None':
         if obj:
-            _available = obj.get(Y_AVAILABLE)
+            _usedsubnets = obj.get(Y_USEDSUBNETS)
             return SubnetGenieStatus(
-                available=_available,
+                usedsubnets=_usedsubnets,
             )
         return None  # pragma: no cover
 

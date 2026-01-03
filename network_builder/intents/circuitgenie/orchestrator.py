@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-from utils.log import log_msg
+
 import utils.exceptions as e
-from network_builder.api.v1alpha1.pysrc.circuitgenie import CircuitGenie
+import eda_common as eda
+
+from network_builder.api.v1alpha1.pysrc.circuitgenie import CIRCUITGENIE_SCHEMA, CircuitGenie
 from network_builder.api.v1alpha1.pysrc.circuitgeniestate import CIRCUITGENIESTATE_SCHEMA
+from network_builder.api.v1alpha1.pysrc.subnetgeniestate import SUBNETGENIESTATE_SCHEMA
+from network_builder.api.v1alpha1.pysrc.subnetlibrary import SUBNETLIBRARY_SCHEMA, SubnetLibrary
 from network_builder.intents.circuitgenie.utils.network_utils import parse_port, int_to_ip
 from network_builder.intents.circuitgenie.utils.config_node import configure_node
 
+from utils.log import log_msg
 
 
 class CircuitConfigOrchestrator:
@@ -26,10 +31,12 @@ class CircuitConfigOrchestrator:
         ports = self._parse_ports()
         supernet = self._validate_supernet()
         subnets = self._find_matching_subnets(supernet)
-        ips = self._allocate_ips(subnets[0])  # Take first available
+        self.subnet = subnets[0]  # First available subnet
+        ips = self._allocate_ips(self.subnet)
         nodes = self._load_nodes(ports)
         self._configure_endpoints(nodes, ports, ips)
-        self._update_state(nodes)
+        # self._update_state(nodes)  # Now passes the correct subnet name
+        self._log_updated_state()  # Log the updated CR for visibility
 
         log_msg(f"Orchestrator complete for '{self.cr_name}'. Another flawless victory.")
 
@@ -53,9 +60,6 @@ class CircuitConfigOrchestrator:
 
     def _find_matching_subnets(self, supernet):
         """Hunt down subnets like a network bloodhound."""
-        from network_builder.api.v1alpha1.pysrc.subnetlibrary import SUBNETLIBRARY_SCHEMA, SubnetLibrary
-        import eda_common as eda
-
         all_subnets = eda.list_crs(schema=SUBNETLIBRARY_SCHEMA, filter=[], ns=self.ns)
         matches = []
         for subnet_cr in all_subnets:
@@ -68,7 +72,7 @@ class CircuitConfigOrchestrator:
         if not matches:
             raise e.InvalidInput(f"No subnets for supernet '{supernet}'. You're out of luck.")
         log_msg(f"Found {len(matches)} subnets. Plenty to work with.")
-        return matches
+        return matches        
 
     def _allocate_ips(self, subnet):
         """Allocate /30 IPs. Only /30. We have rules."""
@@ -106,16 +110,25 @@ class CircuitConfigOrchestrator:
             configure_node(self.cr_obj, node_name, node_cr, interface, ip_prefix)
 
     def _update_state(self, nodes):
-        """Update state CR. The circle is complete."""
+        """Update CircuitGenieState with nodes and the allocated subnet."""
         import eda_common as eda
         node_names = [nodes["A"][0], nodes["B"][0]]
-        subnets = ["test123"]
+        used_subnet_name = self.subnet.metadata.name  # e.g., 'test-0'
+
         eda.update_cr(
-            schema=CIRCUITGENIESTATE_SCHEMA,
+            schema=CIRCUITGENIE_SCHEMA,
             name=self.cr_name,
             spec={
                 "nodes": node_names,
-                "subnets": subnets
+                "subnets": [used_subnet_name]  # Now correct: test-0 instead of test123
             }
         )
-        log_msg("State updated. Users will be so impressed.")
+        log_msg("CircuitGenieState updated with correct used subnet.")
+
+    def _log_updated_state(self):
+        """Fetch and log the updated CircuitGenieState CR for debugging and visibility."""
+        cr = eda.get_cr(schema=CIRCUITGENIESTATE_SCHEMA, name=self.cr_name, ns=self.ns)
+        if cr:
+            log_msg(f"Updated CircuitGenieState CR for '{self.cr_name}':", dict=cr)
+        else:
+            log_msg(f"Failed to fetch updated CircuitGenieState CR for '{self.cr_name}'. It might not exist yet.")

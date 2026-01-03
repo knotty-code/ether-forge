@@ -1,5 +1,5 @@
 {
-  "description": "SubnetGenieState is the Schema for the subnetgeniestates API",
+  "description": "CircuitLibraryState is the Schema for the circuitlibrarystates API",
   "type": "object",
   "properties": {
     "apiVersion": {
@@ -14,13 +14,14 @@
       "type": "object"
     },
     "spec": {
-      "description": "SubnetGenieStateSpec defines the desired state of SubnetGenieState",
+      "description": "CircuitLibraryStateSpec defines the desired state of CircuitLibraryState",
       "type": "object",
       "title": "Specification",
       "properties": {
-        "usedsubnets": {
+        "nodes": {
+          "description": "List of TopoNodes this login banner has been applied to",
           "type": "array",
-          "title": "Used Subnets",
+          "title": "Nodes",
           "items": {
             "type": "string"
           }
@@ -31,7 +32,7 @@
       }
     },
     "status": {
-      "description": "SubnetGenieStateStatus defines the observed state of SubnetGenieState",
+      "description": "CircuitLibraryStateStatus defines the observed state of CircuitLibraryState",
       "type": "object",
       "title": "Status",
       "readOnly": true,

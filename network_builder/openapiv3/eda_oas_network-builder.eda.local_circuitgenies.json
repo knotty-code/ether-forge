@@ -18,6 +18,17 @@
       "type": "object",
       "title": "Specification",
       "properties": {
+        "nodes": {
+          "description": "List of nodes this banner has been applied to",
+          "type": "array",
+          "title": "Nodes",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-column-span": 3
+          }
+        },
         "portA": {
           "description": "Select interface from Port Library.",
           "type": "array",
@@ -60,6 +71,16 @@
             "ui-column-span": 3
           }
         },
+        "subnets": {
+          "type": "array",
+          "title": "Subnets",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-column-span": 3
+          }
+        },
         "supernet": {
           "type": "array",
           "title": "Supernet",
@@ -82,12 +103,6 @@
         }
       },
       "x-eda-nokia-com": {
-        "ui-conditions": [
-          {
-            "condition": "!(spec.nodes.length === 0 \u0026\u0026 spec.nodeSelector.length === 0)",
-            "errorMsg": "Either nodes or nodeSelector must have at least one value set"
-          }
-        ],
         "ui-order-priority": 30
       }
     },

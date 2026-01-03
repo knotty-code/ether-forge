@@ -20,10 +20,12 @@ class SubnetLibrarySpec:
         subnet: str | None = None,
         subnetLength: int | None = None,
         supernet: str | None = None,
+        usedby: list[str] | None = None,
     ):
         self.subnet = subnet
         self.subnetLength = subnetLength
         self.supernet = supernet
+        self.usedby = usedby
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -33,6 +35,8 @@ class SubnetLibrarySpec:
             _rval[Y_SUBNETLENGTH] = self.subnetLength
         if self.supernet is not None:
             _rval[Y_SUPERNET] = self.supernet
+        if self.usedby is not None:
+            _rval[Y_USEDBY] = self.usedby
         return _rval
 
     @staticmethod
@@ -41,10 +45,12 @@ class SubnetLibrarySpec:
             _subnet = obj.get(Y_SUBNET, "'10.0.0.0/29'")
             _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
             _supernet = obj.get(Y_SUPERNET)
+            _usedby = obj.get(Y_USEDBY)
             return SubnetLibrarySpec(
                 subnet=_subnet,
                 subnetLength=_subnetLength,
                 supernet=_supernet,
+                usedby=_usedby,
             )
         return None  # pragma: no cover
 

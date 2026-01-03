@@ -4,20 +4,21 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-  name: subnetlibraries.network-builder.eda.local
+  name: circuitlibrarystates.network-builder.eda.local
 spec:
   group: network-builder.eda.local
   names:
-    kind: SubnetLibrary
-    listKind: SubnetLibraryList
-    plural: subnetlibraries
-    singular: subnetlibrary
+    kind: CircuitLibraryState
+    listKind: CircuitLibraryStateList
+    plural: circuitlibrarystates
+    singular: circuitlibrarystate
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SubnetLibrary is the Schema for the subnetlibraries API
+        description: CircuitLibraryState is the Schema for the circuitlibrarystates
+          API
         properties:
           apiVersion:
             description: |-
@@ -37,31 +38,17 @@ spec:
           metadata:
             type: object
           spec:
-            description: SubnetLibrarySpec defines the desired state of SubnetLibrary
+            description: CircuitLibraryStateSpec defines the desired state of CircuitLibraryState
             properties:
-              subnet:
-                default: '''10.0.0.0/29'''
-                description: IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
-                type: string
-              subnetLength:
-                default: 30
-                description: The size of the subnets to be allocated from within the
-                  parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
-                type: integer
-              supernet:
-                type: string
-              usedby:
+              nodes:
+                description: List of TopoNodes this login banner has been applied
+                  to
                 items:
                   type: string
                 type: array
             type: object
           status:
-            description: SubnetLibraryStatus defines the observed state of SubnetLibrary
-            properties:
-              usedby:
-                items:
-                  type: string
-                type: array
+            description: CircuitLibraryStateStatus defines the observed state of CircuitLibraryState
             type: object
         type: object
     served: true

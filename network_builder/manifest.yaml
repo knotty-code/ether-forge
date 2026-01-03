@@ -137,7 +137,7 @@ spec:
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_circuitgenies.json
         ui:
           category: Port Smith
-          name: P2P Library
+          name: Circuit Genie
     - script:
         path: network_builder/intents/circuitgenie/config_intent.py
         trigger:
@@ -171,6 +171,27 @@ spec:
         path: network_builder/intents/stockappstate/state_intent.py
         trigger:
           kind: StockAppState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_circuitlibraries.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_circuitlibraries.json
+        ui:
+          category: Port Smith
+          name: Circuit Library
+    - script:
+        path: network_builder/intents/circuitlibrary/config_intent.py
+        trigger:
+          kind: CircuitLibrary
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_circuitlibrarystates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_circuitlibrarystates.json
+    - script:
+        path: network_builder/intents/circuitlibrarystate/state_intent.py
+        trigger:
+          kind: CircuitLibraryState
         type: state
   supportedEndpoints:
     - srl:0.0.0

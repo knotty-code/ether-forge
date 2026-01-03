@@ -51,15 +51,18 @@ spec:
                 default: '''10.0.0.0/29'''
                 description: IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
                 type: string
+              usedsubnets:
+                items:
+                  type: string
+                type: array
             type: object
           status:
             description: SubnetGenieStatus defines the observed state of SubnetGenie
             properties:
-              available:
-                description: |-
-                  Available is the percentage (0-100) of available subnets within the supernet.
-                  This is computed by the state script and is read-only.
-                type: integer
+              usedsubnets:
+                items:
+                  type: string
+                type: array
             type: object
         type: object
     served: true

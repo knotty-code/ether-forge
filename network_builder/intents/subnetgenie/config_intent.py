@@ -73,6 +73,7 @@ def process_cr(cr):
         child_name = f"{cr_name}-{i}"
         subnet_ip = subnet_cidr.split('/')[0]
         log_msg(f"Creating SubnetLibrary {child_name} with subnet {subnet_ip} length {cr_obj.spec.subnetLength}")
+        test_value = ["test123", "test456"]
         eda.update_cr(
             schema=SUBNETLIBRARY_SCHEMA,
             name=child_name,
@@ -83,9 +84,9 @@ def process_cr(cr):
             },
         )
 
-    # Create the corresponding SubnetGenieState resource (state-only resource)
-    eda.update_cr(
-        schema=SUBNETGENIESTATE_SCHEMA,
-        name=cr_name,
-        spec={},  # or whatever minimal fields your SubnetGenieState spec requires, often {}
-    )
+    # # Create the corresponding SubnetGenieState resource (state-only resource)
+    # eda.update_cr(
+    #     schema=SUBNETGENIESTATE_SCHEMA,
+    #     name=cr_name,
+    #     spec={},  # or whatever minimal fields your SubnetGenieState spec requires, often {}
+    # )

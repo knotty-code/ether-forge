@@ -23,7 +23,7 @@ class SubnetLibraryOrchestrator:
         """Main orchestration — the new process_cr."""
         log_msg(f"Orchestrator awakened for CR '{self.cr_name}'. Let the games begin.")
         
-        self._update_state()
+        # self._update_state()
 
         log_msg(f"Orchestrator complete for '{self.cr_name}'. Another flawless victory.")
 

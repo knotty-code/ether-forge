@@ -1,5 +1,5 @@
 /*
-Copyright 2025.
+Copyright 2026.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,12 +16,17 @@ limitations under the License.
 
 package v1alpha1
 
-// SubnetGenieStateSpec defines the desired state of SubnetGenieState
-type SubnetGenieStateSpec struct {
-	// +eda:ui:title="Used Subnets"
-	UsedSubnets []string `json:"usedsubnets,omitempty"`
+import (
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
+
+// CircuitLibraryStateSpec defines the desired state of CircuitLibraryState
+type CircuitLibraryStateSpec struct {
+	// +eda:ui:title="Nodes"
+	// List of TopoNodes this login banner has been applied to
+	Nodes []string `json:"nodes,omitempty"`
 }
 
-// SubnetGenieStateStatus defines the observed state of SubnetGenieState
-type SubnetGenieStateStatus struct {
+// CircuitLibraryStateStatus defines the observed state of CircuitLibraryState
+type CircuitLibraryStateStatus struct {
 }

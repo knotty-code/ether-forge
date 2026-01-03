@@ -17,7 +17,6 @@ limitations under the License.
 package v1alpha1
 
 // CircuitGenieSpec defines the desired state of CircuitGenie
-// +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type CircuitGenieSpec struct {
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=3
@@ -39,6 +38,15 @@ type CircuitGenieSpec struct {
 	// +eda:ui:title="Supernet"
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
 	Supernet []string `json:"supernet,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=3
+	// +eda:ui:title="Nodes"
+	// List of nodes this banner has been applied to
+	Nodes []string `json:"nodes,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=3
+	// +eda:ui:title="Subnets"
+	Subnets []string `json:"subnets,omitempty"`
 }
 
 // CircuitGenieStatus defines the observed state of CircuitGenie
