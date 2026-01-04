@@ -6,40 +6,68 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_PORTA = 'portA'
-Y_PORTB = 'portB'
+Y_PORT = 'port'
+Y_NODE = 'node'
+Y_IPADDRESS = 'ipAddress'
+Y_ENDPOINTS = 'endpoints'
 Y_SUPERNET = 'supernet'
-Y_NODES = 'nodes'
 Y_SUBNETS = 'subnets'
 # Package objects (GVK Schemas)
 CIRCUITGENIE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='CircuitGenie')
 
 
+class EndpointSpec:
+    def __init__(
+        self,
+        port: str,
+        node: str,
+        ipAddress: str | None = None,
+    ):
+        self.port = port
+        self.node = node
+        self.ipAddress = ipAddress
+
+    def to_input(self):  # pragma: no cover
+        _rval = {}
+        if self.port is not None:
+            _rval[Y_PORT] = self.port
+        if self.node is not None:
+            _rval[Y_NODE] = self.node
+        if self.ipAddress is not None:
+            _rval[Y_IPADDRESS] = self.ipAddress
+        return _rval
+
+    @staticmethod
+    def from_input(obj) -> 'EndpointSpec | None':
+        if obj:
+            _port = obj.get(Y_PORT)
+            _node = obj.get(Y_NODE)
+            _ipAddress = obj.get(Y_IPADDRESS)
+            return EndpointSpec(
+                port=_port,
+                node=_node,
+                ipAddress=_ipAddress,
+            )
+        return None  # pragma: no cover
+
+
 class CircuitGenieSpec:
     def __init__(
         self,
-        portA: list[str] | None = None,
-        portB: list[str] | None = None,
+        endpoints: list[EndpointSpec],
         supernet: list[str] | None = None,
-        nodes: list[str] | None = None,
         subnets: list[str] | None = None,
     ):
-        self.portA = portA
-        self.portB = portB
+        self.endpoints = endpoints
         self.supernet = supernet
-        self.nodes = nodes
         self.subnets = subnets
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.portA is not None:
-            _rval[Y_PORTA] = self.portA
-        if self.portB is not None:
-            _rval[Y_PORTB] = self.portB
+        if self.endpoints is not None:
+            _rval[Y_ENDPOINTS] = [x.to_input() for x in self.endpoints]
         if self.supernet is not None:
             _rval[Y_SUPERNET] = self.supernet
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
         if self.subnets is not None:
             _rval[Y_SUBNETS] = self.subnets
         return _rval
@@ -47,16 +75,15 @@ class CircuitGenieSpec:
     @staticmethod
     def from_input(obj) -> 'CircuitGenieSpec | None':
         if obj:
-            _portA = obj.get(Y_PORTA)
-            _portB = obj.get(Y_PORTB)
+            _endpoints = []
+            if obj.get(Y_ENDPOINTS) is not None:
+                for x in obj.get(Y_ENDPOINTS):
+                    _endpoints.append(EndpointSpec.from_input(x))
             _supernet = obj.get(Y_SUPERNET)
-            _nodes = obj.get(Y_NODES)
             _subnets = obj.get(Y_SUBNETS)
             return CircuitGenieSpec(
-                portA=_portA,
-                portB=_portB,
+                endpoints=_endpoints,
                 supernet=_supernet,
-                nodes=_nodes,
                 subnets=_subnets,
             )
         return None  # pragma: no cover
@@ -65,28 +92,17 @@ class CircuitGenieSpec:
 class CircuitGenieStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        subnets: list[str] | None = None,
     ):
-        self.nodes = nodes
-        self.subnets = subnets
+        pass
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.subnets is not None:
-            _rval[Y_SUBNETS] = self.subnets
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'CircuitGenieStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _subnets = obj.get(Y_SUBNETS)
             return CircuitGenieStatus(
-                nodes=_nodes,
-                subnets=_subnets,
             )
         return None  # pragma: no cover
 

@@ -6,9 +6,8 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_NODES = 'nodes'
-Y_PORTA = 'portA'
-Y_PORTB = 'portB'
+from .circuitgenie import EndpointSpec
+Y_ENDPOINTS = 'endpoints'
 Y_SUPERNET = 'supernet'
 Y_SUBNETS = 'subnets'
 # Package objects (GVK Schemas)
@@ -18,26 +17,18 @@ CIRCUITLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v
 class CircuitLibrarySpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        portA: list[str] | None = None,
-        portB: list[str] | None = None,
+        endpoints: list[EndpointSpec],
         supernet: list[str] | None = None,
         subnets: list[str] | None = None,
     ):
-        self.nodes = nodes
-        self.portA = portA
-        self.portB = portB
+        self.endpoints = endpoints
         self.supernet = supernet
         self.subnets = subnets
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.portA is not None:
-            _rval[Y_PORTA] = self.portA
-        if self.portB is not None:
-            _rval[Y_PORTB] = self.portB
+        if self.endpoints is not None:
+            _rval[Y_ENDPOINTS] = [x.to_input() for x in self.endpoints]
         if self.supernet is not None:
             _rval[Y_SUPERNET] = self.supernet
         if self.subnets is not None:
@@ -47,15 +38,14 @@ class CircuitLibrarySpec:
     @staticmethod
     def from_input(obj) -> 'CircuitLibrarySpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _portA = obj.get(Y_PORTA)
-            _portB = obj.get(Y_PORTB)
+            _endpoints = []
+            if obj.get(Y_ENDPOINTS) is not None:
+                for x in obj.get(Y_ENDPOINTS):
+                    _endpoints.append(EndpointSpec.from_input(x))
             _supernet = obj.get(Y_SUPERNET)
             _subnets = obj.get(Y_SUBNETS)
             return CircuitLibrarySpec(
-                nodes=_nodes,
-                portA=_portA,
-                portB=_portB,
+                endpoints=_endpoints,
                 supernet=_supernet,
                 subnets=_subnets,
             )
@@ -65,22 +55,17 @@ class CircuitLibrarySpec:
 class CircuitLibraryStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
     ):
-        self.nodes = nodes
+        pass
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'CircuitLibraryStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
             return CircuitLibraryStatus(
-                nodes=_nodes,
             )
         return None  # pragma: no cover
 

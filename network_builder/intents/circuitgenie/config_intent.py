@@ -6,6 +6,8 @@ from network_builder.intents.circuitgenie.init import validate, init_globals_def
 
 
 def process_cr(cr):
+    """Process CircuitGenie CR."""
+    log_msg("CircuitGenie CR:", dict=cr)
     """Entry point — now just delegates to the orchestrator."""
     log_msg("CircuitGenie CR received. Handing off to the orchestrator...")
     cr_obj = CircuitGenie.from_input(cr)
@@ -17,4 +19,4 @@ def process_cr(cr):
     init_globals_defaults(cr_obj)
 
     orchestrator = CircuitConfigOrchestrator(cr_obj)
-    orchestrator.run()
+    # orchestrator.run()

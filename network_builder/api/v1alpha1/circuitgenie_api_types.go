@@ -16,44 +16,21 @@ limitations under the License.
 
 package v1alpha1
 
+// EndpointSpec define the desired state of Site-to-Site link
+type EndpointSpec struct {
+	Port      string `json:"port"`
+	Node      string `json:"node"`
+	IPAddress string `json:"ipAddress,omitempty"`
+}
+
 // CircuitGenieSpec defines the desired state of CircuitGenie
 type CircuitGenieSpec struct {
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=3
-	// +eda:ui:orderpriority=100
-	// +eda:ui:title="Port-B"
-	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
-	// Select interface from Port Library.
-	PortA []string `json:"portA,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=3
-	// +eda:ui:orderpriority=150
-	// +eda:ui:title="Port-A"
-	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
-	// Select interface from Port Library.
-	PortB []string `json:"portB,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=3
-	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Supernet"
-	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
-	Supernet []string `json:"supernet,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=3
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=3
-	// +eda:ui:title="Subnets"
-	Subnets []string `json:"subnets,omitempty"`
+	// +eda:ui:display="table"
+	// +eda:ui:addButtonText="Add Endpoint"
+	Endpoints []EndpointSpec `json:"endpoints"`
+	Supernet  []string       `json:"supernet,omitempty"`
+	Subnets   []string       `json:"subnets,omitempty"`
 }
 
 // CircuitGenieStatus defines the observed state of CircuitGenie
-type CircuitGenieStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
-	// +eda:ui:title="Subnets"
-	Subnets []string `json:"subnets,omitempty"`
-}
+type CircuitGenieStatus struct{}
