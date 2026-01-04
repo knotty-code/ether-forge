@@ -18,7 +18,8 @@
       "type": "object",
       "title": "Specification",
       "required": [
-        "endpoints"
+        "endpoints",
+        "supernet"
       ],
       "properties": {
         "endpoints": {
@@ -27,32 +28,90 @@
             "description": "EndpointSpec define the desired state of Site-to-Site link",
             "type": "object",
             "required": [
-              "node",
               "port"
             ],
             "properties": {
               "ipAddress": {
-                "type": "string"
+                "type": "string",
+                "title": "IP Address",
+                "x-eda-nokia-com": {
+                  "ui-visible-if": "self.advanced ===true",
+                  "ui-order-priority": 300
+                }
               },
               "node": {
-                "type": "string"
+                "type": "string",
+                "title": "Node",
+                "x-eda-nokia-com": {
+                  "ui-visible-if": "self.advanced ===true",
+                  "ui-auto-completes": [
+                    {
+                      "condition": "true",
+                      "type": "gvr",
+                      "group": "core.eda.nokia.com",
+                      "version": "v1",
+                      "resource": "toponodes"
+                    }
+                  ],
+                  "ui-order-priority": 200
+                }
               },
               "port": {
-                "type": "string"
+                "type": "string",
+                "x-eda-nokia-com": {
+                  "ui-auto-completes": [
+                    {
+                      "condition": "true",
+                      "type": "gvr",
+                      "group": "network-builder.eda.local",
+                      "version": "v1alpha1",
+                      "resource": "portlibraries"
+                    }
+                  ],
+                  "ui-order-priority": 100
+                }
               }
             }
           }
         },
         "subnets": {
           "type": "array",
+          "title": "Subnet",
           "items": {
             "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetlibraries"
+              }
+            ],
+            "ui-order-priority": 300,
+            "ui-column-span": 3
           }
         },
         "supernet": {
           "type": "array",
+          "title": "Supernet",
           "items": {
             "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetgenies"
+              }
+            ],
+            "ui-order-priority": 200,
+            "ui-column-span": 2
           }
         }
       },

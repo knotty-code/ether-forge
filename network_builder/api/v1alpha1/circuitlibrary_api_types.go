@@ -22,8 +22,18 @@ type CircuitLibrarySpec struct {
 	// +eda:ui:display="table"
 	// +eda:ui:addButtonText="Add Endpoint"
 	Endpoints []EndpointSpec `json:"endpoints"`
-	Supernet  []string       `json:"supernet,omitempty"`
-	Subnets   []string       `json:"subnets,omitempty"`
+	// +kubebuilder:validation:Required
+	// +eda:ui:orderpriority=200
+	// +eda:ui:columnspan=2
+	// +eda:ui:title="Supernet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
+	Supernet []string `json:"supernet,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:orderpriority=300
+	// +eda:ui:columnspan=3
+	// +eda:ui:title="Subnet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetlibraries"}`
+	Subnets []string `json:"subnets,omitempty"`
 }
 
 // CircuitLibraryStatus defines the observed state of CircuitLibrary
