@@ -4,7 +4,7 @@ import utils.exceptions as e
 import eda_common as eda
 
 from network_builder.api.v1alpha1.pysrc.circuitgenie import CircuitGenie
-from network_builder.api.v1alpha1.pysrc.circuitlibrary import CIRCUITLIBRARY_SCHEMA
+from network_builder.api.v1alpha1.pysrc.orchestrator import ORCHESTRATOR_SCHEMA
 from network_builder.api.v1alpha1.pysrc.portlibrary import PORTLIBRARY_SCHEMA
 
 
@@ -40,7 +40,7 @@ class CircuitConfigOrchestrator:
 
         # Use real_port_a / real_port_b in the CircuitLibrary
         eda.update_cr(
-            schema=CIRCUITLIBRARY_SCHEMA,
+            schema=ORCHESTRATOR_SCHEMA,
             name=self.cr_name,
             spec={
                 "endpoints": [
