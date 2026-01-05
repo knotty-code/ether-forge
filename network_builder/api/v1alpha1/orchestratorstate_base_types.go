@@ -22,26 +22,26 @@ import (
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:path=stockapps,scope=Namespaced
+// +kubebuilder:resource:path=orchestratorstates,scope=Namespaced
 
-// StockApp is the Schema for the stockapps API
-type StockApp struct {
+// OrchestratorState is the Schema for the orchestratorstates API
+type OrchestratorState struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   StockAppSpec   `json:"spec,omitempty"`
-	Status StockAppStatus `json:"status,omitempty"`
+	Spec   OrchestratorStateSpec   `json:"spec,omitempty"`
+	Status OrchestratorStateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// StockAppList contains a list of StockApp
-type StockAppList struct {
+// OrchestratorStateList contains a list of OrchestratorState
+type OrchestratorStateList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []StockApp `json:"items"`
+	Items           []OrchestratorState `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&StockApp{}, &StockAppList{})
+	SchemeBuilder.Register(&OrchestratorState{}, &OrchestratorStateList{})
 }

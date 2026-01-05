@@ -1,0 +1,9 @@
+apiVersion: network-builder.eda.local/v1alpha1
+kind: Orchestrator
+metadata:
+  name: example-orchestrator
+  namespace: eda
+spec:
+  nodeSelector:
+    - eda.nokia.com/role=leaf
+  loginBanner: Hello EDA!

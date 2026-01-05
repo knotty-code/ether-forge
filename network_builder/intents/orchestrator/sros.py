@@ -4,12 +4,12 @@ import json
 import eda_common as eda
 import utils.schema as s
 from common.metadata import Y_METADATA, Y_NAME
-from network_builder.api.v1alpha1.pysrc.stockapp import StockApp
+from network_builder.api.v1alpha1.pysrc.orchestrator import Orchestrator
 from utils.log import log_msg
 
 
 class SrosBaseConfigHandler:
-    def handle_cr(self, cr_obj: StockApp, node_cr=None):
+    def handle_cr(self, cr_obj: Orchestrator, node_cr=None):
         configs = []
         log_msg(f"cr_obj: {cr_obj}")
         log_msg(f"node_cr: {node_cr}")
@@ -22,7 +22,7 @@ class SrosBaseConfigHandler:
             spec={"node-endpoint": node_name, "configs": configs},
         )
 
-    def _generate_config(self, cr_obj: StockApp, configs: list):
+    def _generate_config(self, cr_obj: Orchestrator, configs: list):
         if cr_obj.spec.loginBanner is not None:
             _banner_config = {}
             _banner_config["message"] = cr_obj.spec.loginBanner

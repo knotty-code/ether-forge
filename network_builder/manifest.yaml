@@ -153,27 +153,6 @@ spec:
         type: state
     - crd:
         api:
-          expose: read
-        path: network_builder/crds/network-builder.eda.local_stockapps.yaml
-        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_stockapps.json
-        ui:
-          category: Network Builder
-          name: stockapps
-    - script:
-        path: network_builder/intents/stockapp/config_intent.py
-        trigger:
-          kind: StockApp
-        type: config
-    - crd:
-        path: network_builder/crds/network-builder.eda.local_stockappstates.yaml
-        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_stockappstates.json
-    - script:
-        path: network_builder/intents/stockappstate/state_intent.py
-        trigger:
-          kind: StockAppState
-        type: state
-    - crd:
-        api:
           expose: readWrite
         path: network_builder/crds/network-builder.eda.local_circuitlibraries.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_circuitlibraries.json
@@ -192,6 +171,27 @@ spec:
         path: network_builder/intents/circuitlibrarystate/state_intent.py
         trigger:
           kind: CircuitLibraryState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: network_builder/crds/network-builder.eda.local_orchestrators.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_orchestrators.json
+        ui:
+          category: Network Builder
+          name: orchestrators
+    - script:
+        path: network_builder/intents/orchestrator/config_intent.py
+        trigger:
+          kind: Orchestrator
+        type: config
+    - crd:
+        path: network_builder/crds/network-builder.eda.local_orchestratorstates.yaml
+        schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_orchestratorstates.json
+    - script:
+        path: network_builder/intents/orchestratorstate/state_intent.py
+        trigger:
+          kind: OrchestratorState
         type: state
   supportedEndpoints:
     - srl:0.0.0

@@ -5,15 +5,15 @@ import utils.exceptions as e
 
 from common.constants import PLATFORM_SRL, PLATFORM_SROS
 from utils.log import log_msg
-from network_builder.api.v1alpha1.pysrc.stockapp import StockApp
-from network_builder.api.v1alpha1.pysrc.stockappstate import STOCKAPPSTATE_SCHEMA
-from network_builder.intents.stockapp.handlers import get_config_handler
-from network_builder.intents.stockapp.init import init_globals_defaults, validate
+from network_builder.api.v1alpha1.pysrc.orchestrator import Orchestrator
+from network_builder.api.v1alpha1.pysrc.orchestratorstate import ORCHESTRATORSTATE_SCHEMA
+from network_builder.intents.orchestrator.handlers import get_config_handler
+from network_builder.intents.orchestrator.init import init_globals_defaults, validate
 
 def process_cr(cr):
-    """Process StockApp CR."""
-    log_msg("StockApp CR:", dict=cr)
-    cr_obj = StockApp.from_input(cr)
+    """Process Orchestrator CR."""
+    log_msg("Orchestrator CR:", dict=cr)
+    cr_obj = Orchestrator.from_input(cr)
     if cr_obj is None:
         return
 
@@ -58,7 +58,7 @@ def process_cr(cr):
                 raise e.InvalidInput(msg)
 
     eda.update_cr(
-        schema=STOCKAPPSTATE_SCHEMA,
+        schema=ORCHESTRATORSTATE_SCHEMA,
         name=cr_name,
         spec={
             "nodes": list(nodes.keys()),

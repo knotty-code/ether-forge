@@ -20,13 +20,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// StockAppStateSpec defines the desired state of StockAppState
-type StockAppStateSpec struct {
+// OrchestratorStateSpec defines the desired state of OrchestratorState
+type OrchestratorStateSpec struct {
 	// +eda:ui:title="Nodes"
 	// List of TopoNodes this login banner has been applied to
 	Nodes []string `json:"nodes,omitempty"`
 }
 
-// StockAppStateStatus defines the observed state of StockAppState
-type StockAppStateStatus struct {
+// OrchestratorStateStatus defines the observed state of OrchestratorState
+type OrchestratorStateStatus struct {
 }

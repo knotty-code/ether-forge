@@ -8,10 +8,10 @@ from . import Metadata, Y_NAME
 from .constants import *
 Y_NODES = 'nodes'
 # Package objects (GVK Schemas)
-STOCKAPPSTATE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='StockAppState')
+ORCHESTRATORSTATE_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='OrchestratorState')
 
 
-class StockAppStateSpec:
+class OrchestratorStateSpec:
     def __init__(
         self,
         nodes: list[str] | None = None,
@@ -25,16 +25,16 @@ class StockAppStateSpec:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'StockAppStateSpec | None':
+    def from_input(obj) -> 'OrchestratorStateSpec | None':
         if obj:
             _nodes = obj.get(Y_NODES)
-            return StockAppStateSpec(
+            return OrchestratorStateSpec(
                 nodes=_nodes,
             )
         return None  # pragma: no cover
 
 
-class StockAppStateStatus:
+class OrchestratorStateStatus:
     def __init__(
         self,
     ):
@@ -45,19 +45,19 @@ class StockAppStateStatus:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'StockAppStateStatus | None':
+    def from_input(obj) -> 'OrchestratorStateStatus | None':
         if obj:
-            return StockAppStateStatus(
+            return OrchestratorStateStatus(
             )
         return None  # pragma: no cover
 
 
-class StockAppState:
+class OrchestratorState:
     def __init__(
         self,
         metadata: Metadata | None = None,
-        spec: StockAppStateSpec | None = None,
-        status: StockAppStateStatus | None = None
+        spec: OrchestratorStateSpec | None = None,
+        status: OrchestratorStateStatus | None = None
     ):
         self.metadata = metadata
         self.spec = spec
@@ -65,7 +65,7 @@ class StockAppState:
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        _rval[Y_SCHEMA_KEY] = STOCKAPPSTATE_SCHEMA
+        _rval[Y_SCHEMA_KEY] = ORCHESTRATORSTATE_SCHEMA
         if self.metadata is not None:
             _rval[Y_NAME] = self.metadata.name
         if self.spec is not None:
@@ -75,16 +75,16 @@ class StockAppState:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'StockAppState | None':
+    def from_input(obj) -> 'OrchestratorState | None':
         if obj:
             _metadata = (
                 Metadata.from_input(obj.get(Y_METADATA))
                 if obj.get(Y_METADATA, None)
                 else Metadata.from_name(obj.get(Y_NAME))
             )
-            _spec = StockAppStateSpec.from_input(obj.get(Y_SPEC, None))
-            _status = StockAppStateStatus.from_input(obj.get(Y_STATUS))
-            return StockAppState(
+            _spec = OrchestratorStateSpec.from_input(obj.get(Y_SPEC, None))
+            _status = OrchestratorStateStatus.from_input(obj.get(Y_STATUS))
+            return OrchestratorState(
                 metadata=_metadata,
                 spec=_spec,
                 status=_status,
@@ -92,10 +92,10 @@ class StockAppState:
         return None  # pragma: no cover
 
 
-class StockAppStateList:
+class OrchestratorStateList:
     def __init__(
         self,
-        items: list[StockAppState],
+        items: list[OrchestratorState],
         listMeta: object | None = None
     ):
         self.items = items
@@ -110,11 +110,11 @@ class StockAppStateList:
         return _rval
 
     @staticmethod
-    def from_input(obj) -> 'StockAppStateList | None':
+    def from_input(obj) -> 'OrchestratorStateList | None':
         if obj:
             _items = obj.get(Y_ITEMS, [])
             _listMeta = obj.get(Y_METADATA, None)
-            return StockAppStateList(
+            return OrchestratorStateList(
                 items=_items,
                 listMeta=_listMeta,
             )

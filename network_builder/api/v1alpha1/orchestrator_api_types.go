@@ -20,9 +20,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// StockAppSpec defines the desired state of StockApp
+// OrchestratorSpec defines the desired state of Orchestrator
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
-type StockAppSpec struct {
+type OrchestratorSpec struct {
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=2
 	// +eda:ui:orderpriority=100
@@ -45,8 +45,8 @@ type StockAppSpec struct {
 	LoginBanner string `json:"loginBanner,omitempty"`
 }
 
-// StockAppStatus defines the observed state of StockApp
-type StockAppStatus struct {
+// OrchestratorStatus defines the observed state of Orchestrator
+type OrchestratorStatus struct {
 	// +eda:ui:title="Nodes"
 	// List of nodes this banner has been applied to
 	Nodes []string `json:"nodes,omitempty"`
