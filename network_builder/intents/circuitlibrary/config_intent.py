@@ -19,4 +19,4 @@ def process_cr(cr):
     init_globals_defaults(cr_obj)
 
     orchestrator = CircuitLibraryOrchestrator(cr_obj)
-    orchestrator.run()
+    # orchestrator.run()

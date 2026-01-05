@@ -153,7 +153,7 @@ spec:
         type: state
     - crd:
         api:
-          expose: readWrite
+          expose: read
         path: network_builder/crds/network-builder.eda.local_stockapps.yaml
         schema: network_builder/openapiv3/eda_oas_network-builder.eda.local_stockapps.json
         ui:
