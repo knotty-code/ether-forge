@@ -39,30 +39,36 @@ spec:
           spec:
             description: OrchestratorSpec defines the desired state of Orchestrator
             properties:
-              loginBanner:
-                description: This is the login banner displayed before a user has
-                  logged into the Node.
+              endpoints:
+                items:
+                  description: EndpointSpec define the desired state of Site-to-Site
+                    link
+                  properties:
+                    ipAddress:
+                      type: string
+                    node:
+                      type: string
+                    port:
+                      type: string
+                  required:
+                  - port
+                  type: object
+                type: array
+              source:
                 type: string
-              nodeSelector:
-                description: Label selector to select nodes on which to configure
-                  the banners.
+              subnets:
                 items:
                   type: string
                 type: array
-              nodes:
-                description: List of nodes on which to configure the banners.
+              supernet:
                 items:
                   type: string
                 type: array
+            required:
+            - endpoints
             type: object
           status:
             description: OrchestratorStatus defines the observed state of Orchestrator
-            properties:
-              nodes:
-                description: List of nodes this banner has been applied to
-                items:
-                  type: string
-                type: array
             type: object
         type: object
     served: true

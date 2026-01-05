@@ -6,9 +6,11 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_NODES = 'nodes'
-Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
+from .circuitgenie import EndpointSpec
+Y_ENDPOINTS = 'endpoints'
+Y_SUPERNET = 'supernet'
+Y_SUBNETS = 'subnets'
+Y_SOURCE = 'source'
 # Package objects (GVK Schemas)
 ORCHESTRATOR_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='Orchestrator')
 
@@ -16,34 +18,43 @@ ORCHESTRATOR_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1a
 class OrchestratorSpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        endpoints: list[EndpointSpec],
+        supernet: list[str] | None = None,
+        subnets: list[str] | None = None,
+        source: str | None = None,
     ):
-        self.nodes = nodes
-        self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
+        self.endpoints = endpoints
+        self.supernet = supernet
+        self.subnets = subnets
+        self.source = source
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.nodeSelector is not None:
-            _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.endpoints is not None:
+            _rval[Y_ENDPOINTS] = [x.to_input() for x in self.endpoints]
+        if self.supernet is not None:
+            _rval[Y_SUPERNET] = self.supernet
+        if self.subnets is not None:
+            _rval[Y_SUBNETS] = self.subnets
+        if self.source is not None:
+            _rval[Y_SOURCE] = self.source
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'OrchestratorSpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
+            _endpoints = []
+            if obj.get(Y_ENDPOINTS) is not None:
+                for x in obj.get(Y_ENDPOINTS):
+                    _endpoints.append(EndpointSpec.from_input(x))
+            _supernet = obj.get(Y_SUPERNET)
+            _subnets = obj.get(Y_SUBNETS)
+            _source = obj.get(Y_SOURCE)
             return OrchestratorSpec(
-                nodes=_nodes,
-                nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
+                endpoints=_endpoints,
+                supernet=_supernet,
+                subnets=_subnets,
+                source=_source,
             )
         return None  # pragma: no cover
 
@@ -51,22 +62,17 @@ class OrchestratorSpec:
 class OrchestratorStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
     ):
-        self.nodes = nodes
+        pass
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'OrchestratorStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
             return OrchestratorStatus(
-                nodes=_nodes,
             )
         return None  # pragma: no cover
 

@@ -17,33 +17,72 @@
       "description": "OrchestratorSpec defines the desired state of Orchestrator",
       "type": "object",
       "title": "Specification",
+      "required": [
+        "endpoints"
+      ],
       "properties": {
-        "loginBanner": {
-          "description": "This is the login banner displayed before a user has logged into the Node.",
-          "type": "string",
-          "title": "Login Banner",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 300,
-            "ui-column-span": 4
-          }
-        },
-        "nodeSelector": {
-          "description": "Label selector to select nodes on which to configure the banners.",
+        "endpoints": {
           "type": "array",
-          "format": "labelselector",
-          "title": "Node Selector",
           "items": {
-            "type": "string"
-          },
-          "x-eda-nokia-com": {
-            "ui-order-priority": 200,
-            "ui-column-span": 2
+            "description": "EndpointSpec define the desired state of Site-to-Site link",
+            "type": "object",
+            "required": [
+              "port"
+            ],
+            "properties": {
+              "ipAddress": {
+                "type": "string",
+                "title": "IP Address",
+                "x-eda-nokia-com": {
+                  "ui-visible-if": "self.advanced ===true",
+                  "ui-order-priority": 300
+                }
+              },
+              "node": {
+                "type": "string",
+                "title": "Node",
+                "x-eda-nokia-com": {
+                  "ui-visible-if": "self.advanced ===true",
+                  "ui-auto-completes": [
+                    {
+                      "condition": "true",
+                      "type": "gvr",
+                      "group": "core.eda.nokia.com",
+                      "version": "v1",
+                      "resource": "toponodes"
+                    }
+                  ],
+                  "ui-order-priority": 200
+                }
+              },
+              "port": {
+                "type": "string",
+                "x-eda-nokia-com": {
+                  "ui-auto-completes": [
+                    {
+                      "condition": "true",
+                      "type": "gvr",
+                      "group": "network-builder.eda.local",
+                      "version": "v1alpha1",
+                      "resource": "portlibraries"
+                    }
+                  ],
+                  "ui-order-priority": 100
+                }
+              }
+            }
           }
         },
-        "nodes": {
-          "description": "List of nodes on which to configure the banners.",
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 400
+          }
+        },
+        "subnets": {
           "type": "array",
-          "title": "Nodes",
+          "title": "Subnet",
           "items": {
             "type": "string"
           },
@@ -52,12 +91,32 @@
               {
                 "condition": "true",
                 "type": "gvr",
-                "group": "core.eda.nokia.com",
-                "version": "v1",
-                "resource": "toponodes"
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetlibraries"
               }
             ],
-            "ui-order-priority": 100,
+            "ui-order-priority": 300,
+            "ui-column-span": 3
+          }
+        },
+        "supernet": {
+          "type": "array",
+          "title": "Supernet",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "network-builder.eda.local",
+                "version": "v1alpha1",
+                "resource": "subnetgenies"
+              }
+            ],
+            "ui-order-priority": 200,
             "ui-column-span": 2
           }
         }
@@ -76,16 +135,6 @@
       "description": "OrchestratorStatus defines the observed state of Orchestrator",
       "type": "object",
       "title": "Status",
-      "properties": {
-        "nodes": {
-          "description": "List of nodes this banner has been applied to",
-          "type": "array",
-          "title": "Nodes",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
       "readOnly": true,
       "x-eda-nokia-com": {
         "ui-order-priority": 20

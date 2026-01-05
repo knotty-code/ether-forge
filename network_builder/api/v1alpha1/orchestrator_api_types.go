@@ -16,38 +16,28 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // OrchestratorSpec defines the desired state of Orchestrator
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type OrchestratorSpec struct {
+	// +eda:ui:display="table"
+	// +eda:ui:addButtonText="Add Endpoint"
+	Endpoints []EndpointSpec `json:"endpoints"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
-	// +eda:ui:orderpriority=100
-	// +eda:ui:autocomplete=`{"group":"core.eda.nokia.com", "version":"v1", "resource":"toponodes"}`
-	// +eda:ui:title="Nodes"
-	// List of nodes on which to configure the banners.
-	Nodes []string `json:"nodes,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
 	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Node Selector"
-	// +eda:ui:format="labelselector"
-	// Label selector to select nodes on which to configure the banners.
-	NodeSelector []string `json:"nodeSelector,omitempty"`
+	// +eda:ui:columnspan=2
+	// +eda:ui:title="Supernet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetgenies"}`
+	Supernet []string `json:"supernet,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=4
 	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:columnspan=3
+	// +eda:ui:title="Subnet"
+	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetlibraries"}`
+	Subnets []string `json:"subnets,omitempty"`
+	// +eda:ui:title="Source"
+	// +eda:ui:orderpriority=400
+	Source string `json:"source,omitempty"`
 }
 
 // OrchestratorStatus defines the observed state of Orchestrator
-type OrchestratorStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
-}
+type OrchestratorStatus struct{}
