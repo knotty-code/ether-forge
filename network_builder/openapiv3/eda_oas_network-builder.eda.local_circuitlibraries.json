@@ -27,9 +27,6 @@
           "items": {
             "description": "EndpointSpec define the desired state of Site-to-Site link",
             "type": "object",
-            "required": [
-              "port"
-            ],
             "properties": {
               "ipAddress": {
                 "type": "string",

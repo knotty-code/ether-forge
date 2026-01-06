@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from utils.log import log_msg
 from network_builder.api.v1alpha1.pysrc.subnetgenie import SubnetGenie
-from network_builder.intents.subnetgenie.orchestrator import SubnetGenieOrchestrator
+from network_builder.intents.subnetgenie.agent import SubnetGenieAgent
 from network_builder.intents.subnetgenie.init import validate, init_globals_defaults
 
 
@@ -16,5 +16,5 @@ def process_cr(cr):
     validate(cr_obj)
     init_globals_defaults(cr_obj)
 
-    orchestrator = SubnetGenieOrchestrator(cr_obj)
-    orchestrator.run()
+    agent = SubnetGenieAgent(cr_obj)
+    agent.run()

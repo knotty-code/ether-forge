@@ -11,7 +11,7 @@ from network_builder.api.v1alpha1.pysrc.portlibrary import PORTLIBRARY_SCHEMA
 from utils.log import log_msg
 
 
-class CircuitConfigOrchestrator:
+class CircuitGenieAgent:
     """Orchestrates the full CircuitGenie configuration flow.  
     Because chaos is only fun in logs, not in code."""
     def _error(self, msg: str):
@@ -37,12 +37,14 @@ class CircuitConfigOrchestrator:
         # Derive nodes only if not in advanced mode (node field empty)
         node_a, real_port_a = self._derive_node_and_port_from_portlibrary(endpoint_a.port)
         node_b, real_port_b = self._derive_node_and_port_from_portlibrary(endpoint_b.port)
+        source_app = "circuitgenie"
 
         # Use real_port_a / real_port_b in the CircuitLibrary
         eda.update_cr(
             schema=ORCHESTRATOR_SCHEMA,
             name=self.cr_name,
             spec={
+                "source": source_app,
                 "endpoints": [
                     {"node": node_a, "port": real_port_a},
                     {"node": node_b, "port": real_port_b},

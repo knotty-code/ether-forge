@@ -8,7 +8,7 @@ from network_builder.api.v1alpha1.pysrc.subnetlibrarystate import SUBNETLIBRARYS
 import eda_common as eda  # For update_cr
 
 
-class SubnetLibraryOrchestrator:
+class SubnetLibraryAgent:
     """Orchestrates the full Subnetlibrary configuration flow.  
     Because chaos is only fun in logs, not in code."""
     def _error(self, msg: str):

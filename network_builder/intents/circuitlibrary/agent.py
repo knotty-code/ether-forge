@@ -12,7 +12,7 @@ from network_builder.intents.circuitgenie.utils.network_utils import parse_port 
 from utils.log import log_msg
 
 
-class CircuitLibraryOrchestrator:
+class CircuitLibraryAgent:
     def _error(self, msg: str):
         raise e.InvalidInput(f"[CircuitLibrary '{self.cr_name}' in '{self.ns}'] {msg}")
 
