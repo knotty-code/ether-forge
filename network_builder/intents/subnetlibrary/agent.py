@@ -27,23 +27,4 @@ class SubnetLibraryAgent:
 
         log_msg(f"Orchestrator complete for '{self.cr_name}'. Another flawless victory.")
 
-    def _update_state(self):
-        """Update state CR. The circle is complete."""
-        usedby_names = ["test1", "test2"]
-        eda.update_cr(
-            schema=SUBNETLIBRARYSTATE_SCHEMA,
-            name=self.cr_name,
-            spec={"usedby": usedby_names}
-        )
-        log_msg("State updated. Users will be so impressed.")
 
-
-# # Entry point: Read raw CR dict from stdin and convert to model object
-# if __name__ == "__main__":
-#     cr_dict = json.loads(sys.stdin.read())  # Raw input CR as dict
-#     cr_obj = SubnetLibrary.from_input(cr_dict)  # Convert to model instance
-#     if cr_obj is None:
-#         log_msg("Invalid CR input. Exiting.")
-#         sys.exit(1)
-#     orchestrator = SubnetLibraryOrchestrator(cr_obj)
-#     orchestrator.run()

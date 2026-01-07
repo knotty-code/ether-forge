@@ -17,3 +17,5 @@ class PortTailorAgent:
         self.cr_obj = cr_obj
         self.cr_name = cr_obj.metadata.name
         self.ns = cr_obj.metadata.namespace
+    def run(self):
+        log_msg("PortTailor is running")

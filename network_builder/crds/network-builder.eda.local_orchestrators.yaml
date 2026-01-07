@@ -69,6 +69,8 @@ spec:
                 items:
                   type: string
                 type: array
+              usedby:
+                type: string
             type: object
           status:
             description: OrchestratorStatus defines the observed state of Orchestrator

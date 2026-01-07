@@ -131,6 +131,10 @@
             "ui-order-priority": 200,
             "ui-column-span": 2
           }
+        },
+        "usedby": {
+          "type": "string",
+          "title": "Used By"
         }
       },
       "x-eda-nokia-com": {

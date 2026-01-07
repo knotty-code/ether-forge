@@ -13,6 +13,7 @@ Y_SUBNETS = 'subnets'
 Y_SOURCE = 'source'
 Y_SUBNETLENGTH = 'subnetLength'
 Y_PURPOSE = 'purpose'
+Y_USEDBY = 'usedby'
 # Package objects (GVK Schemas)
 ORCHESTRATOR_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1alpha1', kind='Orchestrator')
 
@@ -26,6 +27,7 @@ class OrchestratorSpec:
         source: str | None = None,
         subnetLength: int | None = None,
         purpose: str | None = None,
+        usedby: str | None = None,
     ):
         self.endpoints = endpoints
         self.supernet = supernet
@@ -33,6 +35,7 @@ class OrchestratorSpec:
         self.source = source
         self.subnetLength = subnetLength
         self.purpose = purpose
+        self.usedby = usedby
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -48,6 +51,8 @@ class OrchestratorSpec:
             _rval[Y_SUBNETLENGTH] = self.subnetLength
         if self.purpose is not None:
             _rval[Y_PURPOSE] = self.purpose
+        if self.usedby is not None:
+            _rval[Y_USEDBY] = self.usedby
         return _rval
 
     @staticmethod
@@ -62,6 +67,7 @@ class OrchestratorSpec:
             _source = obj.get(Y_SOURCE)
             _subnetLength = obj.get(Y_SUBNETLENGTH)
             _purpose = obj.get(Y_PURPOSE)
+            _usedby = obj.get(Y_USEDBY)
             return OrchestratorSpec(
                 endpoints=_endpoints,
                 supernet=_supernet,
@@ -69,6 +75,7 @@ class OrchestratorSpec:
                 source=_source,
                 subnetLength=_subnetLength,
                 purpose=_purpose,
+                usedby=_usedby,
             )
         return None  # pragma: no cover
 

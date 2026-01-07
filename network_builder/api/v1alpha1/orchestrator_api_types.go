@@ -50,6 +50,8 @@ type OrchestratorSpec struct {
 	// +eda:ui:title="SuperNet Description"
 	// Reserved for point-to-point links.
 	Purpose string `json:"purpose,omitempty"`
+	// +eda:ui:title="Used By"
+	UsedBy string `json:"usedby,omitempty"`
 }
 
 // OrchestratorStatus defines the observed state of Orchestrator
