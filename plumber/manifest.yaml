@@ -5,9 +5,9 @@ metadata:
 spec:
   appInfo:
     categories:
-      - uncategorised
+      - interfaces
     documentation: plumber/docs
-  author: knotty-code
+  author: KnottyPein
   dependencies:
     - file:
         path: utils
@@ -17,9 +17,9 @@ spec:
         path: plumber/intents
     - file:
         path: plumber/api/v1alpha1/pysrc
-  description: Sample description
+  description: Plumber simplifies physical interface configuration and inter-switch link creation across nodes. Create bulk interfaces with port ranges and automatically generate TopoLinks for clean topology visualization — with a side of Jack Burton swagger.
   group: plumber.eda.local
-  image: change.me/plumber:v0.0.0
+  image: ghcr.io/knotty-code/plumber:v0.1.0
   supportedCoreVersions:
     - v4.0.0-0
   title: Plumber
