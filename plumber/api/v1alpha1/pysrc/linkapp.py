@@ -6,9 +6,8 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_NODES = 'nodes'
-Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
+Y_LOCAL = 'local'
+Y_REMOTE = 'remote'
 # Package objects (GVK Schemas)
 LINKAPP_SCHEMA = eda.Schema(group='plumber.eda.local', version='v1alpha1', kind='LinkApp')
 
@@ -16,34 +15,28 @@ LINKAPP_SCHEMA = eda.Schema(group='plumber.eda.local', version='v1alpha1', kind=
 class LinkAppSpec:
     def __init__(
         self,
-        nodes: list[str] | None = None,
-        nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        local: str | None = None,
+        remote: str | None = None,
     ):
-        self.nodes = nodes
-        self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
+        self.local = local
+        self.remote = remote
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
-        if self.nodeSelector is not None:
-            _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.local is not None:
+            _rval[Y_LOCAL] = self.local
+        if self.remote is not None:
+            _rval[Y_REMOTE] = self.remote
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'LinkAppSpec | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
-            _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
+            _local = obj.get(Y_LOCAL)
+            _remote = obj.get(Y_REMOTE)
             return LinkAppSpec(
-                nodes=_nodes,
-                nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
+                local=_local,
+                remote=_remote,
             )
         return None  # pragma: no cover
 
@@ -51,22 +44,17 @@ class LinkAppSpec:
 class LinkAppStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
     ):
-        self.nodes = nodes
+        pass
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'LinkAppStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
             return LinkAppStatus(
-                nodes=_nodes,
             )
         return None  # pragma: no cover
 

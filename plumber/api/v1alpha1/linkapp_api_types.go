@@ -16,38 +16,22 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // LinkAppSpec defines the desired state of LinkApp
-// +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type LinkAppSpec struct {
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=2
 	// +eda:ui:orderpriority=100
-	// +eda:ui:autocomplete=`{"group":"core.eda.nokia.com", "version":"v1", "resource":"toponodes"}`
-	// +eda:ui:title="Nodes"
-	// List of nodes on which to configure the banners.
-	Nodes []string `json:"nodes,omitempty"`
+	// +eda:ui:autocomplete=`{"group":"interfaces.eda.nokia.com", "version":"v1alpha1", "resource":"interfaces"}`
+	// +eda:ui:title="Local Interface"
+	LocalInterface string `json:"local,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=2
-	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Node Selector"
-	// +eda:ui:format="labelselector"
-	// Label selector to select nodes on which to configure the banners.
-	NodeSelector []string `json:"nodeSelector,omitempty"`
-	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=4
-	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:orderpriority=100
+	// +eda:ui:autocomplete=`{"group":"interfaces.eda.nokia.com", "version":"v1alpha1", "resource":"interfaces"}`
+	// +eda:ui:title="Remote Interface"
+	RemoteInterface string `json:"remote,omitempty"`
 }
 
 // LinkAppStatus defines the observed state of LinkApp
 type LinkAppStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
 }

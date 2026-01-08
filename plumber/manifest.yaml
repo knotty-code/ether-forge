@@ -53,7 +53,7 @@ spec:
         schema: plumber/openapiv3/eda_oas_plumber.eda.local_linkapps.json
         ui:
           category: Plumber
-          name: linkapps
+          name: EZ-Link
     - script:
         path: plumber/intents/linkapp/config_intent.py
         trigger:
