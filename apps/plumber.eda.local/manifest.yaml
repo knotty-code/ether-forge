@@ -1,0 +1,96 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: plumber
+spec:
+  appInfo:
+    categories:
+      - interfaces
+    documentation: plumber/docs
+    ociSpecVersion: v1.0.0
+  author: KnottyPein
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: plumber/intents
+    - file:
+        path: plumber/api/v1alpha1/pysrc
+  description: Plumber simplifies physical interface configuration and inter-switch link creation across nodes. Create bulk interfaces with port ranges and automatically generate TopoLinks for clean topology visualization — with a side of Jack Burton swagger.
+  group: plumber.eda.local
+  image: docker.io/knottypein/plumber:v0.1.0
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Plumber
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: plumber/crds/plumber.eda.local_interfaceapps.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_interfaceapps.json
+        ui:
+          category: Plumber
+          name: EZ-Interface
+        names:
+          kind: InterfaceApp
+          listKind: InterfaceAppList
+          plural: interfaceapps
+          singular: interfaceapp
+    - script:
+        path: plumber/intents/interfaceapp/config_intent.py
+        trigger:
+          kind: InterfaceApp
+        type: config
+    - crd:
+        path: plumber/crds/plumber.eda.local_interfaceappstates.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_interfaceappstates.json
+        names:
+          singular: interfaceappstate
+          kind: InterfaceAppState
+          listKind: InterfaceAppStateList
+          plural: interfaceappstates
+    - script:
+        path: plumber/intents/interfaceappstate/state_intent.py
+        trigger:
+          kind: InterfaceAppState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: plumber/crds/plumber.eda.local_linkapps.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_linkapps.json
+        ui:
+          category: Plumber
+          name: EZ-Link
+        names:
+          singular: linkapp
+          kind: LinkApp
+          listKind: LinkAppList
+          plural: linkapps
+    - script:
+        path: plumber/intents/linkapp/config_intent.py
+        trigger:
+          kind: LinkApp
+        type: config
+    - crd:
+        path: plumber/crds/plumber.eda.local_linkappstates.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_linkappstates.json
+        names:
+          listKind: LinkAppStateList
+          plural: linkappstates
+          singular: linkappstate
+          kind: LinkAppState
+    - script:
+        path: plumber/intents/linkappstate/state_intent.py
+        trigger:
+          kind: LinkAppState
+        type: state
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.10.*
+    - srl:25.*
+    - sros:24.10.*
+    - sros:25.*
