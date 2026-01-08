@@ -19,6 +19,7 @@ package v1alpha1
 // OrchestratorSpec defines the desired state of Orchestrator
 // +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type OrchestratorSpec struct {
+	// +kubebuilder:validation:Optional
 	// +eda:ui:display="table"
 	// +eda:ui:addButtonText="Add Endpoint"
 	Endpoints []EndpointSpec `json:"endpoints"`
@@ -34,9 +35,23 @@ type OrchestratorSpec struct {
 	// +eda:ui:title="Subnet"
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"subnetlibraries"}`
 	Subnets []string `json:"subnets,omitempty"`
-	// +eda:ui:title="Source"
+	// +eda:ui:title="Source App"
 	// +eda:ui:orderpriority=400
 	Source string `json:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=1
+	// +eda:ui:orderpriority=300
+	// +eda:ui:title="Subnet Length"
+	// The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).
+	SubnetLength int `json:"subnetLength,omitempty"`
+	// +kubebuilder:validation:Optional
+	// +eda:ui:columnspan=4
+	// +eda:ui:orderpriority=200
+	// +eda:ui:title="SuperNet Description"
+	// Reserved for point-to-point links.
+	Purpose string `json:"purpose,omitempty"`
+	// +eda:ui:title="Used By"
+	UsedBy string `json:"usedby,omitempty"`
 }
 
 // OrchestratorStatus defines the observed state of Orchestrator

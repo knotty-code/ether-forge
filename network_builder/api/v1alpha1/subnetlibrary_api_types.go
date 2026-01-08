@@ -24,8 +24,7 @@ type SubnetLibrarySpec struct {
 	// +eda:ui:orderpriority=100
 	// +eda:ui:title="Subnet"
 	// IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16
-	// +kubebuilder:default='10.0.0.0/29'
-	Subnet string `json:"subnet,omitempty"`
+	Subnet string `json:"subnets,omitempty"`
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=1
 	// +eda:ui:orderpriority=200
@@ -39,7 +38,7 @@ type SubnetLibrarySpec struct {
 	// +eda:ui:title="SuperNet Name"
 	SuperNet string `json:"supernet,omitempty"`
 	// +eda:ui:title="Used By"
-	UsedBy []string `json:"usedby,omitempty"`
+	UsedBy string `json:"usedby,omitempty"`
 }
 
 // SubnetLibraryStatus defines the observed state of SubnetLibrary

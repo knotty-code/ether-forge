@@ -4,14 +4,14 @@ import utils.exceptions as e
 import eda_common as eda
 
 from network_builder.api.v1alpha1.pysrc.circuitgenie import CircuitGenie
-from network_builder.api.v1alpha1.pysrc.circuitlibrary import CIRCUITLIBRARY_SCHEMA
+from network_builder.api.v1alpha1.pysrc.orchestrator import ORCHESTRATOR_SCHEMA
 from network_builder.api.v1alpha1.pysrc.portlibrary import PORTLIBRARY_SCHEMA
-
+from network_builder.api.v1alpha1.pysrc.custom_schemas import SUBNETALLOCATIONPOOL_SCHEMA
 
 from utils.log import log_msg
 
 
-class CircuitConfigOrchestrator:
+class CircuitGenieAgent:
     """Orchestrates the full CircuitGenie configuration flow.  
     Because chaos is only fun in logs, not in code."""
     def _error(self, msg: str):
@@ -37,12 +37,14 @@ class CircuitConfigOrchestrator:
         # Derive nodes only if not in advanced mode (node field empty)
         node_a, real_port_a = self._derive_node_and_port_from_portlibrary(endpoint_a.port)
         node_b, real_port_b = self._derive_node_and_port_from_portlibrary(endpoint_b.port)
+        source_app = "circuitgenie"
 
         # Use real_port_a / real_port_b in the CircuitLibrary
         eda.update_cr(
-            schema=CIRCUITLIBRARY_SCHEMA,
+            schema=ORCHESTRATOR_SCHEMA,
             name=self.cr_name,
             spec={
+                "source": source_app,
                 "endpoints": [
                     {"node": node_a, "port": real_port_a},
                     {"node": node_b, "port": real_port_b},
@@ -53,6 +55,8 @@ class CircuitConfigOrchestrator:
         )
 
         log_msg("CircuitLibrary created — downstream allocation/config will follow")
+
+        self._get_subnets("fabric-test")
 
     def _parse_ports(self):
         """Parse portA and portB from CircuitGenie spec into node + interface."""
@@ -89,6 +93,21 @@ class CircuitConfigOrchestrator:
         log_msg(f"Derived from PortLibrary '{portlibrary_name}': node='{node}', port='{port}'")
         return node, port
     
+    def _get_subnets(self, pool_name):
+        # Fetch the specific SubnetAllocationPool CR by name
+        subnetpool_cr = eda.get_cr(
+            schema=SUBNETALLOCATIONPOOL_SCHEMA,
+            name=pool_name,
+            ns=self.ns
+        )
+        log_msg(subnetpool_cr)
+        if subnetpool_cr:
+            log_msg(f'Found SubnetAllocationPool CR with name "{pool_name}"')
+        else:
+            log_msg(f'No SubnetAllocationPool CR found with name "{pool_name}" in namespace {self.ns}')
+            return  # Or raise an error, depending on your needs
+        # Now return the CR for further use (e.g., extraction in the caller)
+        return subnetpool_cr
 
 
 

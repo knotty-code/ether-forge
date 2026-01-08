@@ -3,4 +3,6 @@ go 1.25.5
 use (
 	./common
 	./network_builder
+	./plumber
+	./warp_pipe
 )

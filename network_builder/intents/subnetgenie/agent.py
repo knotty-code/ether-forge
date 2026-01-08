@@ -10,7 +10,7 @@ from network_builder.intents.subnetgenie.utils.network_utils import subnet_split
 
 from utils.log import log_msg
 
-class SubnetGenieOrchestrator:
+class SubnetGenieAgent:
     """Orchestrates the SubnetGenie configuration flow."""
 
     def _error(self, msg: str):
@@ -39,6 +39,8 @@ class SubnetGenieOrchestrator:
         for i, subnet_cidr in enumerate(supernets):
             child_name = f"{self.cr_name}-{i}"
             subnet_ip = subnet_cidr.split('/')[0]
+            supernet = self.cr_obj.metadata.name
+            subnet_length = self.cr_obj.spec.subnetLength
 
             log_msg(f"Creating SubnetLibrary '{child_name}' with subnet {subnet_cidr}")
 
@@ -46,9 +48,9 @@ class SubnetGenieOrchestrator:
                 schema=SUBNETLIBRARY_SCHEMA,
                 name=child_name,
                 spec={
-                    "subnet": subnet_ip,
-                    "subnetLength": self.cr_obj.spec.subnetLength,
-                    "supernet": self.cr_obj.metadata.name,
+                    "subnets": subnet_ip,
+                    "subnetLength": subnet_length,
+                    "supernet": supernet,
                 },
             )
 

@@ -17,18 +17,12 @@
       "description": "OrchestratorSpec defines the desired state of Orchestrator",
       "type": "object",
       "title": "Specification",
-      "required": [
-        "endpoints"
-      ],
       "properties": {
         "endpoints": {
           "type": "array",
           "items": {
             "description": "EndpointSpec define the desired state of Site-to-Site link",
             "type": "object",
-            "required": [
-              "port"
-            ],
             "properties": {
               "ipAddress": {
                 "type": "string",
@@ -73,11 +67,29 @@
             }
           }
         },
+        "purpose": {
+          "description": "Reserved for point-to-point links.",
+          "type": "string",
+          "title": "SuperNet Description",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200,
+            "ui-column-span": 4
+          }
+        },
         "source": {
           "type": "string",
-          "title": "Source",
+          "title": "Source App",
           "x-eda-nokia-com": {
             "ui-order-priority": 400
+          }
+        },
+        "subnetLength": {
+          "description": "The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).",
+          "type": "integer",
+          "title": "Subnet Length",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 300,
+            "ui-column-span": 1
           }
         },
         "subnets": {
@@ -119,6 +131,10 @@
             "ui-order-priority": 200,
             "ui-column-span": 2
           }
+        },
+        "usedby": {
+          "type": "string",
+          "title": "Used By"
         }
       },
       "x-eda-nokia-com": {

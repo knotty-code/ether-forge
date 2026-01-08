@@ -6,7 +6,7 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
-Y_SUBNET = 'subnet'
+Y_SUBNETS = 'subnets'
 Y_SUBNETLENGTH = 'subnetLength'
 Y_SUPERNET = 'supernet'
 Y_USEDBY = 'usedby'
@@ -17,20 +17,20 @@ SUBNETLIBRARY_SCHEMA = eda.Schema(group='network-builder.eda.local', version='v1
 class SubnetLibrarySpec:
     def __init__(
         self,
-        subnet: str | None = None,
+        subnets: str | None = None,
         subnetLength: int | None = None,
         supernet: str | None = None,
-        usedby: list[str] | None = None,
+        usedby: str | None = None,
     ):
-        self.subnet = subnet
+        self.subnets = subnets
         self.subnetLength = subnetLength
         self.supernet = supernet
         self.usedby = usedby
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.subnet is not None:
-            _rval[Y_SUBNET] = self.subnet
+        if self.subnets is not None:
+            _rval[Y_SUBNETS] = self.subnets
         if self.subnetLength is not None:
             _rval[Y_SUBNETLENGTH] = self.subnetLength
         if self.supernet is not None:
@@ -42,12 +42,12 @@ class SubnetLibrarySpec:
     @staticmethod
     def from_input(obj) -> 'SubnetLibrarySpec | None':
         if obj:
-            _subnet = obj.get(Y_SUBNET, "'10.0.0.0/29'")
+            _subnets = obj.get(Y_SUBNETS)
             _subnetLength = obj.get(Y_SUBNETLENGTH, 30)
             _supernet = obj.get(Y_SUPERNET)
             _usedby = obj.get(Y_USEDBY)
             return SubnetLibrarySpec(
-                subnet=_subnet,
+                subnets=_subnets,
                 subnetLength=_subnetLength,
                 supernet=_supernet,
                 usedby=_usedby,

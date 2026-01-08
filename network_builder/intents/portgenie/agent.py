@@ -12,7 +12,7 @@ from network_builder.intents.portgenie.init import init_globals_defaults, valida
 from utils.log import log_msg
 
 
-class PortConfigOrchestrator:
+class PortConfigAgent:
     """Orchestrates the full CircuitGenie configuration flow.  
     Because chaos is only fun in logs, not in code."""
     def _error(self, msg: str):

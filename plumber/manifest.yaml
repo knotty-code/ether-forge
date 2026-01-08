@@ -1,0 +1,54 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: plumber
+spec:
+  appInfo:
+    categories:
+      - uncategorised
+    documentation: plumber/docs
+  author: knotty-code
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: plumber/intents
+    - file:
+        path: plumber/api/v1alpha1/pysrc
+  description: Sample description
+  group: plumber.eda.local
+  image: change.me/plumber:v0.0.0
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Plumber
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: plumber/crds/plumber.eda.local_interfaceapps.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_interfaceapps.json
+        ui:
+          category: Plumber
+          name: interfaceapps
+    - script:
+        path: plumber/intents/interfaceapp/config_intent.py
+        trigger:
+          kind: InterfaceApp
+        type: config
+    - crd:
+        path: plumber/crds/plumber.eda.local_interfaceappstates.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_interfaceappstates.json
+    - script:
+        path: plumber/intents/interfaceappstate/state_intent.py
+        trigger:
+          kind: InterfaceAppState
+        type: state
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.10.*
+    - srl:25.*
+    - sros:24.10.*
+    - sros:25.*

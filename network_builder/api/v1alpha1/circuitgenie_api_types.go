@@ -18,6 +18,7 @@ package v1alpha1
 
 // EndpointSpec define the desired state of Site-to-Site link
 type EndpointSpec struct {
+	// +kubebuilder:validation:Optional
 	// +eda:ui:autocomplete=`{"group":"network-builder.eda.local", "version":"v1alpha1", "resource":"portlibraries"}`
 	// +eda:ui:orderpriority=100
 	Port string `json:"port"`

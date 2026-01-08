@@ -18,16 +18,6 @@
       "type": "object",
       "title": "Specification",
       "properties": {
-        "subnet": {
-          "description": "IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16",
-          "type": "string",
-          "title": "Subnet",
-          "default": "'10.0.0.0/29'",
-          "x-eda-nokia-com": {
-            "ui-order-priority": 100,
-            "ui-column-span": 2
-          }
-        },
         "subnetLength": {
           "description": "The size of the subnets to be allocated from within the parent subnet, e.g. 29 (which could allocate 10.1.0.8/29, for example).",
           "type": "integer",
@@ -36,6 +26,15 @@
           "x-eda-nokia-com": {
             "ui-order-priority": 200,
             "ui-column-span": 1
+          }
+        },
+        "subnets": {
+          "description": "IPv4 subnet to allocate subnets from, e.g. 10.1.0.0/16",
+          "type": "string",
+          "title": "Subnet",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 100,
+            "ui-column-span": 2
           }
         },
         "supernet": {
@@ -47,11 +46,8 @@
           }
         },
         "usedby": {
-          "type": "array",
-          "title": "Used By",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "title": "Used By"
         }
       },
       "x-eda-nokia-com": {
