@@ -16,12 +16,7 @@ limitations under the License.
 
 package v1alpha1
 
-import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-)
-
 // InterfaceAppSpec defines the desired state of InterfaceApp
-// +eda:ui:condition=`{"condition":"!(spec.nodes.length === 0 && spec.nodeSelector.length === 0)", "errorMsg":"Either nodes or nodeSelector must have at least one value set"}`
 type InterfaceAppSpec struct {
 	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=2
@@ -31,23 +26,44 @@ type InterfaceAppSpec struct {
 	// List of nodes on which to configure the banners.
 	Nodes []string `json:"nodes,omitempty"`
 	// +kubebuilder:validation:Optional
-	// +eda:ui:columnspan=2
-	// +eda:ui:orderpriority=200
-	// +eda:ui:title="Node Selector"
-	// +eda:ui:format="labelselector"
-	// Label selector to select nodes on which to configure the banners.
-	NodeSelector []string `json:"nodeSelector,omitempty"`
-	// +kubebuilder:validation:Optional
 	// +eda:ui:columnspan=4
+	// +eda:ui:orderpriority=200
+	// +eda:ui:title="Ports"
+	// Idetify which ports to create ie, 1 - 3, 5 - 10
+	PortSelector string `json:"portselector,omitempty"`
 	// +eda:ui:orderpriority=300
-	// +eda:ui:title="Login Banner"
-	// This is the login banner displayed before a user has logged into the Node.
-	LoginBanner string `json:"loginBanner,omitempty"`
+	// +eda:ui:title="Enabled"
+	// +kubebuilder:default=true
+	Enabled bool `json:"enabled,omitempty"`
+	// +kubebuilder:validation:Enum=lag;interface;loopback
+	// +eda:ui:orderpriority=400
+	// +eda:ui:title="Type"
+	// +eda:ui:columnspan=2
+	// +kubebuilder:default=interface
+	// Type defines whether the interface is a Lag or Interface.
+	Type string `json:"type,omitempty"`
+	// +kubebuilder:validation:Enum=null;dot1q
+	// +eda:ui:orderpriority=500
+	// +eda:ui:title="Encapsulation Type"
+	// +eda:ui:columnspan=2
+	// +kubebuilder:default=null
+	// Enable or disable VLAN tagging on this interface. [default="null"]
+	EncapType string `json:"encapType,omitempty"`
+	// +eda:ui:orderpriority=600
+	// +eda:ui:title="LLDP"
+	// +kubebuilder:default=true
+	LLDP bool `json:"lldp,omitempty"`
+	// +eda:ui:title="MTU"
+	// MTU to apply on all interfaces
+	MTU int `json:"mtu,omitempty"`
+	// +kubebuilder:validation:Enum="1G";"10G";"25G";"40G";"50G";"100G";"400G"
+	// +eda:ui:orderpriority=700
+	// +eda:ui:title="Port Speed"
+	// +eda:ui:columnspan=2
+	// +kubebuilder:default="1G"
+	// The speed of this interface, in human-readable format - e.g. 25G, 100G.
+	Speed string `json:"speed,omitempty"`
 }
 
 // InterfaceAppStatus defines the observed state of InterfaceApp
-type InterfaceAppStatus struct {
-	// +eda:ui:title="Nodes"
-	// List of nodes this banner has been applied to
-	Nodes []string `json:"nodes,omitempty"`
-}
+type InterfaceAppStatus struct{}

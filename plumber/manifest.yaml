@@ -32,7 +32,7 @@ spec:
         schema: plumber/openapiv3/eda_oas_plumber.eda.local_interfaceapps.json
         ui:
           category: Plumber
-          name: interfaceapps
+          name: EZ-Interface
     - script:
         path: plumber/intents/interfaceapp/config_intent.py
         trigger:
@@ -45,6 +45,27 @@ spec:
         path: plumber/intents/interfaceappstate/state_intent.py
         trigger:
           kind: InterfaceAppState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: plumber/crds/plumber.eda.local_linkapps.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_linkapps.json
+        ui:
+          category: Plumber
+          name: linkapps
+    - script:
+        path: plumber/intents/linkapp/config_intent.py
+        trigger:
+          kind: LinkApp
+        type: config
+    - crd:
+        path: plumber/crds/plumber.eda.local_linkappstates.yaml
+        schema: plumber/openapiv3/eda_oas_plumber.eda.local_linkappstates.json
+    - script:
+        path: plumber/intents/linkappstate/state_intent.py
+        trigger:
+          kind: LinkAppState
         type: state
   supportedEndpoints:
     - srl:0.0.0

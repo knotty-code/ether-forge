@@ -1,5 +1,6 @@
 from utils.log import log_msg
 
+
 def expand_port_ranges(port_selector: str) -> list[str]:
     """Expand '1-5,7-10,12' into ['1', '2', '3', '4', '5', '7', '8', '9', '10', '12']"""
     if not port_selector:

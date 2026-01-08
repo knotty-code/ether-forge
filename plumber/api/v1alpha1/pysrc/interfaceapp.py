@@ -6,9 +6,29 @@ import eda_common as eda
 from . import Metadata, Y_NAME
 
 from .constants import *
+
+ENUM_INTERFACEAPPSPECTYPE_LAG = 'lag'
+ENUM_INTERFACEAPPSPECTYPE_INTERFACE = 'interface'
+ENUM_INTERFACEAPPSPECTYPE_LOOPBACK = 'loopback'
+
+ENUM_INTERFACEAPPSPECENCAPTYPE_NULL = 'null'
+ENUM_INTERFACEAPPSPECENCAPTYPE_DOT1Q = 'dot1q'
+
+ENUM_INTERFACEAPPSPECSPEED_1G = '1G'
+ENUM_INTERFACEAPPSPECSPEED_10G = '10G'
+ENUM_INTERFACEAPPSPECSPEED_25G = '25G'
+ENUM_INTERFACEAPPSPECSPEED_40G = '40G'
+ENUM_INTERFACEAPPSPECSPEED_50G = '50G'
+ENUM_INTERFACEAPPSPECSPEED_100G = '100G'
+ENUM_INTERFACEAPPSPECSPEED_400G = '400G'
 Y_NODES = 'nodes'
-Y_NODESELECTOR = 'nodeSelector'
-Y_LOGINBANNER = 'loginBanner'
+Y_PORTSELECTOR = 'portselector'
+Y_ENABLED = 'enabled'
+Y_TYPE = 'type'
+Y_ENCAPTYPE = 'encapType'
+Y_LLDP = 'lldp'
+Y_MTU = 'mtu'
+Y_SPEED = 'speed'
 # Package objects (GVK Schemas)
 INTERFACEAPP_SCHEMA = eda.Schema(group='plumber.eda.local', version='v1alpha1', kind='InterfaceApp')
 
@@ -17,33 +37,63 @@ class InterfaceAppSpec:
     def __init__(
         self,
         nodes: list[str] | None = None,
-        nodeSelector: list[str] | None = None,
-        loginBanner: str | None = None,
+        portselector: str | None = None,
+        enabled: bool | None = None,
+        type: str | None = None,
+        encapType: str | None = None,
+        lldp: bool | None = None,
+        mtu: int | None = None,
+        speed: str | None = None,
     ):
         self.nodes = nodes
-        self.nodeSelector = nodeSelector
-        self.loginBanner = loginBanner
+        self.portselector = portselector
+        self.enabled = enabled
+        self.type = type
+        self.encapType = encapType
+        self.lldp = lldp
+        self.mtu = mtu
+        self.speed = speed
 
     def to_input(self):  # pragma: no cover
         _rval = {}
         if self.nodes is not None:
             _rval[Y_NODES] = self.nodes
-        if self.nodeSelector is not None:
-            _rval[Y_NODESELECTOR] = self.nodeSelector
-        if self.loginBanner is not None:
-            _rval[Y_LOGINBANNER] = self.loginBanner
+        if self.portselector is not None:
+            _rval[Y_PORTSELECTOR] = self.portselector
+        if self.enabled is not None:
+            _rval[Y_ENABLED] = self.enabled
+        if self.type is not None:
+            _rval[Y_TYPE] = self.type
+        if self.encapType is not None:
+            _rval[Y_ENCAPTYPE] = self.encapType
+        if self.lldp is not None:
+            _rval[Y_LLDP] = self.lldp
+        if self.mtu is not None:
+            _rval[Y_MTU] = self.mtu
+        if self.speed is not None:
+            _rval[Y_SPEED] = self.speed
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'InterfaceAppSpec | None':
         if obj:
             _nodes = obj.get(Y_NODES)
-            _nodeSelector = obj.get(Y_NODESELECTOR)
-            _loginBanner = obj.get(Y_LOGINBANNER)
+            _portselector = obj.get(Y_PORTSELECTOR)
+            _enabled = obj.get(Y_ENABLED, True)
+            _type = obj.get(Y_TYPE, "interface")
+            _encapType = obj.get(Y_ENCAPTYPE, "null")
+            _lldp = obj.get(Y_LLDP, True)
+            _mtu = obj.get(Y_MTU)
+            _speed = obj.get(Y_SPEED, "1G")
             return InterfaceAppSpec(
                 nodes=_nodes,
-                nodeSelector=_nodeSelector,
-                loginBanner=_loginBanner,
+                portselector=_portselector,
+                enabled=_enabled,
+                type=_type,
+                encapType=_encapType,
+                lldp=_lldp,
+                mtu=_mtu,
+                speed=_speed,
             )
         return None  # pragma: no cover
 
@@ -51,22 +101,17 @@ class InterfaceAppSpec:
 class InterfaceAppStatus:
     def __init__(
         self,
-        nodes: list[str] | None = None,
     ):
-        self.nodes = nodes
+        pass
 
     def to_input(self):  # pragma: no cover
         _rval = {}
-        if self.nodes is not None:
-            _rval[Y_NODES] = self.nodes
         return _rval
 
     @staticmethod
     def from_input(obj) -> 'InterfaceAppStatus | None':
         if obj:
-            _nodes = obj.get(Y_NODES)
             return InterfaceAppStatus(
-                nodes=_nodes,
             )
         return None  # pragma: no cover
 

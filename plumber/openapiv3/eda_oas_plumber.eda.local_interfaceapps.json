@@ -18,27 +18,40 @@
       "type": "object",
       "title": "Specification",
       "properties": {
-        "loginBanner": {
-          "description": "This is the login banner displayed before a user has logged into the Node.",
-          "type": "string",
-          "title": "Login Banner",
+        "enabled": {
+          "type": "boolean",
+          "title": "Enabled",
+          "default": true,
           "x-eda-nokia-com": {
-            "ui-order-priority": 300,
-            "ui-column-span": 4
+            "ui-order-priority": 300
           }
         },
-        "nodeSelector": {
-          "description": "Label selector to select nodes on which to configure the banners.",
-          "type": "array",
-          "format": "labelselector",
-          "title": "Node Selector",
-          "items": {
-            "type": "string"
-          },
+        "encapType": {
+          "description": "Enable or disable VLAN tagging on this interface. [default=\"null\"]",
+          "type": "string",
+          "title": "Encapsulation Type",
+          "default": "null",
+          "enum": [
+            "null",
+            "dot1q"
+          ],
           "x-eda-nokia-com": {
-            "ui-order-priority": 200,
+            "ui-order-priority": 500,
             "ui-column-span": 2
           }
+        },
+        "lldp": {
+          "type": "boolean",
+          "title": "LLDP",
+          "default": true,
+          "x-eda-nokia-com": {
+            "ui-order-priority": 600
+          }
+        },
+        "mtu": {
+          "description": "MTU to apply on all interfaces",
+          "type": "integer",
+          "title": "MTU"
         },
         "nodes": {
           "description": "List of nodes on which to configure the banners.",
@@ -60,15 +73,52 @@
             "ui-order-priority": 100,
             "ui-column-span": 2
           }
+        },
+        "portselector": {
+          "description": "Idetify which ports to create ie, 1 - 3, 5 - 10",
+          "type": "string",
+          "title": "Ports",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200,
+            "ui-column-span": 4
+          }
+        },
+        "speed": {
+          "description": "The speed of this interface, in human-readable format - e.g. 25G, 100G.",
+          "type": "string",
+          "title": "Port Speed",
+          "default": "1G",
+          "enum": [
+            "1G",
+            "10G",
+            "25G",
+            "40G",
+            "50G",
+            "100G",
+            "400G"
+          ],
+          "x-eda-nokia-com": {
+            "ui-order-priority": 700,
+            "ui-column-span": 2
+          }
+        },
+        "type": {
+          "description": "Type defines whether the interface is a Lag or Interface.",
+          "type": "string",
+          "title": "Type",
+          "default": "interface",
+          "enum": [
+            "lag",
+            "interface",
+            "loopback"
+          ],
+          "x-eda-nokia-com": {
+            "ui-order-priority": 400,
+            "ui-column-span": 2
+          }
         }
       },
       "x-eda-nokia-com": {
-        "ui-conditions": [
-          {
-            "condition": "!(spec.nodes.length === 0 \u0026\u0026 spec.nodeSelector.length === 0)",
-            "errorMsg": "Either nodes or nodeSelector must have at least one value set"
-          }
-        ],
         "ui-order-priority": 30
       }
     },
@@ -76,16 +126,6 @@
       "description": "InterfaceAppStatus defines the observed state of InterfaceApp",
       "type": "object",
       "title": "Status",
-      "properties": {
-        "nodes": {
-          "description": "List of nodes this banner has been applied to",
-          "type": "array",
-          "title": "Nodes",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
       "readOnly": true,
       "x-eda-nokia-com": {
         "ui-order-priority": 20

@@ -1,0 +1,95 @@
+{
+  "description": "LinkApp is the Schema for the linkapps API",
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "description": "LinkAppSpec defines the desired state of LinkApp",
+      "type": "object",
+      "title": "Specification",
+      "properties": {
+        "loginBanner": {
+          "description": "This is the login banner displayed before a user has logged into the Node.",
+          "type": "string",
+          "title": "Login Banner",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 300,
+            "ui-column-span": 4
+          }
+        },
+        "nodeSelector": {
+          "description": "Label selector to select nodes on which to configure the banners.",
+          "type": "array",
+          "format": "labelselector",
+          "title": "Node Selector",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-order-priority": 200,
+            "ui-column-span": 2
+          }
+        },
+        "nodes": {
+          "description": "List of nodes on which to configure the banners.",
+          "type": "array",
+          "title": "Nodes",
+          "items": {
+            "type": "string"
+          },
+          "x-eda-nokia-com": {
+            "ui-auto-completes": [
+              {
+                "condition": "true",
+                "type": "gvr",
+                "group": "core.eda.nokia.com",
+                "version": "v1",
+                "resource": "toponodes"
+              }
+            ],
+            "ui-order-priority": 100,
+            "ui-column-span": 2
+          }
+        }
+      },
+      "x-eda-nokia-com": {
+        "ui-conditions": [
+          {
+            "condition": "!(spec.nodes.length === 0 \u0026\u0026 spec.nodeSelector.length === 0)",
+            "errorMsg": "Either nodes or nodeSelector must have at least one value set"
+          }
+        ],
+        "ui-order-priority": 30
+      }
+    },
+    "status": {
+      "description": "LinkAppStatus defines the observed state of LinkApp",
+      "type": "object",
+      "title": "Status",
+      "properties": {
+        "nodes": {
+          "description": "List of nodes this banner has been applied to",
+          "type": "array",
+          "title": "Nodes",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true,
+      "x-eda-nokia-com": {
+        "ui-order-priority": 20
+      }
+    }
+  }
+}
