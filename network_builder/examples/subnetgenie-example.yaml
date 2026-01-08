@@ -1,9 +1,0 @@
-apiVersion: network-builder.eda.local/v1alpha1
-kind: SubnetGenie
-metadata:
-  name: example-subnetgenie
-  namespace: eda
-spec:
-  nodeSelector:
-    - eda.nokia.com/role=leaf
-  loginBanner: Hello EDA!
