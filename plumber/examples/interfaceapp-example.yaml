@@ -1,0 +1,9 @@
+apiVersion: plumber.eda.local/v1alpha1
+kind: InterfaceApp
+metadata:
+  name: example-interfaceapp
+  namespace: eda
+spec:
+  nodeSelector:
+    - eda.nokia.com/role=leaf
+  loginBanner: Hello EDA!

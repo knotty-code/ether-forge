@@ -35,7 +35,7 @@ class OrchestratorAgent:
         ip_a, ip_b, subnet_name, network_addr, desired_length = self._allocate_subnet()
 
         # Create the CircuitLibrary entry
-        self._create_circuit(ip_a, ip_b, subnet_name, network_addr, desired_length)
+        # self._create_circuit(ip_a, ip_b, subnet_name, network_addr, desired_length)
 
         log_msg(f"CircuitLibrary orchestrator complete for '{self.cr_name}'")
         

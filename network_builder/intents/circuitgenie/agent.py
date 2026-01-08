@@ -6,7 +6,7 @@ import eda_common as eda
 from network_builder.api.v1alpha1.pysrc.circuitgenie import CircuitGenie
 from network_builder.api.v1alpha1.pysrc.orchestrator import ORCHESTRATOR_SCHEMA
 from network_builder.api.v1alpha1.pysrc.portlibrary import PORTLIBRARY_SCHEMA
-
+from network_builder.api.v1alpha1.pysrc.custom_schemas import SUBNETALLOCATIONPOOL_SCHEMA
 
 from utils.log import log_msg
 
@@ -56,6 +56,8 @@ class CircuitGenieAgent:
 
         log_msg("CircuitLibrary created — downstream allocation/config will follow")
 
+        self._get_subnets("fabric-test")
+
     def _parse_ports(self):
         """Parse portA and portB from CircuitGenie spec into node + interface."""
         if not self.cr_obj.spec.portA or not self.cr_obj.spec.portB:
@@ -91,6 +93,21 @@ class CircuitGenieAgent:
         log_msg(f"Derived from PortLibrary '{portlibrary_name}': node='{node}', port='{port}'")
         return node, port
     
+    def _get_subnets(self, pool_name):
+        # Fetch the specific SubnetAllocationPool CR by name
+        subnetpool_cr = eda.get_cr(
+            schema=SUBNETALLOCATIONPOOL_SCHEMA,
+            name=pool_name,
+            ns=self.ns
+        )
+        log_msg(subnetpool_cr)
+        if subnetpool_cr:
+            log_msg(f'Found SubnetAllocationPool CR with name "{pool_name}"')
+        else:
+            log_msg(f'No SubnetAllocationPool CR found with name "{pool_name}" in namespace {self.ns}')
+            return  # Or raise an error, depending on your needs
+        # Now return the CR for further use (e.g., extraction in the caller)
+        return subnetpool_cr
 
 
 
