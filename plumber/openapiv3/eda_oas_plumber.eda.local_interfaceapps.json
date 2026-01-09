@@ -14,11 +14,20 @@
       "type": "object"
     },
     "spec": {
-      "description": "InterfaceAppSpec defines the desired state of InterfaceApp",
+      "description": "Listen up — this is Jack Burton in the Pork Chop Express,\nand InterfaceAppSpec is the rig that tells me what kinda freight you're haulin' across these nodes.\nYou throw in your nodes, ports, speed, type — all the good stuff — and ol' Jack\ntakes it from there, configurin' interfaces like thunder rollin' through Chinatown.\nIt's all about gettin' the job done clean and mean, no fuss, no drift, just pure network power.\nYou know what ol' Jack Burton says? It's all in the reflexes.",
       "type": "object",
       "title": "Specification",
       "properties": {
+        "ddm": {
+          "description": "Enables reporting of DDM events.",
+          "type": "boolean",
+          "title": "DDM",
+          "x-eda-nokia-com": {
+            "ui-order-priority": 800
+          }
+        },
         "enabled": {
+          "description": "You want these interfaces up and runnin'? Hell yeah you do. Default's on — because Jack don't do half measures.",
           "type": "boolean",
           "title": "Enabled",
           "default": true,
@@ -27,7 +36,7 @@
           }
         },
         "encapType": {
-          "description": "Enable or disable VLAN tagging on this interface. [default=\"null\"]",
+          "description": "VLAN tagging or straight raw? Null means no tags — just pure freight. Dot1q if you wanna get fancy.",
           "type": "string",
           "title": "Encapsulation Type",
           "default": "null",
@@ -41,6 +50,7 @@
           }
         },
         "lldp": {
+          "description": "Let the neighbors know who's boss. LLDP on by default — because Jack Burton don't hide in the shadows.",
           "type": "boolean",
           "title": "LLDP",
           "default": true,
@@ -49,12 +59,14 @@
           }
         },
         "mtu": {
-          "description": "MTU to apply on all interfaces",
+          "description": "How big can the packets get before I gotta break 'em up? Throw me a number. Bigger's usually better.",
           "type": "integer",
-          "title": "MTU"
+          "title": "MTU",
+          "maximum": 9500,
+          "minimum": 1450
         },
         "nodes": {
-          "description": "List of nodes on which to configure the banners.",
+          "description": "Tell ol' Jack which rigs (nodes) he needs to haul this config to. Pick one or twenty — I drive 'em all.",
           "type": "array",
           "title": "Nodes",
           "items": {
@@ -75,7 +87,7 @@
           }
         },
         "portselector": {
-          "description": "Idetify which ports to create ie, 1 - 3, 5 - 10",
+          "description": "Which ports we lightin' up today? Throw me somethin' like \"1-3,5-10\". I got this. It's all in the reflexes.",
           "type": "string",
           "title": "Ports",
           "x-eda-nokia-com": {
@@ -84,7 +96,7 @@
           }
         },
         "speed": {
-          "description": "The speed of this interface, in human-readable format - e.g. 25G, 100G.",
+          "description": "How fast we haulin' this data? 1G's the default — reliable, like the Pork Chop Express. But you can go full thunder if you got the horsepower.",
           "type": "string",
           "title": "Port Speed",
           "default": "1G",
@@ -103,7 +115,7 @@
           }
         },
         "type": {
-          "description": "Type defines whether the interface is a Lag or Interface.",
+          "description": "What kinda beast we buildin'? Regular interface, LAG bundle, or loopback? Default's plain interface — keep it simple, tall man.",
           "type": "string",
           "title": "Type",
           "default": "interface",

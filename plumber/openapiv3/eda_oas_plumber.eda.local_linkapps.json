@@ -14,11 +14,12 @@
       "type": "object"
     },
     "spec": {
-      "description": "LinkAppSpec defines the desired state of LinkApp",
+      "description": "LinkAppSpec defines the desired state of LinkApp\nThis is the rig that tells ol' Jack which two ends to hook up.\nYou give me the local and remote interfaces, and I make 'em shake hands like thunder rollin' through Chinatown.\nIt's all in the reflexes.",
       "type": "object",
       "title": "Specification",
       "properties": {
         "local": {
+          "description": "Pick your home base — the local interface we're startin' from. Better be a real one, or ol' Jack's comin' after ya with the Pork Chop Express.",
           "type": "string",
           "title": "Local Interface",
           "x-eda-nokia-com": {
@@ -36,6 +37,7 @@
           }
         },
         "remote": {
+          "description": "The other side of the deal — the remote interface we gotta connect to. Point me right, and I'll bridge 'em faster than you can say \"it's all in the reflexes.\"",
           "type": "string",
           "title": "Remote Interface",
           "x-eda-nokia-com": {

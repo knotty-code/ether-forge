@@ -37,11 +37,21 @@ spec:
           metadata:
             type: object
           spec:
-            description: LinkAppSpec defines the desired state of LinkApp
+            description: |-
+              LinkAppSpec defines the desired state of LinkApp
+              This is the rig that tells ol' Jack which two ends to hook up.
+              You give me the local and remote interfaces, and I make 'em shake hands like thunder rollin' through Chinatown.
+              It's all in the reflexes.
             properties:
               local:
+                description: Pick your home base — the local interface we're startin'
+                  from. Better be a real one, or ol' Jack's comin' after ya with the
+                  Pork Chop Express.
                 type: string
               remote:
+                description: The other side of the deal — the remote interface we
+                  gotta connect to. Point me right, and I'll bridge 'em faster than
+                  you can say "it's all in the reflexes."
                 type: string
             type: object
           status:

@@ -52,6 +52,9 @@ class InterfaceAppAgent:
         speed = getattr(self.cr_obj.spec, "speed")
         lacp = 32768
         int_type = getattr(self.cr_obj.spec, "type")
+        
+        raw_mtu = getattr(self.cr_obj.spec, "mtu", None)
+        mtu = int(raw_mtu) if raw_mtu is not None else None
 
         port_selector = getattr(self.cr_obj.spec, "portselector", None) or ""
         selected_ports = expand_port_ranges(port_selector)
