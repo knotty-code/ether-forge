@@ -19,7 +19,7 @@ spec:
         path: plumber/api/v1alpha1/pysrc
   description: Plumber simplifies physical interface configuration and inter-switch link creation across nodes. Create bulk interfaces with port ranges and automatically generate TopoLinks for clean topology visualization — with a side of Jack Burton swagger.
   group: plumber.eda.local
-  image: docker.io/knottypein/plumber:v0.1.0
+  image: docker.io/knottypein/plumber:v26.1.1
   supportedCoreVersions:
     - v4.0.0-0
   title: Plumber

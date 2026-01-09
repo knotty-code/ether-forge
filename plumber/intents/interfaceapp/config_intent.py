@@ -25,11 +25,3 @@ def process_cr(cr):
 
     Agent = InterfaceAppAgent(cr_obj)
     Agent.run()
-
-    # eda.update_cr(
-    #     schema=INTERFACEAPPSTATE_SCHEMA,
-    #     name=cr_name,
-    #     spec={
-    #         "nodes": list(nodes.keys()),
-    #     },
-    # )

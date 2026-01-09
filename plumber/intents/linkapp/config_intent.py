@@ -23,11 +23,3 @@ def process_cr(cr):
 
     Agent = LinkAppAgent(cr_obj)
     Agent.run()
-
-    # eda.update_cr(
-    #     schema=LINKAPPSTATE_SCHEMA,
-    #     name=cr_name,
-    #     spec={
-    #         "nodes": list(nodes.keys()),
-    #     },
-    # )

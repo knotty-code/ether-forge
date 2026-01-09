@@ -29,6 +29,7 @@ Y_ENCAPTYPE = 'encapType'
 Y_LLDP = 'lldp'
 Y_MTU = 'mtu'
 Y_SPEED = 'speed'
+Y_DDM = 'ddm'
 # Package objects (GVK Schemas)
 INTERFACEAPP_SCHEMA = eda.Schema(group='plumber.eda.local', version='v1alpha1', kind='InterfaceApp')
 
@@ -44,6 +45,7 @@ class InterfaceAppSpec:
         lldp: bool | None = None,
         mtu: int | None = None,
         speed: str | None = None,
+        ddm: bool | None = None,
     ):
         self.nodes = nodes
         self.portselector = portselector
@@ -53,6 +55,7 @@ class InterfaceAppSpec:
         self.lldp = lldp
         self.mtu = mtu
         self.speed = speed
+        self.ddm = ddm
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -72,6 +75,8 @@ class InterfaceAppSpec:
             _rval[Y_MTU] = self.mtu
         if self.speed is not None:
             _rval[Y_SPEED] = self.speed
+        if self.ddm is not None:
+            _rval[Y_DDM] = self.ddm
         return _rval
 
     @staticmethod
@@ -85,6 +90,7 @@ class InterfaceAppSpec:
             _lldp = obj.get(Y_LLDP, True)
             _mtu = obj.get(Y_MTU)
             _speed = obj.get(Y_SPEED, "1G")
+            _ddm = obj.get(Y_DDM)
             return InterfaceAppSpec(
                 nodes=_nodes,
                 portselector=_portselector,
@@ -94,6 +100,7 @@ class InterfaceAppSpec:
                 lldp=_lldp,
                 mtu=_mtu,
                 speed=_speed,
+                ddm=_ddm,
             )
         return None  # pragma: no cover
 

@@ -37,36 +37,56 @@ spec:
           metadata:
             type: object
           spec:
-            description: InterfaceAppSpec defines the desired state of InterfaceApp
+            description: |-
+              Listen up — this is Jack Burton in the Pork Chop Express,
+              and InterfaceAppSpec is the rig that tells me what kinda freight you're haulin' across these nodes.
+              You throw in your nodes, ports, speed, type — all the good stuff — and ol' Jack
+              takes it from there, configurin' interfaces like thunder rollin' through Chinatown.
+              It's all about gettin' the job done clean and mean, no fuss, no drift, just pure network power.
+              You know what ol' Jack Burton says? It's all in the reflexes.
             properties:
+              ddm:
+                description: Enables reporting of DDM events.
+                type: boolean
               enabled:
                 default: true
+                description: You want these interfaces up and runnin'? Hell yeah you
+                  do. Default's on — because Jack don't do half measures.
                 type: boolean
               encapType:
                 default: "null"
-                description: Enable or disable VLAN tagging on this interface. [default="null"]
+                description: VLAN tagging or straight raw? Null means no tags — just
+                  pure freight. Dot1q if you wanna get fancy.
                 enum:
                 - "null"
                 - dot1q
                 type: string
               lldp:
                 default: true
+                description: Let the neighbors know who's boss. LLDP on by default
+                  — because Jack Burton don't hide in the shadows.
                 type: boolean
               mtu:
-                description: MTU to apply on all interfaces
+                description: How big can the packets get before I gotta break 'em
+                  up? Throw me a number. Bigger's usually better.
+                maximum: 9500
+                minimum: 1450
                 type: integer
               nodes:
-                description: List of nodes on which to configure the banners.
+                description: Tell ol' Jack which rigs (nodes) he needs to haul this
+                  config to. Pick one or twenty — I drive 'em all.
                 items:
                   type: string
                 type: array
               portselector:
-                description: Idetify which ports to create ie, 1 - 3, 5 - 10
+                description: Which ports we lightin' up today? Throw me somethin'
+                  like "1-3,5-10". I got this. It's all in the reflexes.
                 type: string
               speed:
                 default: 1G
-                description: The speed of this interface, in human-readable format
-                  - e.g. 25G, 100G.
+                description: How fast we haulin' this data? 1G's the default — reliable,
+                  like the Pork Chop Express. But you can go full thunder if you got
+                  the horsepower.
                 enum:
                 - 1G
                 - 10G
@@ -78,7 +98,9 @@ spec:
                 type: string
               type:
                 default: interface
-                description: Type defines whether the interface is a Lag or Interface.
+                description: What kinda beast we buildin'? Regular interface, LAG
+                  bundle, or loopback? Default's plain interface — keep it simple,
+                  tall man.
                 enum:
                 - lag
                 - interface
