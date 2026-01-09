@@ -27,9 +27,7 @@ Y_ENABLED = 'enabled'
 Y_TYPE = 'type'
 Y_ENCAPTYPE = 'encapType'
 Y_LLDP = 'lldp'
-Y_MTU = 'mtu'
 Y_SPEED = 'speed'
-Y_DDM = 'ddm'
 # Package objects (GVK Schemas)
 INTERFACEAPP_SCHEMA = eda.Schema(group='plumber.eda.local', version='v1alpha1', kind='InterfaceApp')
 
@@ -43,9 +41,7 @@ class InterfaceAppSpec:
         type: str | None = None,
         encapType: str | None = None,
         lldp: bool | None = None,
-        mtu: int | None = None,
         speed: str | None = None,
-        ddm: bool | None = None,
     ):
         self.nodes = nodes
         self.portselector = portselector
@@ -53,9 +49,7 @@ class InterfaceAppSpec:
         self.type = type
         self.encapType = encapType
         self.lldp = lldp
-        self.mtu = mtu
         self.speed = speed
-        self.ddm = ddm
 
     def to_input(self):  # pragma: no cover
         _rval = {}
@@ -71,12 +65,8 @@ class InterfaceAppSpec:
             _rval[Y_ENCAPTYPE] = self.encapType
         if self.lldp is not None:
             _rval[Y_LLDP] = self.lldp
-        if self.mtu is not None:
-            _rval[Y_MTU] = self.mtu
         if self.speed is not None:
             _rval[Y_SPEED] = self.speed
-        if self.ddm is not None:
-            _rval[Y_DDM] = self.ddm
         return _rval
 
     @staticmethod
@@ -88,9 +78,7 @@ class InterfaceAppSpec:
             _type = obj.get(Y_TYPE, "interface")
             _encapType = obj.get(Y_ENCAPTYPE, "null")
             _lldp = obj.get(Y_LLDP, True)
-            _mtu = obj.get(Y_MTU)
             _speed = obj.get(Y_SPEED, "1G")
-            _ddm = obj.get(Y_DDM)
             return InterfaceAppSpec(
                 nodes=_nodes,
                 portselector=_portselector,
@@ -98,9 +86,7 @@ class InterfaceAppSpec:
                 type=_type,
                 encapType=_encapType,
                 lldp=_lldp,
-                mtu=_mtu,
                 speed=_speed,
-                ddm=_ddm,
             )
         return None  # pragma: no cover
 
