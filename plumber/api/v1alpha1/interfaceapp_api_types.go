@@ -66,12 +66,6 @@ type InterfaceAppSpec struct {
 	// Let the neighbors know who's boss. LLDP on by default — because Jack Burton don't hide in the shadows.
 	LLDP bool `json:"lldp,omitempty"`
 
-	// +eda:ui:title="MTU"
-	// +kubebuilder:validation:Minimum=1450
-	// +kubebuilder:validation:Maximum=9500
-	// How big can the packets get before I gotta break 'em up? Throw me a number. Bigger's usually better.
-	MTU int `json:"mtu,omitempty"`
-
 	// +kubebuilder:validation:Enum="1G";"10G";"25G";"40G";"50G";"100G";"400G"
 	// +eda:ui:orderpriority=700
 	// +eda:ui:title="Port Speed"
@@ -79,11 +73,6 @@ type InterfaceAppSpec struct {
 	// +kubebuilder:default="1G"
 	// How fast we haulin' this data? 1G's the default — reliable, like the Pork Chop Express. But you can go full thunder if you got the horsepower.
 	Speed string `json:"speed,omitempty"`
-
-	// +eda:ui:orderpriority=800
-	// +eda:ui:title="DDM"
-	// Enables reporting of DDM events.
-	DDM bool `json:"ddm,omitempty"`
 }
 
 // InterfaceAppStatus defines the observed state of InterfaceApp
