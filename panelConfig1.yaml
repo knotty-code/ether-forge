@@ -1,12 +1,13 @@
 cells:
   spine_1:
+    dataRef: "test-data-small-sin"      # ← uses built-in test data (sine wave, small range)
     label:
-      text: "Spine 1"
-    dataRef: test-value          # keep this for now, it's just a placeholder
-    thresholds:
-      - value: 0
-        color: "#00ff00"         # green (use hex for reliability)
-      - value: 50
-        color: "#ffff00"         # yellow
-      - value: 100
-        color: "#ff0000"         # red
+      separator: "cr"                   # "cr" = carriage return (new line)
+      units: "units"                    # just for visibility
+      decimalPoints: 0
+    labelColor:
+      gradientMode: "hue"
+      thresholds:
+        - {color: "green", level: 0}
+        - {color: "orange", level: 50}
+        - {color: "red", level: 100}
