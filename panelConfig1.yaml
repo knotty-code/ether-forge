@@ -1,1 +1,13 @@
 
+cells:
+  spine_1:
+    dataRef: test-value   # temporary placeholder
+    label: "Spine 1"
+    thresholds:
+      - value: 0
+        color: green
+      - value: 50
+        color: yellow
+      - value: 100
+        color: red
+    valueFormat: "{value} units"  # just for testing
