@@ -1,15 +1,12 @@
 cells:
   spine_1:
     label:
-      text: "Spine 1"          # ← the actual display text goes here as a string
-      valueFormat: ""          # optional: custom format string (e.g. "{value:.1f} bps")
-      decimalPoints: 1         # optional: number of decimal places
-      # other label options if supported (e.g. position, fontSize, etc. – check examples)
+      text: "Spine 1"
+    dataRef: test-value          # keep this for now, it's just a placeholder
     thresholds:
       - value: 0
-        color: green
+        color: "#00ff00"         # green (use hex for reliability)
       - value: 50
-        color: yellow
+        color: "#ffff00"         # yellow
       - value: 100
-        color: red
-    dataRef: test-value        # your test or real query alias
+        color: "#ff0000"         # red
