@@ -1,8 +1,10 @@
-
 cells:
   spine_1:
-    dataRef: test-value   # temporary placeholder
-    label: "Spine 1"
+    label:
+      text: "Spine 1"          # ← the actual display text goes here as a string
+      valueFormat: ""          # optional: custom format string (e.g. "{value:.1f} bps")
+      decimalPoints: 1         # optional: number of decimal places
+      # other label options if supported (e.g. position, fontSize, etc. – check examples)
     thresholds:
       - value: 0
         color: green
@@ -10,4 +12,4 @@ cells:
         color: yellow
       - value: 100
         color: red
-    valueFormat: "{value} units"  # just for testing
+    dataRef: test-value        # your test or real query alias
