@@ -1,13 +1,29 @@
+---
+anchors:
+  thresholds-operstate: &thresholds-operstate
+    - color: "#FF3154" # red
+      level: 0
+    - color: "#4BDD33" # green
+      level: 1
+
+cellIdPreamble: cell-
 cells:
-  spine_1:
-    dataRef: "test-data-small-sin"      # ← uses built-in test data (sine wave, small range)
-    label:
-      separator: "cr"                   # "cr" = carriage return (new line)
-      units: "units"                    # just for visibility
-      decimalPoints: 0
-    labelColor:
-      gradientMode: "hue"
-      thresholds:
-        - {color: "green", level: 0}
-        - {color: "orange", level: 50}
-        - {color: "red", level: 100}
+  sspine1_e1:
+    dataRef: oper-state:superspine1:ethernet-1/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  sspine1_e2:
+    dataRef: oper-state:superspine1:ethernet-1/2
+    fillColor:
+      thresholds: *thresholds-operstate
+  sspine1_e3:
+    dataRef: oper-state:superspine1:ethernet-1/3
+    fillColor:
+      thresholds: *thresholds-operstate
+  sspine1_back:
+    dataRef: oper-state:superspine1
+    fillColor:
+      thresholds: *thresholds-operstate
+
+
+
