@@ -9,6 +9,3 @@ spec:
   remoteURL: https://github.com/knotty-code/ether-forge.git
   skipTLSVerify: false
   title: Knotty Code
-status:
-  lastRefreshTime: '2026-01-14T15:29:59Z'
-  operational: true
