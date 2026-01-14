@@ -1,0 +1,14 @@
+apiVersion: appstore.eda.nokia.com/v1
+kind: Catalog
+metadata:
+  name: knotty-code-catalog
+  namespace: eda-system
+spec:
+  refreshInterval: 180
+  remoteType: git
+  remoteURL: https://github.com/knotty-code/ether-forge.git
+  skipTLSVerify: false
+  title: Knotty Code
+status:
+  lastRefreshTime: '2026-01-14T15:29:59Z'
+  operational: true
