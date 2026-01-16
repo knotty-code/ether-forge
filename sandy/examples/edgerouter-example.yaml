@@ -1,0 +1,9 @@
+apiVersion: sandy.eda.local/v1alpha1
+kind: EdgeRouter
+metadata:
+  name: example-edgerouter
+  namespace: eda
+spec:
+  nodeSelector:
+    - eda.nokia.com/role=leaf
+  loginBanner: Hello EDA!

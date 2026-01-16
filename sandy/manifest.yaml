@@ -1,0 +1,75 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: sandy
+spec:
+  appInfo:
+    categories:
+      - wan
+    documentation: sandy/docs
+  author: KnottyPein
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: sandy/intents
+    - file:
+        path: sandy/api/v1alpha1/pysrc
+  description: Sandy as in Sandy the sandworm creates links between sites.
+  group: sandy.eda.local
+  image: docker.io/knottypein/sandy:v26.1.1
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Sandy
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: sandy/crds/sandy.eda.local_sitetosites.yaml
+        schema: sandy/openapiv3/eda_oas_sandy.eda.local_sitetosites.json
+        ui:
+          category: Sandy
+          name: Site-To-Site
+    - script:
+        path: sandy/intents/sitetosite/config_intent.py
+        trigger:
+          kind: SiteToSite
+        type: config
+    - crd:
+        path: sandy/crds/sandy.eda.local_sitetositestates.yaml
+        schema: sandy/openapiv3/eda_oas_sandy.eda.local_sitetositestates.json
+    - script:
+        path: sandy/intents/sitetositestate/state_intent.py
+        trigger:
+          kind: SiteToSiteState
+        type: state
+    - crd:
+        api:
+          expose: readWrite
+        path: sandy/crds/sandy.eda.local_edgerouters.yaml
+        schema: sandy/openapiv3/eda_oas_sandy.eda.local_edgerouters.json
+        ui:
+          category: Sandy
+          name: Edge Routers
+    - script:
+        path: sandy/intents/edgerouter/config_intent.py
+        trigger:
+          kind: EdgeRouter
+        type: config
+    - crd:
+        path: sandy/crds/sandy.eda.local_edgerouterstates.yaml
+        schema: sandy/openapiv3/eda_oas_sandy.eda.local_edgerouterstates.json
+    - script:
+        path: sandy/intents/edgerouterstate/state_intent.py
+        trigger:
+          kind: EdgeRouterState
+        type: state
+  supportedEndpoints:
+    - srl:0.0.0
+    - srl:24.10.*
+    - srl:25.*
+    - sros:24.10.*
+    - sros:25.*

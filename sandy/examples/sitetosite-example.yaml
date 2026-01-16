@@ -1,0 +1,9 @@
+apiVersion: sandy.eda.local/v1alpha1
+kind: SiteToSite
+metadata:
+  name: example-sitetosite
+  namespace: eda
+spec:
+  nodeSelector:
+    - eda.nokia.com/role=leaf
+  loginBanner: Hello EDA!
