@@ -9,19 +9,19 @@ anchors:
 cellIdPreamble: cell-
 cells:
   sspine1_e1:
-    dataRef: oper-state:superspine1:ethernet-1/1
+    dataRef: oper-state:isp1:1/1/c11/1
     fillColor:
       thresholds: *thresholds-operstate
   sspine1_e2:
-    dataRef: oper-state:superspine1:ethernet-1/2
+    dataRef: oper-state:isp1:1/1/c1/1
     fillColor:
       thresholds: *thresholds-operstate
   sspine1_e3:
-    dataRef: oper-state:superspine1:ethernet-1/3
+    dataRef: oper-state:isp1:1/1/c2/1
     fillColor:
       thresholds: *thresholds-operstate
   sspine1_back:
-    dataRef: oper-state:superspine1
+    dataRef: oper-state:isp1
     fillColor:
       thresholds: *thresholds-operstate
 
