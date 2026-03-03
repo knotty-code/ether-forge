@@ -5,25 +5,36 @@ anchors:
       level: 0
     - color: "#4BDD33" # green
       level: 1
+  label-config: &label-config
+    separator: replace
+    units: bps
+    decimalPoints: 1
+    valueMappings:
+      - valueMax: 199999
+        text: ​
+      - valueMin: 200000
+  thresholds-traffic: &thresholds-traffic
+    - color: "#bec8d2" # grey
+      level: 0
+    - color: "#4BDD33" # green
+      level: 199999
+    - color: "#FFFF00" # yellow
+      level: 500000
+    - color: "#FF8000" # orange
+      level: 1000000
+    - color: "#FF3154" # red
+      level: 5000000
 
 cellIdPreamble: cell-
 cells:
-  sspine1_e1:
-    dataRef: oper-state:isp1:1/1/c11/1
+  reno-e1:c1-1:
+    dataRef: oper-state:isp1:1/1/c1/1  # adjust to your real series name
     fillColor:
       thresholds: *thresholds-operstate
-  sspine1_e2:
-    dataRef: oper-state:isp1:1/1/c1/1
-    fillColor:
-      thresholds: *thresholds-operstate
-  sspine1_e3:
-    dataRef: oper-state:isp1:1/1/c2/1
-    fillColor:
-      thresholds: *thresholds-operstate
-  sspine1_back:
-    dataRef: oper-state:isp1
-    fillColor:
-      thresholds: *thresholds-operstate
-
+  link_id:reno-e1-c1-1:
+    dataRef: isp1:1/1/c1/1:out
+    label: *label-config
+    strokeColor:
+      thresholds: *thresholds-traffic
 
 

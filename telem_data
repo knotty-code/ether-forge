@@ -27,7 +27,7 @@ anchors:
 cellIdPreamble: cell-
 cells:
   isp-1:c1-1:
-    dataRef: state_port_oper_state:isp1:1/1/c1
+    dataRef: state_port_oper_state:isp1:1/1/c1/1
     fillColor:
       thresholds: *thresholds-operstate
   link_id:isp-1-c1-1:
@@ -36,7 +36,7 @@ cells:
     strokeColor:
       thresholds: *thresholds-traffic
   reno-e1:c1-1:
-    dataRef: state_port_oper_state:reno-e1:1/1/c1
+    dataRef: state_port_oper_state:reno-e1:1/1/c1/1
     fillColor:
       thresholds: *thresholds-operstate
   link_id:reno-e1-c1-1:
