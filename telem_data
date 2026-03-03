@@ -1,0 +1,47 @@
+---
+anchors:
+  thresholds-operstate: &thresholds-operstate
+    - color: "#FF3154" # red
+      level: 0
+    - color: "#4BDD33" # green
+      level: 1
+  thresholds-traffic: &thresholds-traffic
+    - color: "#bec8d2" # grey
+      level: 0
+    - color: "#4BDD33" # green
+      level: 199999
+    - color: "#FFFF00" # yellow
+      level: 500000
+    - color: "#FF8000" # orange
+      level: 1000000
+    - color: "#FF3154" # red
+      level: 5000000
+  label-config: &label-config
+    separator: replace
+    units: bps
+    decimalPoints: 1
+    valueMappings:
+      - valueMax: 199999
+        text: ​
+      - valueMin: 200000
+cellIdPreamble: cell-
+cells:
+  isp-1:c1-1:
+    dataRef: state_port_oper_state:isp1:1/1/c1
+    fillColor:
+      thresholds: *thresholds-operstate
+  link_id:isp-1-c1-1:
+    dataRef: isp1:1/1/c1:out
+    label: *label-config
+    strokeColor:
+      thresholds: *thresholds-traffic
+  reno-e1:c1-1:
+    dataRef: state_port_oper_state:reno-e1:1/1/c1
+    fillColor:
+      thresholds: *thresholds-operstate
+  link_id:reno-e1-c1-1:
+    dataRef: reno-e1:1/1/c1:out
+    label: *label-config
+    strokeColor:
+      thresholds: *thresholds-traffic
+ 
