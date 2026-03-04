@@ -40,6 +40,64 @@ cells:
     dataRef: isp1:1/1/c1/1:out
     label: *label-config
 
+  isp-1:c2-1:
+    dataRef: oper-state:isp1:1/1/c2/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp1-c2-1:
+    dataRef: isp1:1/1/c2/1:out
+    label: *label-config
+
+  isp-1:c3-1:
+    dataRef: oper-state:isp1:1/1/c3/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp1-c3-1:
+    dataRef: isp1:1/1/c3/1:out
+    label: *label-config
+
+  isp-1:c4-1:
+    dataRef: oper-state:isp1:1/1/c4/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp1-c4-1:
+    dataRef: isp1:1/1/c4/1:out
+    label: *label-config
+
+  isp-2:c1-1:
+    dataRef: oper-state:isp2:1/1/c1/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp2-c1-1:
+    dataRef: isp2:1/1/c1/1:out
+    label: *label-config
+
+  isp-2:c2-1:
+    dataRef: oper-state:isp2:1/1/c2/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp2-c2-1:
+    dataRef: isp2:1/1/c2/1:out
+    label: *label-config
+
+  isp-2:c3-1:
+    dataRef: oper-state:isp2:1/1/c3/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp2-c3-1:
+    dataRef: isp2:1/1/c3/1:out
+    label: *label-config
+
+  isp-2:c4-1:
+    dataRef: oper-state:isp2:1/1/c4/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:isp2-c4-1:
+    dataRef: isp2:1/1/c4/1:out
+    label: *label-config
+
+
+
 
 
 #### RENO ###
@@ -222,4 +280,25 @@ cells:
   label-link:vegas-e2-c11-1:
     dataRef: vegas-e2:1/1/c11/1:out
     label: *label-config
+
+#### SERVERS #### 
+
+  reno-a:eth1:
+    dataRef: oper-state:reno-e1:1/1/c10/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-a-eth1:
+    dataRef: reno-e1:1/1/c10/1:in
+    label: *label-config
+
+  reno-a:eth2:
+    dataRef: oper-state:reno-e1:1/1/c10/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-a-eth2:
+    dataRef: reno-e2:1/1/c10/1:in
+    label: *label-config
+
+
+
 
