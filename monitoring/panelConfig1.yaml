@@ -25,30 +25,201 @@ anchors:
     valueMappings:
       - valueMax: 199999
         text: ""
-      - valueMin: 200000
+      - valueMin: 10
 
 cellIdPreamble: cell-
 
 cells:
-  # Your working port example (keep as-is)
-  reno-e1:c1-1:
+#### ISP ####
+
+  isp-1:c1-1:
     dataRef: oper-state:isp1:1/1/c1/1
     fillColor:
       thresholds: *thresholds-operstate
+  label-link:isp1-c1-1:
+    dataRef: isp1:1/1/c1/1:out
+    label: *label-config
 
-  # Link line color (assuming this works)
-  link_id:reno-e1-c1-1:
-    dataRef: isp1:1/1/c1/1:out   # ← adjust if your alias is different
-    strokeColor:
-      thresholds: *thresholds-traffic
 
-  # Throughput label – target the exact ID you added
+
+#### RENO ###
+  reno-e1:c1-1:
+    dataRef: oper-state:reno-e1:1/1/c1/1
+    fillColor:
+      thresholds: *thresholds-operstate
   label-link:reno-e1-c1-1:
-    dataRef: isp1:1/1/c1/1:out   # ← MUST match your legend format exactly!
-    label: *label-config          # Use your config anchor for formatting
-    # Or inline if you prefer:
-    # label:
-    #   value: true
-    #   format: "{:.1f} bps"
-    #   decimalPoints: 1
-    #   units: bps
+    dataRef: reno-e1:1/1/c1/1:out
+    label: *label-config
+
+  reno-e1:c2-1:
+    dataRef: oper-state:reno-e1:1/1/c2/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e1-c2-1:
+    dataRef: reno-e1:1/1/c2/1:out
+    label: *label-config
+
+  reno-e1:c3-1:
+    dataRef: oper-state:reno-e1:1/1/c3/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e1-c3-1:
+    dataRef: reno-e1:1/1/c3/1:out
+    label: *label-config
+
+  reno-e1:c10-1:
+    dataRef: oper-state:reno-e1:1/1/c10/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e1-c10-1:
+    dataRef: reno-e1:1/1/c10/1:out
+    label: *label-config
+
+  reno-e1:c11-1:
+    dataRef: oper-state:reno-e1:1/1/c11/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e1-c11-1:
+    dataRef: reno-e1:1/1/c11/1:out
+    label: *label-config
+
+
+  reno-e2:c1-1:
+    dataRef: oper-state:reno-e2:1/1/c1/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e2-c1-1:
+    dataRef: reno-e2:1/1/c1/1:out
+    label: *label-config
+
+  reno-e2:c2-1:
+    dataRef: oper-state:reno-e2:1/1/c2/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e2-c2-1:
+    dataRef: reno-e2:1/1/c2/1:out
+    label: *label-config
+
+  reno-e2:c3-1:
+    dataRef: oper-state:reno-e2:1/1/c3/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e2-c3-1:
+    dataRef: reno-e2:1/1/c3/1:out
+    label: *label-config
+
+  reno-e2:c5-1:
+    dataRef: oper-state:reno-e2:1/1/c5/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e2-c5-1:
+    dataRef: reno-e2:1/1/c5/1:out
+    label: *label-config
+
+  reno-e2:c10-1:
+    dataRef: oper-state:reno-e2:1/1/c10/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e2-c10-1:
+    dataRef: reno-e2:1/1/c10/1:out
+    label: *label-config
+
+  reno-e2:c11-1:
+    dataRef: oper-state:reno-e2:1/1/c11/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-e2-c11-1:
+    dataRef: reno-e2:1/1/c11/1:out
+    label: *label-config
+
+#### VEGAS ####
+
+  vegas-e1:c1-1:
+    dataRef: oper-state:vegas-e1:1/1/c1/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e1-c1-1:
+    dataRef: vegas-e1:1/1/c1/1:out
+    label: *label-config
+
+  vegas-e1:c2-1:
+    dataRef: oper-state:vegas-e1:1/1/c2/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e1-c2-1:
+    dataRef: vegas-e1:1/1/c2/1:out
+    label: *label-config
+
+  vegas-e1:c3-1:
+    dataRef: oper-state:vegas-e1:1/1/c3/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e1-c3-1:
+    dataRef: vegas-e1:1/1/c3/1:out
+    label: *label-config
+
+  vegas-e1:c10-1:
+    dataRef: oper-state:vegas-e1:1/1/c10/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e1-c10-1:
+    dataRef: vegas-e1:1/1/c10/1:out
+    label: *label-config
+
+  vegas-e1:c11-1:
+    dataRef: oper-state:vegas-e1:1/1/c11/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e1-c11-1:
+    dataRef: vegas-e1:1/1/c11/1:out
+    label: *label-config
+
+
+  vegas-e2:c1-1:
+    dataRef: oper-state:vegas-e2:1/1/c1/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e2-c1-1:
+    dataRef: vegas-e2:1/1/c1/1:out
+    label: *label-config
+
+  vegas-e2:c2-1:
+    dataRef: oper-state:vegas-e2:1/1/c2/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e2-c2-1:
+    dataRef: vegas-e2:1/1/c2/1:out
+    label: *label-config
+
+  vegas-e2:c3-1:
+    dataRef: oper-state:vegas-e2:1/1/c3/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e2-c3-1:
+    dataRef: vegas-e2:1/1/c3/1:out
+    label: *label-config
+
+  vegas-e2:c5-1:
+    dataRef: oper-state:vegas-e2:1/1/c5/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e2-c5-1:
+    dataRef: vegas-e2:1/1/c5/1:out
+    label: *label-config
+
+  vegas-e2:c10-1:
+    dataRef: oper-state:vegas-e2:1/1/c10/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e2-c10-1:
+    dataRef: vegas-e2:1/1/c10/1:out
+    label: *label-config
+
+  vegas-e2:c11-1:
+    dataRef: oper-state:vegas-e2:1/1/c11/1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-e2-c11-1:
+    dataRef: vegas-e2:1/1/c11/1:out
+    label: *label-config
+
