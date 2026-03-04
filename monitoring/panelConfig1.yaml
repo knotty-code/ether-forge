@@ -346,3 +346,8 @@ cells:
   label-link:vegas-b-eth2:
     dataRef: srv-bw:vegas-b:eth2:out
     label: *label-config
+
+  label-isp1:
+    label:
+      value: "ISP-1"
+      color: "#FFFFFF"
