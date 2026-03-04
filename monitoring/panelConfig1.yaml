@@ -284,21 +284,65 @@ cells:
 #### SERVERS #### 
 
   reno-a:eth1:
-    dataRef: oper-state:reno-e1:1/1/c10/1
+    dataRef: srv-state:reno-a:eth1
     fillColor:
       thresholds: *thresholds-operstate
   label-link:reno-a-eth1:
-    dataRef: reno-e1:1/1/c10/1:in
+    dataRef: srv-bw:reno-a:eth1:out
     label: *label-config
 
   reno-a:eth2:
-    dataRef: oper-state:reno-e1:1/1/c10/1
+    dataRef: srv-state:reno-a:eth2
     fillColor:
       thresholds: *thresholds-operstate
   label-link:reno-a-eth2:
-    dataRef: reno-e2:1/1/c10/1:in
+    dataRef: srv-bw:reno-a:eth2:out
     label: *label-config
 
+  reno-b:eth1:
+    dataRef: srv-state:reno-b:eth1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-b-eth1:
+    dataRef: srv-bw:reno-b:eth1:out
+    label: *label-config
 
+  reno-b:eth2:
+    dataRef: srv-state:reno-b:eth2
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:reno-b-eth2:
+    dataRef: srv-bw:reno-b:eth2:out
+    label: *label-config
 
+  vegas-a:eth1:
+    dataRef: srv-state:vegas-a:eth1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-a-eth1:
+    dataRef: srv-bw:vegas-a:eth1:out
+    label: *label-config
 
+  vegas-a:eth2:
+    dataRef: srv-state:vegas-a:eth2
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-a-eth2:
+    dataRef: srv-bw:vegas-a:eth2:out
+    label: *label-config
+
+  vegas-b:eth1:
+    dataRef: srv-state:vegas-b:eth1
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-b-eth1:
+    dataRef: srv-bw:vegas-b:eth1:out
+    label: *label-config
+
+  vegas-b:eth2:
+    dataRef: srv-state:vegas-b:eth2
+    fillColor:
+      thresholds: *thresholds-operstate
+  label-link:vegas-b-eth2:
+    dataRef: srv-bw:vegas-b:eth2:out
+    label: *label-config
